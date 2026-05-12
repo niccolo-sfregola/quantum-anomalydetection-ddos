@@ -115,9 +115,9 @@ Each traffic window produces several quantum observables.
 
 Measures the entropy of the IP-distribution density matrix:
 
-$$
-S(\rho) = -\mathrm{Tr}(\rho \log \rho)
-$$
+
+S(rho) = -Tr(rho log rho)
+
 
 Captures diversity and disorder in the population-level source-IP distribution.
 
@@ -126,9 +126,8 @@ Captures diversity and disorder in the population-level source-IP distribution.
 ### 2. Trace Distance from Benign Baseline
 
 A geometric anomaly score computed between the current density matrix and a benign reference state:
-$$
-T(\rho, \sigma) = \frac{1}{2}\|\rho - \sigma\|_1
-$$
+
+T(rho, sigma) = 1/2 ||rho - sigma||_1
 
 Operationally, the trace distance represents the maximum distinguishability between two quantum states.
 
@@ -142,9 +141,7 @@ The reservoir generates entanglement across qubits.
 
 After tracing out half of the system, the entanglement entropy is computed:
 
-$$
-S_E = -\mathrm{Tr}(\rho_A \log \rho_A)
-$$
+S_E = -Tr(rho_A log rho_A)
 
 This quantity has no compact classical analogue and captures higher-order feature correlations.
 
