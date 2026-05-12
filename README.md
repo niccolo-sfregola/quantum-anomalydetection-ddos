@@ -284,9 +284,7 @@ can provide useful inductive structure for future anomaly detection systems unde
 
 ## Authors
 
-Developed by **Qool Quids** during the ETH Quantum Hackathon 2026.
-
-Team members:
+Developed by:
 
 * Niccolò Sfregola
 * David Chudožilov
