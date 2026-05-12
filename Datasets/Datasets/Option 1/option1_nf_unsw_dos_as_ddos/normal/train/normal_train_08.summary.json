@@ -1,0 +1,12 @@
+{
+  "scenario": "normal",
+  "split": "train",
+  "dataset_id": 8,
+  "rows": 100000,
+  "attack_rows": 0,
+  "attack_ratio": 0,
+  "bot_pool_size": 0,
+  "source": "NF-UNSW-NB15-v3",
+  "attack_source_class": null,
+  "window_minutes": 15
+}

@@ -1,0 +1,12 @@
+{
+  "scenario": "normal",
+  "split": "test",
+  "dataset_id": 2,
+  "rows": 100000,
+  "attack_rows": 0,
+  "attack_ratio": 0,
+  "benign_source": "NF-UNSW-NB15-v3",
+  "attack_source": null,
+  "attack_source_class": null,
+  "window_minutes": 15
+}

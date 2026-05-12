@@ -1,0 +1,53 @@
+{
+  "feature_set": "combined",
+  "feature_cols": [
+    "unique_src_ip",
+    "entropy_src_ip",
+    "unique_dst_ip",
+    "entropy_dst_ip",
+    "dst_concentration",
+    "mean_duration",
+    "mean_total_bytes",
+    "mean_pkts_per_sec",
+    "mean_outbound_ratio",
+    "mean_pkt_size",
+    "z_qubit_0",
+    "z_qubit_1",
+    "z_qubit_2",
+    "z_qubit_3",
+    "z_qubit_4",
+    "z_qubit_5",
+    "z_qubit_6",
+    "z_qubit_7",
+    "z_qubit_8",
+    "z_qubit_9",
+    "s_rho",
+    "trace_distance",
+    "s_entanglement"
+  ],
+  "C": 1.0,
+  "threshold": 0.9999998250323541,
+  "validation_f1_at_threshold": 0.9999999999995,
+  "n_train": 240,
+  "n_train_attack": 27,
+  "metrics": {
+    "validation": {
+      "n_samples": 60,
+      "n_attack": 6,
+      "f1": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "ap": 1.0,
+      "roc_auc": 1.0
+    },
+    "test": {
+      "n_samples": 60,
+      "n_attack": 9,
+      "f1": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "ap": 1.0000000000000002,
+      "roc_auc": 1.0
+    }
+  }
+}

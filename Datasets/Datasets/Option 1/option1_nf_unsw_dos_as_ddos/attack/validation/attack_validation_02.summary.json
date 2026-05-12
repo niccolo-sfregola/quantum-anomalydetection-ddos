@@ -1,0 +1,12 @@
+{
+  "scenario": "attack",
+  "split": "validation",
+  "dataset_id": 2,
+  "rows": 100000,
+  "attack_rows": 2271,
+  "attack_ratio": 0.02271,
+  "bot_pool_size": 94,
+  "source": "NF-UNSW-NB15-v3",
+  "attack_source_class": "DoS relabelled/redistributed as DDoS-like",
+  "window_minutes": 15
+}

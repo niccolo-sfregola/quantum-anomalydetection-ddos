@@ -1,0 +1,319 @@
+{
+  "config": {
+    "seed": 20260430,
+    "rowsPerDataset": 100000,
+    "windowMs": 900000,
+    "splits": {
+      "train": 8,
+      "validation": 2,
+      "test": 2
+    },
+    "attackRows": {
+      "min": 1500,
+      "max": 2500
+    },
+    "burstCount": {
+      "min": 2,
+      "max": 4
+    },
+    "burstBlockRows": 2000,
+    "botPoolSize": {
+      "min": 50,
+      "max": 100
+    }
+  },
+  "raw_csv": "C:\\Users\\nicol\\Documents\\QCentroid\\ETH-HKTN\\datasets\\raw\\NF-UNSW-NB15-v3\\f7546561558c07c5_NFV3DATA-A11964_A11964\\data\\NF-UNSW-NB15-v3.csv",
+  "benign_rows_available": 2237731,
+  "dos_rows_available": 5980,
+  "note": "Rows are sampled with replacement. NF-UNSW-NB15-v3 has only 5,980 DoS rows, so generated attack datasets intentionally reuse and redistribute DoS exemplars across synthetic bot source IPs.",
+  "datasets": [
+    {
+      "scenario": "normal",
+      "split": "train",
+      "dataset_id": 1,
+      "rows": 100000,
+      "attack_rows": 0,
+      "attack_ratio": 0,
+      "bot_pool_size": 0,
+      "source": "NF-UNSW-NB15-v3",
+      "attack_source_class": null,
+      "window_minutes": 15
+    },
+    {
+      "scenario": "normal",
+      "split": "train",
+      "dataset_id": 2,
+      "rows": 100000,
+      "attack_rows": 0,
+      "attack_ratio": 0,
+      "bot_pool_size": 0,
+      "source": "NF-UNSW-NB15-v3",
+      "attack_source_class": null,
+      "window_minutes": 15
+    },
+    {
+      "scenario": "normal",
+      "split": "train",
+      "dataset_id": 3,
+      "rows": 100000,
+      "attack_rows": 0,
+      "attack_ratio": 0,
+      "bot_pool_size": 0,
+      "source": "NF-UNSW-NB15-v3",
+      "attack_source_class": null,
+      "window_minutes": 15
+    },
+    {
+      "scenario": "normal",
+      "split": "train",
+      "dataset_id": 4,
+      "rows": 100000,
+      "attack_rows": 0,
+      "attack_ratio": 0,
+      "bot_pool_size": 0,
+      "source": "NF-UNSW-NB15-v3",
+      "attack_source_class": null,
+      "window_minutes": 15
+    },
+    {
+      "scenario": "normal",
+      "split": "train",
+      "dataset_id": 5,
+      "rows": 100000,
+      "attack_rows": 0,
+      "attack_ratio": 0,
+      "bot_pool_size": 0,
+      "source": "NF-UNSW-NB15-v3",
+      "attack_source_class": null,
+      "window_minutes": 15
+    },
+    {
+      "scenario": "normal",
+      "split": "train",
+      "dataset_id": 6,
+      "rows": 100000,
+      "attack_rows": 0,
+      "attack_ratio": 0,
+      "bot_pool_size": 0,
+      "source": "NF-UNSW-NB15-v3",
+      "attack_source_class": null,
+      "window_minutes": 15
+    },
+    {
+      "scenario": "normal",
+      "split": "train",
+      "dataset_id": 7,
+      "rows": 100000,
+      "attack_rows": 0,
+      "attack_ratio": 0,
+      "bot_pool_size": 0,
+      "source": "NF-UNSW-NB15-v3",
+      "attack_source_class": null,
+      "window_minutes": 15
+    },
+    {
+      "scenario": "normal",
+      "split": "train",
+      "dataset_id": 8,
+      "rows": 100000,
+      "attack_rows": 0,
+      "attack_ratio": 0,
+      "bot_pool_size": 0,
+      "source": "NF-UNSW-NB15-v3",
+      "attack_source_class": null,
+      "window_minutes": 15
+    },
+    {
+      "scenario": "normal",
+      "split": "validation",
+      "dataset_id": 1,
+      "rows": 100000,
+      "attack_rows": 0,
+      "attack_ratio": 0,
+      "bot_pool_size": 0,
+      "source": "NF-UNSW-NB15-v3",
+      "attack_source_class": null,
+      "window_minutes": 15
+    },
+    {
+      "scenario": "normal",
+      "split": "validation",
+      "dataset_id": 2,
+      "rows": 100000,
+      "attack_rows": 0,
+      "attack_ratio": 0,
+      "bot_pool_size": 0,
+      "source": "NF-UNSW-NB15-v3",
+      "attack_source_class": null,
+      "window_minutes": 15
+    },
+    {
+      "scenario": "normal",
+      "split": "test",
+      "dataset_id": 1,
+      "rows": 100000,
+      "attack_rows": 0,
+      "attack_ratio": 0,
+      "bot_pool_size": 0,
+      "source": "NF-UNSW-NB15-v3",
+      "attack_source_class": null,
+      "window_minutes": 15
+    },
+    {
+      "scenario": "normal",
+      "split": "test",
+      "dataset_id": 2,
+      "rows": 100000,
+      "attack_rows": 0,
+      "attack_ratio": 0,
+      "bot_pool_size": 0,
+      "source": "NF-UNSW-NB15-v3",
+      "attack_source_class": null,
+      "window_minutes": 15
+    },
+    {
+      "scenario": "attack",
+      "split": "train",
+      "dataset_id": 1,
+      "rows": 100000,
+      "attack_rows": 2126,
+      "attack_ratio": 0.02126,
+      "bot_pool_size": 59,
+      "source": "NF-UNSW-NB15-v3",
+      "attack_source_class": "DoS relabelled/redistributed as DDoS-like",
+      "window_minutes": 15
+    },
+    {
+      "scenario": "attack",
+      "split": "train",
+      "dataset_id": 2,
+      "rows": 100000,
+      "attack_rows": 1575,
+      "attack_ratio": 0.01575,
+      "bot_pool_size": 71,
+      "source": "NF-UNSW-NB15-v3",
+      "attack_source_class": "DoS relabelled/redistributed as DDoS-like",
+      "window_minutes": 15
+    },
+    {
+      "scenario": "attack",
+      "split": "train",
+      "dataset_id": 3,
+      "rows": 100000,
+      "attack_rows": 1881,
+      "attack_ratio": 0.01881,
+      "bot_pool_size": 69,
+      "source": "NF-UNSW-NB15-v3",
+      "attack_source_class": "DoS relabelled/redistributed as DDoS-like",
+      "window_minutes": 15
+    },
+    {
+      "scenario": "attack",
+      "split": "train",
+      "dataset_id": 4,
+      "rows": 100000,
+      "attack_rows": 2225,
+      "attack_ratio": 0.02225,
+      "bot_pool_size": 58,
+      "source": "NF-UNSW-NB15-v3",
+      "attack_source_class": "DoS relabelled/redistributed as DDoS-like",
+      "window_minutes": 15
+    },
+    {
+      "scenario": "attack",
+      "split": "train",
+      "dataset_id": 5,
+      "rows": 100000,
+      "attack_rows": 2204,
+      "attack_ratio": 0.02204,
+      "bot_pool_size": 74,
+      "source": "NF-UNSW-NB15-v3",
+      "attack_source_class": "DoS relabelled/redistributed as DDoS-like",
+      "window_minutes": 15
+    },
+    {
+      "scenario": "attack",
+      "split": "train",
+      "dataset_id": 6,
+      "rows": 100000,
+      "attack_rows": 1647,
+      "attack_ratio": 0.01647,
+      "bot_pool_size": 74,
+      "source": "NF-UNSW-NB15-v3",
+      "attack_source_class": "DoS relabelled/redistributed as DDoS-like",
+      "window_minutes": 15
+    },
+    {
+      "scenario": "attack",
+      "split": "train",
+      "dataset_id": 7,
+      "rows": 100000,
+      "attack_rows": 2180,
+      "attack_ratio": 0.0218,
+      "bot_pool_size": 55,
+      "source": "NF-UNSW-NB15-v3",
+      "attack_source_class": "DoS relabelled/redistributed as DDoS-like",
+      "window_minutes": 15
+    },
+    {
+      "scenario": "attack",
+      "split": "train",
+      "dataset_id": 8,
+      "rows": 100000,
+      "attack_rows": 1907,
+      "attack_ratio": 0.01907,
+      "bot_pool_size": 71,
+      "source": "NF-UNSW-NB15-v3",
+      "attack_source_class": "DoS relabelled/redistributed as DDoS-like",
+      "window_minutes": 15
+    },
+    {
+      "scenario": "attack",
+      "split": "validation",
+      "dataset_id": 1,
+      "rows": 100000,
+      "attack_rows": 2123,
+      "attack_ratio": 0.02123,
+      "bot_pool_size": 50,
+      "source": "NF-UNSW-NB15-v3",
+      "attack_source_class": "DoS relabelled/redistributed as DDoS-like",
+      "window_minutes": 15
+    },
+    {
+      "scenario": "attack",
+      "split": "validation",
+      "dataset_id": 2,
+      "rows": 100000,
+      "attack_rows": 2271,
+      "attack_ratio": 0.02271,
+      "bot_pool_size": 94,
+      "source": "NF-UNSW-NB15-v3",
+      "attack_source_class": "DoS relabelled/redistributed as DDoS-like",
+      "window_minutes": 15
+    },
+    {
+      "scenario": "attack",
+      "split": "test",
+      "dataset_id": 1,
+      "rows": 100000,
+      "attack_rows": 2091,
+      "attack_ratio": 0.02091,
+      "bot_pool_size": 89,
+      "source": "NF-UNSW-NB15-v3",
+      "attack_source_class": "DoS relabelled/redistributed as DDoS-like",
+      "window_minutes": 15
+    },
+    {
+      "scenario": "attack",
+      "split": "test",
+      "dataset_id": 2,
+      "rows": 100000,
+      "attack_rows": 2163,
+      "attack_ratio": 0.02163,
+      "bot_pool_size": 71,
+      "source": "NF-UNSW-NB15-v3",
+      "attack_source_class": "DoS relabelled/redistributed as DDoS-like",
+      "window_minutes": 15
+    }
+  ]
+}

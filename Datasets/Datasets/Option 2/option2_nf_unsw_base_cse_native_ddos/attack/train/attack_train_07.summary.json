@@ -1,0 +1,12 @@
+{
+  "scenario": "attack",
+  "split": "train",
+  "dataset_id": 7,
+  "rows": 100000,
+  "attack_rows": 1583,
+  "attack_ratio": 0.01583,
+  "benign_source": "NF-UNSW-NB15-v3",
+  "attack_source": "NF-CSE-CIC-IDS2018-v3",
+  "attack_source_class": "native DDoS",
+  "window_minutes": 15
+}

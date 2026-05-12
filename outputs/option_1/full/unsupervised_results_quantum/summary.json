@@ -1,0 +1,84 @@
+{
+  "feature_set": "quantum_only",
+  "feature_cols": [
+    "z_qubit_0",
+    "z_qubit_1",
+    "z_qubit_2",
+    "z_qubit_3",
+    "z_qubit_4",
+    "z_qubit_5",
+    "z_qubit_6",
+    "z_qubit_7",
+    "z_qubit_8",
+    "z_qubit_9",
+    "s_rho",
+    "trace_distance",
+    "s_entanglement"
+  ],
+  "percentile": 95,
+  "methods": {
+    "A_trace_distance": {
+      "threshold": 0.3817720115184784,
+      "validation": {
+        "n_samples": 60,
+        "n_attack": 6,
+        "f1": 0.75,
+        "precision": 0.6,
+        "recall": 1.0,
+        "ap": 1.0,
+        "roc_auc": 1.0
+      },
+      "test": {
+        "n_samples": 60,
+        "n_attack": 9,
+        "f1": 0.8571428571428571,
+        "precision": 0.75,
+        "recall": 1.0,
+        "ap": 1.0000000000000002,
+        "roc_auc": 1.0
+      }
+    },
+    "B_isolation_forest": {
+      "threshold": 0.10114501040787705,
+      "validation": {
+        "n_samples": 60,
+        "n_attack": 6,
+        "f1": 0.9230769230769231,
+        "precision": 0.8571428571428571,
+        "recall": 1.0,
+        "ap": 1.0,
+        "roc_auc": 1.0
+      },
+      "test": {
+        "n_samples": 60,
+        "n_attack": 9,
+        "f1": 0.9473684210526315,
+        "precision": 0.9,
+        "recall": 1.0,
+        "ap": 1.0,
+        "roc_auc": 1.0
+      }
+    },
+    "C_hybrid": {
+      "threshold": 0.5250088506741449,
+      "validation": {
+        "n_samples": 60,
+        "n_attack": 6,
+        "f1": 0.6666666666666666,
+        "precision": 0.5,
+        "recall": 1.0,
+        "ap": 1.0,
+        "roc_auc": 1.0
+      },
+      "test": {
+        "n_samples": 60,
+        "n_attack": 9,
+        "f1": 0.9,
+        "precision": 0.8181818181818182,
+        "recall": 1.0,
+        "ap": 1.0,
+        "roc_auc": 1.0
+      }
+    }
+  }
+}

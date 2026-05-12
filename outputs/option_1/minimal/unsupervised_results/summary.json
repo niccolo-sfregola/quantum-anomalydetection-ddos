@@ -1,0 +1,82 @@
+{
+  "feature_set": "combined",
+  "feature_cols": [
+    "unique_src_ip",
+    "entropy_src_ip",
+    "unique_dst_ip",
+    "entropy_dst_ip",
+    "z_qubit_0",
+    "z_qubit_1",
+    "z_qubit_2",
+    "z_qubit_3",
+    "s_rho",
+    "trace_distance",
+    "s_entanglement"
+  ],
+  "percentile": 95,
+  "methods": {
+    "A_trace_distance": {
+      "threshold": 0.3817720115184784,
+      "validation": {
+        "n_samples": 60,
+        "n_attack": 6,
+        "f1": 0.75,
+        "precision": 0.6,
+        "recall": 1.0,
+        "ap": 1.0,
+        "roc_auc": 1.0
+      },
+      "test": {
+        "n_samples": 60,
+        "n_attack": 9,
+        "f1": 0.8571428571428571,
+        "precision": 0.75,
+        "recall": 1.0,
+        "ap": 1.0000000000000002,
+        "roc_auc": 1.0
+      }
+    },
+    "B_isolation_forest": {
+      "threshold": 0.08463904779307915,
+      "validation": {
+        "n_samples": 60,
+        "n_attack": 6,
+        "f1": 0.9230769230769231,
+        "precision": 0.8571428571428571,
+        "recall": 1.0,
+        "ap": 1.0,
+        "roc_auc": 1.0
+      },
+      "test": {
+        "n_samples": 60,
+        "n_attack": 9,
+        "f1": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "ap": 1.0,
+        "roc_auc": 1.0
+      }
+    },
+    "C_hybrid": {
+      "threshold": 0.7093179880196049,
+      "validation": {
+        "n_samples": 60,
+        "n_attack": 6,
+        "f1": 0.8571428571428571,
+        "precision": 0.75,
+        "recall": 1.0,
+        "ap": 1.0,
+        "roc_auc": 1.0
+      },
+      "test": {
+        "n_samples": 60,
+        "n_attack": 9,
+        "f1": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "ap": 1.0,
+        "roc_auc": 1.0
+      }
+    }
+  }
+}

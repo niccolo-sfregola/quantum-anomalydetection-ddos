@@ -1,0 +1,33 @@
+{
+  "feature_set": "classical_only",
+  "feature_cols": [
+    "unique_src_ip",
+    "entropy_src_ip",
+    "unique_dst_ip",
+    "entropy_dst_ip"
+  ],
+  "percentile": 95,
+  "methods": {
+    "B_isolation_forest": {
+      "threshold": 0.0910483992011123,
+      "validation": {
+        "n_samples": 60,
+        "n_attack": 6,
+        "f1": 0.8571428571428571,
+        "precision": 0.75,
+        "recall": 1.0,
+        "ap": 1.0,
+        "roc_auc": 1.0
+      },
+      "test": {
+        "n_samples": 60,
+        "n_attack": 9,
+        "f1": 0.9473684210526315,
+        "precision": 0.9,
+        "recall": 1.0,
+        "ap": 1.0,
+        "roc_auc": 1.0
+      }
+    }
+  }
+}

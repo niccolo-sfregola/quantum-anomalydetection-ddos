@@ -1,0 +1,142 @@
+{
+  "source_dataset_family": "option2_nf_unsw_base_cse_native_ddos",
+  "reduced_dataset_family": "option2_nf_unsw_base_cse_native_ddos_reduced_schema",
+  "rows_are_projected_from_rich_generated_datasets": true,
+  "columns": [
+    "src_ip",
+    "dst_ip",
+    "src_port",
+    "dst_port",
+    "protocol",
+    "outbound_byte_ratio",
+    "duration",
+    "packets_per_second",
+    "bytes_per_second",
+    "inter_packet_arrival_mean",
+    "inter_packet_arrival_std",
+    "total_packets",
+    "total_bytes",
+    "packet_size_avg",
+    "packet_size_std",
+    "Label",
+    "Attack",
+    "scenario",
+    "split",
+    "dataset_id",
+    "row_in_window",
+    "is_seeded_ddos",
+    "burst_id",
+    "burst_phase",
+    "source_dataset"
+  ],
+  "derivation_notes": {
+    "duration": "FLOW_DURATION_MILLISECONDS converted to seconds with a 0.001 second floor for rate calculations.",
+    "packets_per_second": "(IN_PKTS + OUT_PKTS) / duration.",
+    "bytes_per_second": "(IN_BYTES + OUT_BYTES) / duration.",
+    "outbound_byte_ratio": "OUT_BYTES / (IN_BYTES + OUT_BYTES).",
+    "inter_packet_arrival_mean": "Packet-count-weighted average of directional IAT averages.",
+    "inter_packet_arrival_std": "Combined directional IAT standard deviation using directional packet counts.",
+    "total_packets": "IN_PKTS + OUT_PKTS.",
+    "total_bytes": "IN_BYTES + OUT_BYTES.",
+    "packet_size_avg": "total_bytes / total_packets.",
+    "packet_size_std": "Approximation from NetFlow v3 packet-size bucket counts using bucket midpoints."
+  },
+  "files": [
+    {
+      "file": "normal\\train\\normal_train_01.csv",
+      "rows": 100000
+    },
+    {
+      "file": "normal\\train\\normal_train_02.csv",
+      "rows": 100000
+    },
+    {
+      "file": "normal\\train\\normal_train_03.csv",
+      "rows": 100000
+    },
+    {
+      "file": "normal\\train\\normal_train_04.csv",
+      "rows": 100000
+    },
+    {
+      "file": "normal\\train\\normal_train_05.csv",
+      "rows": 100000
+    },
+    {
+      "file": "normal\\train\\normal_train_06.csv",
+      "rows": 100000
+    },
+    {
+      "file": "normal\\train\\normal_train_07.csv",
+      "rows": 100000
+    },
+    {
+      "file": "normal\\train\\normal_train_08.csv",
+      "rows": 100000
+    },
+    {
+      "file": "normal\\validation\\normal_validation_01.csv",
+      "rows": 100000
+    },
+    {
+      "file": "normal\\validation\\normal_validation_02.csv",
+      "rows": 100000
+    },
+    {
+      "file": "normal\\test\\normal_test_01.csv",
+      "rows": 100000
+    },
+    {
+      "file": "normal\\test\\normal_test_02.csv",
+      "rows": 100000
+    },
+    {
+      "file": "attack\\train\\attack_train_01.csv",
+      "rows": 100000
+    },
+    {
+      "file": "attack\\train\\attack_train_02.csv",
+      "rows": 100000
+    },
+    {
+      "file": "attack\\train\\attack_train_03.csv",
+      "rows": 100000
+    },
+    {
+      "file": "attack\\train\\attack_train_04.csv",
+      "rows": 100000
+    },
+    {
+      "file": "attack\\train\\attack_train_05.csv",
+      "rows": 100000
+    },
+    {
+      "file": "attack\\train\\attack_train_06.csv",
+      "rows": 100000
+    },
+    {
+      "file": "attack\\train\\attack_train_07.csv",
+      "rows": 100000
+    },
+    {
+      "file": "attack\\train\\attack_train_08.csv",
+      "rows": 100000
+    },
+    {
+      "file": "attack\\validation\\attack_validation_01.csv",
+      "rows": 100000
+    },
+    {
+      "file": "attack\\validation\\attack_validation_02.csv",
+      "rows": 100000
+    },
+    {
+      "file": "attack\\test\\attack_test_01.csv",
+      "rows": 100000
+    },
+    {
+      "file": "attack\\test\\attack_test_02.csv",
+      "rows": 100000
+    }
+  ]
+}
