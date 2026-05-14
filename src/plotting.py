@@ -419,6 +419,6 @@ def run_tree(cleaned_root: str | Path, output_root: str | Path) -> None:
 
 
 if __name__ == "__main__":
-    CLEANED_ROOT = "quantum-anomalydetection-ddos/cleaned_dataset/option_1/attack/train"
-    OUTPUT_ROOT  = "quantum-anomalydetection-ddos/cleaned_dataset/option_1/attack/train/eda"
+    CLEANED_ROOT = "cleaned_dataset/option_1/attack/train"
+    OUTPUT_ROOT  = "cleaned_dataset/option_1/attack/train/eda"
     run_tree(CLEANED_ROOT, OUTPUT_ROOT)

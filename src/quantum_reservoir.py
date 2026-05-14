@@ -396,8 +396,8 @@ if __name__ == "__main__":
     baseline = load_baseline("outputs/option_1/baseline/baseline_rho.npy")
 
     enrich_tree(
-        phase1_root  = "quantum-anomalydetection-ddos/outputs/option_2/minimal",
-        output_root  = "quantum-anomalydetection-ddos/outputs/option_2/minimal/enriched",
+        phase1_root  = "outputs/option_2/minimal",
+        output_root  = "outputs/option_2/minimal/enriched",
         reservoir    = reservoir,
         baseline_rho = baseline,
 )
