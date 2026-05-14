@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 from pathlib import Path
 
-from niccolo_unsupervised.quantum_reservoir import (
+from quantum_reservoir import (
     DensityMatrix,
     build_density_matrix,
     next_power_of_2,
