@@ -1,0 +1,1 @@
+Enrichment with quantum reservoir doesn't affect quantum_reservoir time efficiency

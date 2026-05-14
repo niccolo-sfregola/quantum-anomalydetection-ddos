@@ -37,7 +37,8 @@ DROP_REDUNDANT = [
     "inter_packet_arrival_mean",
 ]
 
-ROWS_PER_DATASET = 100_000
+DATASET_SCALING = 1_000
+ROWS_PER_DATASET = DATASET_SCALING
 N_WINDOWS        = 15
 ROWS_PER_WINDOW  = ROWS_PER_DATASET // N_WINDOWS    
 
@@ -119,7 +120,8 @@ def preprocess_dataframe(df: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
 
 def preprocess_file(input_path: str | Path,
                     output_dir: str | Path,
-                    verbose: bool = True) -> Path:
+                    verbose: bool = True,
+                    dataset_scaling: int | None = None) -> Path:
     """
     Preprocess one CSV. Saves two files in `output_dir`:
         <stem>_clean.csv : feature columns + window_id (model input)
@@ -132,8 +134,12 @@ def preprocess_file(input_path: str | Path,
     if verbose:
         print(f"[phase0] Reading {input_path.name} ...")
     df = pd.read_csv(input_path, low_memory=False)
+
+    if dataset_scaling is not None:
+        df = df.iloc[:dataset_scaling].copy()
+
     if verbose:
-        print(f"[phase0]   {len(df):,} rows × {df.shape[1]} cols")
+        print(f"[phase0]   {len(df):,} rows x {df.shape[1]} cols")
 
     features_df, audit_df = preprocess_dataframe(df)
 
@@ -152,7 +158,8 @@ def preprocess_file(input_path: str | Path,
 
 def preprocess_tree(input_root: str | Path,
                     output_root: str | Path,
-                    pattern: str = "*.csv") -> list[Path]:
+                    pattern: str = "*.csv",
+                    dataset_scaling: int | None = None) -> list[Path]:
     """
     Walk the dataset tree and preprocess every CSV, mirroring the folder
     structure under `output_root`.
@@ -167,7 +174,7 @@ def preprocess_tree(input_root: str | Path,
     for csv in csv_files:
         rel_dir = csv.parent.relative_to(input_root)
         out_dir = output_root / rel_dir
-        cleaned = preprocess_file(csv, out_dir, verbose=True)
+        cleaned = preprocess_file(csv, out_dir, verbose=True, dataset_scaling=dataset_scaling)
         cleaned_paths.append(cleaned)
 
     print(f"\n[phase0] Done. {len(cleaned_paths)} files cleaned → {output_root}")
@@ -177,6 +184,6 @@ def preprocess_tree(input_root: str | Path,
 if __name__ == "__main__":
     # Edit these paths to match your local layout.
     INPUT_ROOT  = "Datasets/Datasets/Option_2/option2_nf_unsw_base_cse_native_ddos_reduced_schema"
-    OUTPUT_ROOT = "cleaned_dataset/option_2"
+    OUTPUT_ROOT = "cleaned_dataset_1000/option_2"
 
-    preprocess_tree(INPUT_ROOT, OUTPUT_ROOT)
+    preprocess_tree(INPUT_ROOT, OUTPUT_ROOT, dataset_scaling = DATASET_SCALING)

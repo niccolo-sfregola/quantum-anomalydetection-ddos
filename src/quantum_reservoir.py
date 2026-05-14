@@ -392,12 +392,12 @@ def load_baseline(path: str | Path) -> DensityMatrix:
 
 if __name__ == "__main__":
 
-    reservoir = QuantumReservoir(n_qubits=4, depth=4)
+    reservoir = QuantumReservoir(n_qubits=10, depth=4)
     baseline = load_baseline("outputs/option_1/baseline/baseline_rho.npy")
 
     enrich_tree(
-        phase1_root  = "outputs/option_2/minimal",
-        output_root  = "outputs/option_2/minimal/enriched",
+        phase1_root  = "outputs_50000/option_2/full",
+        output_root  = "outputs_50000/option_2/full/enriched",
         reservoir    = reservoir,
         baseline_rho = baseline,
 )
