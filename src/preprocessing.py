@@ -176,7 +176,7 @@ def preprocess_tree(input_root: str | Path,
 
 if __name__ == "__main__":
     # Edit these paths to match your local layout.
-    INPUT_ROOT  = "Datasets/Datasets/Option_2/option2_nf_unsw_base_cse_native_ddos_reduced_schema"
-    OUTPUT_ROOT = "cleaned_dataset/option_2"
+    INPUT_ROOT  = "quantum-anomalydetection-ddos/Datasets/Datasets/Option_2/option2_nf_unsw_base_cse_native_ddos_reduced_schema"
+    OUTPUT_ROOT = "quantum-anomalydetection-ddos/cleaned_dataset/option_2"
 
     preprocess_tree(INPUT_ROOT, OUTPUT_ROOT)

@@ -379,7 +379,7 @@ def train_and_evaluate(
 
 if __name__ == "__main__":
     train_and_evaluate(
-        phase2_root  = "outputs/option_1/enriched_data_full",
-        output_dir   = "outputs/option_1/logistic_results_1",
+        phase2_root  = "quantum-anomalydetection-ddos/outputs/option_1/enriched_data_full",
+        output_dir   = "quantum-anomalydetection-ddos/outputs/option_1/logistic_results_1",
         feature_set  = "combined",
     )

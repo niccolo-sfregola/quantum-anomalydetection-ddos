@@ -260,9 +260,9 @@ def run_supervised(
 
 if __name__ == "__main__":
     # Edit these paths to match your local layout.
-    ENRICHED_ROOT = "niccolo_unsupervised/outputs/option_1/minimal/enriched"
-    OUTPUT_DIR    = "niccolo_unsupervised/outputs/option_1/minimal/supervised_results_classical"
-    AUDIT_ROOT    = "niccolo_unsupervised/cleaned_dataset/option_1"
+    ENRICHED_ROOT = "quantum-anomalydetection-ddos/outputs/option_1/minimal/enriched"
+    OUTPUT_DIR    = "quantum-anomalydetection-ddos/outputs/option_1/minimal/supervised_results_classical"
+    AUDIT_ROOT    = "quantum-anomalydetection-ddos/cleaned_dataset/option_1"
     FEATURE_SET   = "classical_only"
 
     run_supervised(
