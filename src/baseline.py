@@ -75,7 +75,7 @@ def build_baseline(
 
 if __name__ == "__main__":
     # Edit paths to match your local layout.
-    PHASE1_NORMAL_TRAIN = "outputs/option_2/full/normal/train"
-    OUTPUT_PATH         = "outputs/option_2/baseline/baseline_rho.npy"
+    PHASE1_NORMAL_TRAIN = "outputs_1000/option_2/minimal/normal/train"
+    OUTPUT_PATH         = "outputs_1000/option_2/baseline/baseline_rho.npy"
 
     build_baseline(PHASE1_NORMAL_TRAIN, OUTPUT_PATH)
