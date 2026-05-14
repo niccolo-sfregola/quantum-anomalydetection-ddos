@@ -69,7 +69,7 @@ def load_split(
     kind: str,                  # "attack" | "normal"
     split: str,                 # "train" | "validation" | "test"
     feature_set: str,
-    require_labels: bool = True,
+    require_labels: bool = True
 ) -> tuple[np.ndarray, np.ndarray, list[str], list[str]]:
     """
     Load all enriched files for one (kind, split) combination.
@@ -126,8 +126,7 @@ def load_all(enriched_root: Path, audit_root: Path, feature_set: str) -> dict:
     for kind in ("attack", "normal"):
         for split in ("train", "validation", "test"):
             X, y, feat_cols, stems = load_split(
-                enriched_root, audit_root, kind, split, feature_set,
-            )
+                enriched_root, audit_root, kind, split, feature_set)
             out[(kind, split)] = {
                 "X": X, "y": y, "feat_cols": feat_cols, "stems": stems,
             }
@@ -456,6 +455,8 @@ def run_unsupervised(
     audit_root: str | Path,
     feature_set: str = "combined",
     seed: int = 42,
+    data_scaling: Optional[int] = None,
+    plot_check: bool = False
 ):
     """
     Full unsupervised pipeline. Saves plots and metrics for methods A, B, C.
@@ -478,7 +479,7 @@ def run_unsupervised(
     print(f"[unsupervised] Enriched root: {enriched_root}")
     print(f"[unsupervised] Audit root   : {audit_root}")
     print(f"[unsupervised] Feature set  : {feature_set}")
-    data = load_all(enriched_root, audit_root, feature_set)
+    data = load_all(enriched_root, audit_root, feature_set, data_scaling)
  
     feat_cols = data[("normal", "train")]["feat_cols"]
     print(f"[unsupervised] Feature columns ({len(feat_cols)}): {feat_cols}")
@@ -496,7 +497,9 @@ def run_unsupervised(
         print("\n[unsupervised] === Method A: trace_distance threshold ===")
         res_A = method_A_trace_distance(data, feat_cols)
         print(f"  threshold = {res_A['threshold']:.4f}")
-        make_all_plots(res_A, output_dir / "plots" / "method_A")
+
+        if plot_check:
+            make_all_plots(res_A, output_dir / "plots" / "method_A")
     else:
         print("\n[unsupervised] === Method A: SKIPPED ===")
         print("  trace_distance not in feature set → skipping method A and C")
@@ -505,7 +508,8 @@ def run_unsupervised(
     print("\n[unsupervised] === Method B: Isolation Forest ===")
     res_B = method_B_isolation_forest(data, feat_cols, seed=seed)
     print(f"  threshold = {res_B['threshold']:.4f}")
-    make_all_plots(res_B, output_dir / "plots" / "method_B")
+    if plot_check:
+        make_all_plots(res_B, output_dir / "plots" / "method_B")
  
     # ── Method C: Hybrid (only if A is available) ────────────────────────
     res_C = None
@@ -513,7 +517,8 @@ def run_unsupervised(
         print("\n[unsupervised] === Method C: Hybrid (mean of A and B) ===")
         res_C = method_C_hybrid(res_A, res_B)
         print(f"  threshold = {res_C['threshold']:.4f}")
-        make_all_plots(res_C, output_dir / "plots" / "method_C")
+        if plot_check:
+            make_all_plots(res_C, output_dir / "plots" / "method_C")
  
     # ── Summary ──────────────────────────────────────────────────────────
     methods_summary = {}
@@ -557,5 +562,6 @@ if __name__ == "__main__":
     OUTPUT_DIR    = "outputs/option_2/minimal/unsupervised_results"
     AUDIT_ROOT    = "cleaned_dataset/option_2"   # contains *_audit.csv files
     FEATURE_SET   = "combined"
+    DATA_SCALING  = 4
 
-    run_unsupervised(ENRICHED_ROOT, OUTPUT_DIR, AUDIT_ROOT, FEATURE_SET)
+    run_unsupervised(ENRICHED_ROOT, OUTPUT_DIR, AUDIT_ROOT, FEATURE_SET, DATA_SCALING, plot_check = False)

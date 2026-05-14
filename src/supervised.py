@@ -104,6 +104,7 @@ def run_supervised(
     feature_set: str = "combined",
     C: float = 1.0,
     seed: int = 42,
+    plot_check: bool = False 
 ):
     """
     Full supervised pipeline. Fits a logistic regression on (X, y),
@@ -207,16 +208,18 @@ def run_supervised(
         result.predictions[key] = (raw_scores[key] >= threshold).astype(int)
 
     # ── Plots ────────────────────────────────────────────────────────────
-    print("[supervised] Generating plots ...")
-    for split in ("validation", "test"):
-        plot_score_histogram(result,  split, plots_dir)
-        plot_pr_roc(result,           split, plots_dir)
-        plot_threshold_sweep(result,  split, plots_dir)
-        plot_confusion_matrix(result, split, plots_dir)
-        plot_score_timeline(result,   split, plots_dir)
 
-    # Logistic-specific plot
-    plot_feature_importance(model.coef_.ravel(), feat_cols, plots_dir)
+    if plot_check:
+        print("[supervised] Generating plots ...")
+        for split in ("validation", "test"):
+            plot_score_histogram(result,  split, plots_dir)
+            plot_pr_roc(result,           split, plots_dir)
+            plot_threshold_sweep(result,  split, plots_dir)
+            plot_confusion_matrix(result, split, plots_dir)
+            plot_score_timeline(result,   split, plots_dir)
+
+        # Logistic-specific plot
+        plot_feature_importance(model.coef_.ravel(), feat_cols, plots_dir)
 
     # ── Summary ──────────────────────────────────────────────────────────
     summary = {
@@ -260,14 +263,16 @@ def run_supervised(
 
 if __name__ == "__main__":
     # Edit these paths to match your local layout.
-    ENRICHED_ROOT = "quantum-anomalydetection-ddos/outputs/option_1/minimal/enriched"
-    OUTPUT_DIR    = "quantum-anomalydetection-ddos/outputs/option_1/minimal/supervised_results_classical"
-    AUDIT_ROOT    = "quantum-anomalydetection-ddos/cleaned_dataset/option_1"
+    ENRICHED_ROOT = "outputs/option_1/minimal/enriched"
+    OUTPUT_DIR    = "outputs/option_1/minimal/supervised_classical_1"
+    AUDIT_ROOT    = "cleaned_dataset/option_1"
     FEATURE_SET   = "classical_only"
+    
 
     run_supervised(
         enriched_root = ENRICHED_ROOT,
         output_dir    = OUTPUT_DIR,
         audit_root    = AUDIT_ROOT,
         feature_set   = FEATURE_SET,
+        plot_check = False
     )
