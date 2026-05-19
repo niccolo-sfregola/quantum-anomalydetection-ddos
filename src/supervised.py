@@ -263,10 +263,10 @@ def run_supervised(
 
 if __name__ == "__main__":
     # Edit these paths to match your local layout.
-    ENRICHED_ROOT = "outputs/option_1/minimal/enriched"
-    OUTPUT_DIR    = "outputs/option_1/minimal/supervised_classical_1"
-    AUDIT_ROOT    = "cleaned_dataset/option_1"
-    FEATURE_SET   = "classical_only"
+    ENRICHED_ROOT = "outputs_50000/option_2/full/enriched"
+    OUTPUT_DIR    = "outputs_50000/option_2/full/supervised"
+    AUDIT_ROOT    = "cleaned_dataset_50000/option_2"
+    FEATURE_SET   = "quantum_only"
     
 
     run_supervised(
