@@ -29,22 +29,45 @@ COLOR_LINE   = "#444"
 
 PERCENTILE_THRESHOLD = 99   # threshold = 95th percentile of scores on normal/train
 
+QUANTUM_SCALAR_COLUMNS = {"s_rho", "trace_distance", "s_entanglement"}
+
+FORBIDDEN_MODEL_INPUT_COLUMNS = {
+    "label", "labels", "attack",
+    "is_seeded_ddos", "burst_id", "burst_phase",
+    "split", "scenario", "dataset_id",
+    "row_in_window", "source_dataset",
+}
+
 
 # ── Data loading ──────────────────────────────────────────────────────────────
 
 def select_feature_columns(df: pd.DataFrame, feature_set: str) -> list[str]:
     """Select which columns of the enriched CSV are model input."""
-    quantum_cols = [c for c in df.columns
-                    if c.startswith("z_qubit_")
-                    or c in ("s_rho", "trace_distance", "s_entanglement")]
+    leaks = sorted(
+        c for c in df.columns
+        if c != "window_id" and c.lower() in FORBIDDEN_MODEL_INPUT_COLUMNS
+    )
+    if leaks:
+        raise ValueError(f"Leakage/audit columns cannot be model inputs: {leaks}")
+
     all_features = [c for c in df.columns if c != "window_id"]
+    quantum_cols = [
+        c for c in all_features
+        if c.startswith("z_qubit_") or c in QUANTUM_SCALAR_COLUMNS
+    ]
 
     if feature_set == "combined":
         return all_features
     if feature_set == "quantum_only":
+        if not quantum_cols:
+            raise ValueError("feature_set='quantum_only' but no quantum columns were found")
         return quantum_cols
     if feature_set == "classical_only":
-        return [c for c in all_features if c not in quantum_cols]
+        classical_cols = [c for c in all_features if c not in quantum_cols]
+        if not classical_cols:
+            raise ValueError("feature_set='classical_only' but no classical columns were found")
+        return classical_cols
+
     raise ValueError(f"Unknown feature_set '{feature_set}'")
 
 
@@ -57,10 +80,26 @@ def _find_audit_csv(stem: str, audit_root: Path) -> Optional[Path]:
 def _window_labels_from_audit(audit_csv: Path) -> np.ndarray:
     """A window is labelled 1 if any of its flows had is_seeded_ddos == 1."""
     audit = pd.read_csv(audit_csv, low_memory=False)
-    rows_per_window = 100_000 // N_WINDOWS
-    audit["window_id"] = (audit["row_in_window"] // rows_per_window).clip(0, N_WINDOWS - 1)
-    return (audit.groupby("window_id")["is_seeded_ddos"].max()
-                 .reindex(range(N_WINDOWS), fill_value=0).values)
+
+    if "is_seeded_ddos" not in audit.columns:
+        return np.zeros(N_WINDOWS, dtype=np.float32)
+
+    if "row_in_window" not in audit.columns:
+        raise ValueError(
+            f"{audit_csv.name} has is_seeded_ddos labels but no row_in_window column"
+        )
+
+    rows_per_window = max(1, len(audit) // N_WINDOWS)
+    audit["window_id"] = (
+        audit["row_in_window"] // rows_per_window
+    ).clip(0, N_WINDOWS - 1)
+
+    return (
+        audit.groupby("window_id")["is_seeded_ddos"]
+             .max()
+             .reindex(range(N_WINDOWS), fill_value=0)
+             .values
+    )
 
 
 def load_split(
@@ -69,18 +108,26 @@ def load_split(
     kind: str,                  # "attack" | "normal"
     split: str,                 # "train" | "validation" | "test"
     feature_set: str,
-    require_labels: bool = True
+    require_labels: bool = True,
+    data_scaling: Optional[int] = None,
 ) -> tuple[np.ndarray, np.ndarray, list[str], list[str]]:
     """
     Load all enriched files for one (kind, split) combination.
 
     Args:
         require_labels : if True, raise an error if audit CSVs cannot be
-                         found for `attack` files (so silent failures don't
-                         produce empty label arrays).
+                         found for `attack` files.
+        data_scaling   : optional maximum number of enriched files to load
+                         from this split. None means all files.
     """
     folder = enriched_root / kind / split
     files = sorted(folder.rglob("*_enriched.csv"))
+
+    if data_scaling is not None:
+        if data_scaling <= 0:
+            raise ValueError("data_scaling must be positive when provided")
+        files = files[:data_scaling]
+
     if not files:
         return (np.empty((0, 0), dtype=np.float32),
                 np.empty(0, dtype=np.float32), [], [])
@@ -90,8 +137,21 @@ def load_split(
 
     for f in files:
         df = pd.read_csv(f).sort_values("window_id").reset_index(drop=True)
+        current_cols = select_feature_columns(df, feature_set)
+
         if not feat_cols:
-            feat_cols = select_feature_columns(df, feature_set)
+            feat_cols = current_cols
+        elif current_cols != feat_cols:
+            missing = [c for c in feat_cols if c not in current_cols]
+            extra = [c for c in current_cols if c not in feat_cols]
+            raise ValueError(
+                f"Inconsistent enriched feature schema in {f.name}.\n"
+                f"  This usually means outputs from different reservoir sizes "
+                f"or feature sets were mixed.\n"
+                f"  Missing expected columns: {missing}\n"
+                f"  Extra columns: {extra}"
+            )
+
         X_list.append(df[feat_cols].values.astype(np.float32))
 
         stem      = f.stem.replace("_enriched", "")
@@ -99,7 +159,6 @@ def load_split(
 
         if audit_csv is None:
             if kind == "normal":
-                # Normal datasets are all-benign by construction: no audit needed
                 labels = np.zeros(N_WINDOWS, dtype=np.float32)
             elif require_labels:
                 raise FileNotFoundError(
@@ -120,16 +179,50 @@ def load_split(
     return X, y, feat_cols, stems
 
 
-def load_all(enriched_root: Path, audit_root: Path, feature_set: str) -> dict:
-    """Load every (kind, split) combination into a dict."""
+def load_all(
+    enriched_root: Path,
+    audit_root: Path,
+    feature_set: str,
+    data_scaling: Optional[int] = None,
+) -> dict:
+    """Load every (kind, split) combination into a dict with one consistent schema."""
     out: dict = {}
+    reference_cols: list[str] = []
+
     for kind in ("attack", "normal"):
         for split in ("train", "validation", "test"):
             X, y, feat_cols, stems = load_split(
-                enriched_root, audit_root, kind, split, feature_set)
+                enriched_root,
+                audit_root,
+                kind,
+                split,
+                feature_set,
+                data_scaling=data_scaling,
+            )
+
+            if feat_cols:
+                if not reference_cols:
+                    reference_cols = feat_cols
+                elif feat_cols != reference_cols:
+                    missing = [c for c in reference_cols if c not in feat_cols]
+                    extra = [c for c in feat_cols if c not in reference_cols]
+                    raise ValueError(
+                        f"Inconsistent feature schema in {kind}/{split}.\n"
+                        f"  Do not mix enriched files generated with different "
+                        f"reservoir sizes or feature sets.\n"
+                        f"  Missing expected columns: {missing}\n"
+                        f"  Extra columns: {extra}"
+                    )
+
             out[(kind, split)] = {
                 "X": X, "y": y, "feat_cols": feat_cols, "stems": stems,
             }
+
+    if reference_cols:
+        for blk in out.values():
+            if not blk["feat_cols"]:
+                blk["feat_cols"] = reference_cols
+
     return out
 
 
@@ -557,11 +650,19 @@ def run_unsupervised(
 
 
 if __name__ == "__main__":
-    # Edit these paths to match your local layout
-    ENRICHED_ROOT = "outputs/option_2/minimal/enriched"
-    OUTPUT_DIR    = "outputs/option_2/minimal/unsupervised_results"
-    AUDIT_ROOT    = "cleaned_dataset/option_2"   # contains *_audit.csv files
-    FEATURE_SET   = "combined"
-    DATA_SCALING  = 4
+    # Run unsupervised validation/test on the full enriched Option 2 dataset.
+    ENRICHED_ROOT = "outputs/option_2/full/enriched"
+    OUTPUT_DIR    = "outputs/option_2/full/unsupervised_results"
+    AUDIT_ROOT    = "cleaned_dataset/option_2"
 
-    run_unsupervised(ENRICHED_ROOT, OUTPUT_DIR, AUDIT_ROOT, FEATURE_SET, DATA_SCALING, plot_check = False)
+    FEATURE_SET   = "combined"
+    DATA_SCALING  = None
+
+    run_unsupervised(
+        enriched_root = ENRICHED_ROOT,
+        output_dir    = OUTPUT_DIR,
+        audit_root    = AUDIT_ROOT,
+        feature_set   = FEATURE_SET,
+        data_scaling  = DATA_SCALING,
+        plot_check    = True,
+    )

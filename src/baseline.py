@@ -6,21 +6,33 @@ from quantum_reservoir import (
     DensityMatrix,
     build_density_matrix,
     next_power_of_2,
-    pad_density_matrix,
     save_baseline,
+    validate_density_matrix,
 )
+
 
 
 def build_baseline(
     phase1_normal_train_root: str | Path,
     output_path: str | Path,
     verbose: bool = True,
+    *,
+    n_qubits: int,
 ) -> DensityMatrix:
     """
     Walk the output of the normal training datasets and build sigma.
+
+    The baseline must be built directly in the same Hilbert space as the
+    reservoir. Do not build a compact baseline and pad it later, because that
+    would not preserve the source-IP-to-basis mapping.
     """
     phase1_root = Path(phase1_normal_train_root)
     output_path = Path(output_path)
+
+    if n_qubits <= 0:
+        raise ValueError("n_qubits must be positive")
+
+    global_dim = 2 ** n_qubits
 
     ip_dist_files = sorted(phase1_root.rglob("*_ip_distributions.csv"))
     if not ip_dist_files:
@@ -30,19 +42,10 @@ def build_baseline(
         )
     print(f"[baseline] Found {len(ip_dist_files)} normal training file(s)")
 
-    # ── Pass 1: find global dimension ────────────────────────────────────
-    max_ips = 0
-    for f in ip_dist_files:
-        df = pd.read_csv(f)
-        per_window_max = df.groupby("window_id").size().max()
-        max_ips = max(max_ips, int(per_window_max))
-    global_dim = next_power_of_2(max_ips)
-
     if verbose:
-        print(f"[baseline] Max IPs in any training window: {max_ips}")
-        print(f"[baseline] Global density matrix dimension: {global_dim} × {global_dim}")
+        print(f"[baseline] Reservoir qubits: {n_qubits}")
+        print(f"[baseline] Baseline density matrix dimension: {global_dim} × {global_dim}")
 
-    # ── Pass 2: accumulate ρ matrices, all padded to global_dim ──────────
     accumulator = np.zeros((global_dim, global_dim), dtype=complex)
     n_windows   = 0
 
@@ -52,19 +55,19 @@ def build_baseline(
             ip_freq = dict(zip(sub["src_ip"], sub["freq"]))
             if not ip_freq:
                 continue
-            rho        = build_density_matrix(ip_freq)
-            rho_padded = pad_density_matrix(rho, global_dim)
-            accumulator += rho_padded.data
+            rho = build_density_matrix(ip_freq, dim=global_dim)
+            accumulator += rho.data
             n_windows   += 1
         if verbose:
             print(f"[baseline]   processed {f.name}")
 
-    # Average → still a valid density matrix (convex combination of valid ρ_i)
+    if n_windows == 0:
+        raise ValueError("No non-empty IP-distribution windows found for baseline")
+
     sigma_data = accumulator / n_windows
-    sigma      = DensityMatrix(sigma_data)
+    sigma      = validate_density_matrix(DensityMatrix(sigma_data), dim=global_dim)
 
     if verbose:
-        # Sanity check
         trace_sigma = np.trace(sigma_data).real
         print(f"[baseline] Averaged over {n_windows} benign windows")
         print(f"[baseline] Tr(σ) = {trace_sigma:.6f}  (should be ≈ 1.0)")
@@ -74,8 +77,15 @@ def build_baseline(
 
 
 if __name__ == "__main__":
-    # Edit paths to match your local layout.
-    PHASE1_NORMAL_TRAIN = "outputs_1000/option_2/minimal/normal/train"
-    OUTPUT_PATH         = "outputs_1000/option_2/baseline/baseline_rho.npy"
+    # Build benign baseline density matrix from full normal/train windows.
+    PHASE1_NORMAL_TRAIN = "outputs/option_2/full/normal/train"
+    OUTPUT_PATH         = "outputs/option_2/baseline/baseline_rho.npy"
 
-    build_baseline(PHASE1_NORMAL_TRAIN, OUTPUT_PATH)
+    FEATURE_SET         = "full"
+    N_QUBITS            = 10
+
+    build_baseline(
+        phase1_normal_train_root = PHASE1_NORMAL_TRAIN,
+        output_path              = OUTPUT_PATH,
+        n_qubits                 = N_QUBITS,
+    )

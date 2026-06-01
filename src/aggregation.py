@@ -211,10 +211,10 @@ def aggregate_tree(cleaned_root: str | Path,
 
 
 if __name__ == "__main__":
-    # Edit these paths to match your local layout.
-    CLEANED_ROOT = "cleaned_dataset_1000/option_2"
-    OUTPUT_ROOT  = "outputs_1000/option_2/full"
-    FEATURE_SET  = "full"   # or "full"
+    # Aggregate the full cleaned Option 2 dataset into window-level features.
+    CLEANED_ROOT = "cleaned_dataset/option_2"
+    OUTPUT_ROOT  = "outputs/option_2/full"
+    FEATURE_SET  = "full"
 
     aggregate_tree(
         cleaned_root = CLEANED_ROOT,

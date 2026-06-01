@@ -28,6 +28,7 @@ from unsupervised import (
     _save,
     N_WINDOWS,
     COLOR_BENIGN, COLOR_ATTACK,
+    FORBIDDEN_MODEL_INPUT_COLUMNS,
 )
 
 
@@ -104,7 +105,8 @@ def run_supervised(
     feature_set: str = "combined",
     C: float = 1.0,
     seed: int = 42,
-    plot_check: bool = False 
+    data_scaling: Optional[int] = None,
+    plot_check: bool = False,
 ):
     """
     Full supervised pipeline. Fits a logistic regression on (X, y),
@@ -117,6 +119,9 @@ def run_supervised(
         feature_set   : "combined" | "quantum_only" | "classical_only"
         C             : inverse L2 regularisation strength (smaller = stronger)
         seed          : random seed
+        data_scaling  : optional maximum number of enriched files to load
+                        from each split. None means all files.
+        plot_check    : if True, generate diagnostic plots
     """
     enriched_root = Path(enriched_root)
     audit_root    = Path(audit_root)
@@ -131,17 +136,27 @@ def run_supervised(
     print(f"[supervised] Feature set  : {feature_set}")
 
     # ── Load all data ─────────────────────────────────────────────────────
-    data = load_all(enriched_root, audit_root, feature_set)
+    # load_all performs schema validation, so mixed 4-qubit / 10-qubit
+    # enriched CSVs fail early instead of breaking inside sklearn.
+    data = load_all(
+        enriched_root = enriched_root,
+        audit_root    = audit_root,
+        feature_set   = feature_set,
+        data_scaling  = data_scaling,
+    )
+
     feat_cols = data[("normal", "train")]["feat_cols"]
     print(f"[supervised] Feature columns ({len(feat_cols)}): {feat_cols}")
 
-    # Sanity: confirm labels are NOT among the features (no leakage).
-    forbidden = {"is_seeded_ddos", "burst_id", "burst_phase", "Label", "Attack"}
-    leaks = forbidden.intersection(feat_cols)
+    # Sanity: confirm labels/audit metadata are NOT among the model features.
+    leaks = sorted(c for c in feat_cols if c.lower() in FORBIDDEN_MODEL_INPUT_COLUMNS)
     if leaks:
         raise RuntimeError(
-            f"Leakage detected: ground-truth columns appear in features: {leaks}"
+            f"Leakage detected: audit/ground-truth columns appear in features: {leaks}"
         )
+
+    z_cols = [c for c in feat_cols if c.startswith("z_qubit_")]
+    print(f"[supervised] Quantum z-expectation columns: {len(z_cols)}")
 
     for (kind, split), blk in data.items():
         n_windows = len(blk["X"])
@@ -152,9 +167,9 @@ def run_supervised(
     # ── Assemble training set ─────────────────────────────────────────────
     # Supervised: combine attack/train AND normal/train, with their labels.
     X_train = np.vstack([data[("attack", "train")]["X"],
-                          data[("normal", "train")]["X"]])
+                         data[("normal", "train")]["X"]])
     y_train = np.concatenate([data[("attack", "train")]["y"],
-                               data[("normal", "train")]["y"]])
+                              data[("normal", "train")]["y"]])
 
     if y_train.sum() == 0:
         raise RuntimeError(
@@ -196,6 +211,7 @@ def run_supervised(
                                  raw_scores[("normal", "validation")]])
     val_labels = np.concatenate([raw_labels[("attack", "validation")],
                                  raw_labels[("normal", "validation")]])
+
     threshold, val_f1_at_t = tune_threshold(val_scores, val_labels)
     print(f"[supervised] Best validation threshold: {threshold:.4f}  "
           f"(F1 = {val_f1_at_t:.3f})")
@@ -208,7 +224,6 @@ def run_supervised(
         result.predictions[key] = (raw_scores[key] >= threshold).astype(int)
 
     # ── Plots ────────────────────────────────────────────────────────────
-
     if plot_check:
         print("[supervised] Generating plots ...")
         for split in ("validation", "test"):
@@ -223,13 +238,16 @@ def run_supervised(
 
     # ── Summary ──────────────────────────────────────────────────────────
     summary = {
-        "feature_set"   : feature_set,
-        "feature_cols"  : feat_cols,
-        "C"             : C,
-        "threshold"     : threshold,
+        "feature_set"          : feature_set,
+        "feature_cols"         : feat_cols,
+        "n_features"           : len(feat_cols),
+        "n_z_qubit_features"   : len(z_cols),
+        "data_scaling"         : data_scaling,
+        "C"                    : C,
+        "threshold"            : threshold,
         "validation_f1_at_threshold": val_f1_at_t,
-        "n_train"       : int(X_train.shape[0]),
-        "n_train_attack": int(y_train.sum()),
+        "n_train"              : int(X_train.shape[0]),
+        "n_train_attack"       : int(y_train.sum()),
         "metrics": {
             "validation": metrics_for_split(result, "validation"),
             "test"      : metrics_for_split(result, "test"),
@@ -262,17 +280,19 @@ def run_supervised(
 
 
 if __name__ == "__main__":
-    # Edit these paths to match your local layout.
-    ENRICHED_ROOT = "outputs_50000/option_2/full/enriched"
-    OUTPUT_DIR    = "outputs_50000/option_2/full/supervised"
-    AUDIT_ROOT    = "cleaned_dataset_50000/option_2"
-    FEATURE_SET   = "quantum_only"
-    
+    # Run supervised validation/test on the full enriched Option 2 dataset.
+    ENRICHED_ROOT = "outputs/option_2/full/enriched"
+    OUTPUT_DIR    = "outputs/option_2/full/supervised_results"
+    AUDIT_ROOT    = "cleaned_dataset/option_2"
+
+    FEATURE_SET   = "combined"
+    DATA_SCALING  = None
 
     run_supervised(
         enriched_root = ENRICHED_ROOT,
         output_dir    = OUTPUT_DIR,
         audit_root    = AUDIT_ROOT,
         feature_set   = FEATURE_SET,
-        plot_check = False
+        data_scaling  = DATA_SCALING,
+        plot_check    = True,
     )
