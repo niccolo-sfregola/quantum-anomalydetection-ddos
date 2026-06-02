@@ -14,6 +14,7 @@ from sklearn.metrics import (
 )
 
 
+
 # ── Style ─────────────────────────────────────────────────────────────────────
 
 plt.rcParams.update({
@@ -23,6 +24,8 @@ plt.rcParams.update({
 })
 
 N_WINDOWS    = 15
+ROWS_PER_DATASET = 100_000
+
 COLOR_BENIGN = "#4A90C2"
 COLOR_ATTACK = "#D85A30"
 COLOR_LINE   = "#444"
@@ -54,13 +57,25 @@ def _find_audit_csv(stem: str, audit_root: Path) -> Optional[Path]:
     return candidates[0] if candidates else None
 
 
-def _window_labels_from_audit(audit_csv: Path) -> np.ndarray:
+def _window_labels_from_audit(
+    audit_csv: Path,
+    rows_per_dataset: int = ROWS_PER_DATASET,
+) -> np.ndarray:
     """A window is labelled 1 if any of its flows had is_seeded_ddos == 1."""
     audit = pd.read_csv(audit_csv, low_memory=False)
-    rows_per_window = 100_000 // N_WINDOWS
-    audit["window_id"] = (audit["row_in_window"] // rows_per_window).clip(0, N_WINDOWS - 1)
-    return (audit.groupby("window_id")["is_seeded_ddos"].max()
-                 .reindex(range(N_WINDOWS), fill_value=0).values)
+
+    rows_per_window = rows_per_dataset // N_WINDOWS
+
+    audit["window_id"] = (
+        audit["row_in_window"] // rows_per_window
+    ).clip(0, N_WINDOWS - 1)
+
+    return (
+        audit.groupby("window_id")["is_seeded_ddos"]
+             .max()
+             .reindex(range(N_WINDOWS), fill_value=0)
+             .values
+    )
 
 
 def load_split(
@@ -69,7 +84,8 @@ def load_split(
     kind: str,                  # "attack" | "normal"
     split: str,                 # "train" | "validation" | "test"
     feature_set: str,
-    require_labels: bool = True
+    require_labels: bool = True,
+    rows_per_dataset: int = ROWS_PER_DATASET,
 ) -> tuple[np.ndarray, np.ndarray, list[str], list[str]]:
     """
     Load all enriched files for one (kind, split) combination.
@@ -110,8 +126,7 @@ def load_split(
             else:
                 labels = np.zeros(N_WINDOWS, dtype=np.float32)
         else:
-            labels = _window_labels_from_audit(audit_csv).astype(np.float32)
-
+            labels = _window_labels_from_audit(audit_csv, rows_per_dataset=rows_per_dataset).astype(np.float32)
         y_list.append(labels)
         stems.append(stem)
 
@@ -120,15 +135,29 @@ def load_split(
     return X, y, feat_cols, stems
 
 
-def load_all(enriched_root: Path, audit_root: Path, feature_set: str) -> dict:
+def load_all(
+    enriched_root: Path,
+    audit_root: Path,
+    feature_set: str,
+    rows_per_dataset: int = ROWS_PER_DATASET,
+) -> dict:
     """Load every (kind, split) combination into a dict."""
     out: dict = {}
     for kind in ("attack", "normal"):
         for split in ("train", "validation", "test"):
             X, y, feat_cols, stems = load_split(
-                enriched_root, audit_root, kind, split, feature_set)
+                enriched_root,
+                audit_root,
+                kind,
+                split,
+                feature_set,
+                rows_per_dataset=rows_per_dataset,
+            )
             out[(kind, split)] = {
-                "X": X, "y": y, "feat_cols": feat_cols, "stems": stems,
+                "X": X,
+                "y": y,
+                "feat_cols": feat_cols,
+                "stems": stems,
             }
     return out
 
@@ -455,8 +484,8 @@ def run_unsupervised(
     audit_root: str | Path,
     feature_set: str = "combined",
     seed: int = 42,
-    data_scaling: Optional[int] = None,
-    plot_check: bool = False
+    rows_per_dataset: int = ROWS_PER_DATASET,
+    plot_check: bool = False,
 ):
     """
     Full unsupervised pipeline. Saves plots and metrics for methods A, B, C.
@@ -479,8 +508,8 @@ def run_unsupervised(
     print(f"[unsupervised] Enriched root: {enriched_root}")
     print(f"[unsupervised] Audit root   : {audit_root}")
     print(f"[unsupervised] Feature set  : {feature_set}")
-    data = load_all(enriched_root, audit_root, feature_set, data_scaling)
- 
+    data = load_all(enriched_root, audit_root, feature_set, rows_per_dataset=rows_per_dataset) 
+
     feat_cols = data[("normal", "train")]["feat_cols"]
     print(f"[unsupervised] Feature columns ({len(feat_cols)}): {feat_cols}")
  
@@ -557,11 +586,21 @@ def run_unsupervised(
 
 
 if __name__ == "__main__":
-    # Edit these paths to match your local layout
-    ENRICHED_ROOT = "outputs/option_2/minimal/enriched"
-    OUTPUT_DIR    = "outputs/option_2/minimal/unsupervised_results"
-    AUDIT_ROOT    = "cleaned_dataset/option_2"   # contains *_audit.csv files
-    FEATURE_SET   = "combined"
-    DATA_SCALING  = 4
+    SIZE = 50_000
+    OPTION = "option_2"
+    AGG_FEATURE_SET = "full"
 
-    run_unsupervised(ENRICHED_ROOT, OUTPUT_DIR, AUDIT_ROOT, FEATURE_SET, DATA_SCALING, plot_check = False)
+    ENRICHED_ROOT = f"outputs_{SIZE}/{OPTION}/{AGG_FEATURE_SET}/enriched"
+    OUTPUT_DIR    = f"outputs_{SIZE}/{OPTION}/{AGG_FEATURE_SET}/unsupervised_results"
+    AUDIT_ROOT    = f"cleaned_dataset_{SIZE}/{OPTION}"
+    FEATURE_SET   = "combined"
+
+    run_unsupervised(
+        enriched_root     = ENRICHED_ROOT,
+        output_dir        = OUTPUT_DIR,
+        audit_root        = AUDIT_ROOT,
+        feature_set       = FEATURE_SET,
+        seed              = 42,
+        rows_per_dataset  = SIZE,
+        plot_check        = True,
+    )

@@ -211,13 +211,15 @@ def aggregate_tree(cleaned_root: str | Path,
 
 
 if __name__ == "__main__":
-    # Edit these paths to match your local layout.
-    CLEANED_ROOT = "cleaned_dataset_1000/option_2"
-    OUTPUT_ROOT  = "outputs_1000/option_2/full"
-    FEATURE_SET  = "full"   # or "full"
+    SIZE = 50_000
+    OPTION = "option_2"
+    AGG_FEATURE_SET = "full"   # "full" => 10 qubits; "minimal" => 4 qubits
+
+    CLEANED_ROOT = f"cleaned_dataset_{SIZE}/{OPTION}"
+    OUTPUT_ROOT  = f"outputs_{SIZE}/{OPTION}/{AGG_FEATURE_SET}"
 
     aggregate_tree(
         cleaned_root = CLEANED_ROOT,
         output_root  = OUTPUT_ROOT,
-        feature_set  = FEATURE_SET,
+        feature_set  = AGG_FEATURE_SET,
     )

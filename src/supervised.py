@@ -104,7 +104,8 @@ def run_supervised(
     feature_set: str = "combined",
     C: float = 1.0,
     seed: int = 42,
-    plot_check: bool = False 
+    rows_per_dataset: int = 100_000,
+    plot_check: bool = False,
 ):
     """
     Full supervised pipeline. Fits a logistic regression on (X, y),
@@ -131,7 +132,7 @@ def run_supervised(
     print(f"[supervised] Feature set  : {feature_set}")
 
     # ── Load all data ─────────────────────────────────────────────────────
-    data = load_all(enriched_root, audit_root, feature_set)
+    data = load_all(enriched_root, audit_root, feature_set, rows_per_dataset=rows_per_dataset)
     feat_cols = data[("normal", "train")]["feat_cols"]
     print(f"[supervised] Feature columns ({len(feat_cols)}): {feat_cols}")
 
@@ -262,17 +263,22 @@ def run_supervised(
 
 
 if __name__ == "__main__":
-    # Edit these paths to match your local layout.
-    ENRICHED_ROOT = "outputs_50000/option_2/full/enriched"
-    OUTPUT_DIR    = "outputs_50000/option_2/full/supervised"
-    AUDIT_ROOT    = "cleaned_dataset_50000/option_2"
-    FEATURE_SET   = "quantum_only"
-    
+    SIZE = 50_000
+    OPTION = "option_2"
+    AGG_FEATURE_SET = "full"
+
+    ENRICHED_ROOT = f"outputs_{SIZE}/{OPTION}/{AGG_FEATURE_SET}/enriched"
+    OUTPUT_DIR    = f"outputs_{SIZE}/{OPTION}/{AGG_FEATURE_SET}/supervised"
+    AUDIT_ROOT    = f"cleaned_dataset_{SIZE}/{OPTION}"
+    FEATURE_SET   = "combined"   # "combined" / "classical_only" / "quantum_only"
 
     run_supervised(
-        enriched_root = ENRICHED_ROOT,
-        output_dir    = OUTPUT_DIR,
-        audit_root    = AUDIT_ROOT,
-        feature_set   = FEATURE_SET,
-        plot_check = False
+        enriched_root     = ENRICHED_ROOT,
+        output_dir        = OUTPUT_DIR,
+        audit_root        = AUDIT_ROOT,
+        feature_set       = FEATURE_SET,
+        C                 = 1.0,
+        seed              = 42,
+        rows_per_dataset  = SIZE,
+        plot_check        = True,
     )

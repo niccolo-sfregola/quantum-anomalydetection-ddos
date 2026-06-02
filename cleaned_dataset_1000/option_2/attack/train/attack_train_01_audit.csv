@@ -154,11 +154,11 @@ Label,Attack,is_seeded_ddos,burst_id,burst_phase,source_dataset,row_in_window
 0,Benign,0,,,NF-UNSW-NB15-v3-Benign,152
 0,Benign,0,,,NF-UNSW-NB15-v3-Benign,153
 0,Benign,0,,,NF-UNSW-NB15-v3-Benign,154
-0,Benign,0,,,NF-UNSW-NB15-v3-Benign,155
+1,DDoS,1,1.0,peak,NF-CSE-CIC-IDS2018-v3-DDoS,155
 0,Benign,0,,,NF-UNSW-NB15-v3-Benign,156
 0,Benign,0,,,NF-UNSW-NB15-v3-Benign,157
 0,Benign,0,,,NF-UNSW-NB15-v3-Benign,158
-0,Benign,0,,,NF-UNSW-NB15-v3-Benign,159
+1,DDoS,1,1.0,peak,NF-CSE-CIC-IDS2018-v3-DDoS,159
 0,Benign,0,,,NF-UNSW-NB15-v3-Benign,160
 0,Benign,0,,,NF-UNSW-NB15-v3-Benign,161
 0,Benign,0,,,NF-UNSW-NB15-v3-Benign,162
@@ -180,7 +180,7 @@ Label,Attack,is_seeded_ddos,burst_id,burst_phase,source_dataset,row_in_window
 0,Benign,0,,,NF-UNSW-NB15-v3-Benign,178
 0,Benign,0,,,NF-UNSW-NB15-v3-Benign,179
 0,Benign,0,,,NF-UNSW-NB15-v3-Benign,180
-0,Benign,0,,,NF-UNSW-NB15-v3-Benign,181
+1,DDoS,1,1.0,taper,NF-CSE-CIC-IDS2018-v3-DDoS,181
 0,Benign,0,,,NF-UNSW-NB15-v3-Benign,182
 0,Benign,0,,,NF-UNSW-NB15-v3-Benign,183
 0,Benign,0,,,NF-UNSW-NB15-v3-Benign,184
@@ -189,11 +189,11 @@ Label,Attack,is_seeded_ddos,burst_id,burst_phase,source_dataset,row_in_window
 0,Benign,0,,,NF-UNSW-NB15-v3-Benign,187
 0,Benign,0,,,NF-UNSW-NB15-v3-Benign,188
 0,Benign,0,,,NF-UNSW-NB15-v3-Benign,189
-0,Benign,0,,,NF-UNSW-NB15-v3-Benign,190
+1,DDoS,1,1.0,peak,NF-CSE-CIC-IDS2018-v3-DDoS,190
 0,Benign,0,,,NF-UNSW-NB15-v3-Benign,191
 0,Benign,0,,,NF-UNSW-NB15-v3-Benign,192
 0,Benign,0,,,NF-UNSW-NB15-v3-Benign,193
-0,Benign,0,,,NF-UNSW-NB15-v3-Benign,194
+1,DDoS,1,1.0,taper,NF-CSE-CIC-IDS2018-v3-DDoS,194
 0,Benign,0,,,NF-UNSW-NB15-v3-Benign,195
 0,Benign,0,,,NF-UNSW-NB15-v3-Benign,196
 0,Benign,0,,,NF-UNSW-NB15-v3-Benign,197
@@ -397,10 +397,10 @@ Label,Attack,is_seeded_ddos,burst_id,burst_phase,source_dataset,row_in_window
 0,Benign,0,,,NF-UNSW-NB15-v3-Benign,395
 0,Benign,0,,,NF-UNSW-NB15-v3-Benign,396
 0,Benign,0,,,NF-UNSW-NB15-v3-Benign,397
-0,Benign,0,,,NF-UNSW-NB15-v3-Benign,398
-0,Benign,0,,,NF-UNSW-NB15-v3-Benign,399
+1,DDoS,1,2.0,peak,NF-CSE-CIC-IDS2018-v3-DDoS,398
+1,DDoS,1,2.0,taper,NF-CSE-CIC-IDS2018-v3-DDoS,399
 0,Benign,0,,,NF-UNSW-NB15-v3-Benign,400
-0,Benign,0,,,NF-UNSW-NB15-v3-Benign,401
+1,DDoS,1,2.0,ramp_up,NF-CSE-CIC-IDS2018-v3-DDoS,401
 0,Benign,0,,,NF-UNSW-NB15-v3-Benign,402
 0,Benign,0,,,NF-UNSW-NB15-v3-Benign,403
 0,Benign,0,,,NF-UNSW-NB15-v3-Benign,404
@@ -414,7 +414,7 @@ Label,Attack,is_seeded_ddos,burst_id,burst_phase,source_dataset,row_in_window
 0,Benign,0,,,NF-UNSW-NB15-v3-Benign,412
 0,Benign,0,,,NF-UNSW-NB15-v3-Benign,413
 0,Benign,0,,,NF-UNSW-NB15-v3-Benign,414
-0,Benign,0,,,NF-UNSW-NB15-v3-Benign,415
+1,DDoS,1,2.0,peak,NF-CSE-CIC-IDS2018-v3-DDoS,415
 0,Benign,0,,,NF-UNSW-NB15-v3-Benign,416
 0,Benign,0,,,NF-UNSW-NB15-v3-Benign,417
 0,Benign,0,,,NF-UNSW-NB15-v3-Benign,418
@@ -422,7 +422,7 @@ Label,Attack,is_seeded_ddos,burst_id,burst_phase,source_dataset,row_in_window
 0,Benign,0,,,NF-UNSW-NB15-v3-Benign,420
 0,Benign,0,,,NF-UNSW-NB15-v3-Benign,421
 0,Benign,0,,,NF-UNSW-NB15-v3-Benign,422
-0,Benign,0,,,NF-UNSW-NB15-v3-Benign,423
+1,DDoS,1,2.0,peak,NF-CSE-CIC-IDS2018-v3-DDoS,423
 0,Benign,0,,,NF-UNSW-NB15-v3-Benign,424
 0,Benign,0,,,NF-UNSW-NB15-v3-Benign,425
 0,Benign,0,,,NF-UNSW-NB15-v3-Benign,426
@@ -438,7 +438,7 @@ Label,Attack,is_seeded_ddos,burst_id,burst_phase,source_dataset,row_in_window
 0,Benign,0,,,NF-UNSW-NB15-v3-Benign,436
 0,Benign,0,,,NF-UNSW-NB15-v3-Benign,437
 0,Benign,0,,,NF-UNSW-NB15-v3-Benign,438
-0,Benign,0,,,NF-UNSW-NB15-v3-Benign,439
+1,DDoS,1,2.0,peak,NF-CSE-CIC-IDS2018-v3-DDoS,439
 0,Benign,0,,,NF-UNSW-NB15-v3-Benign,440
 0,Benign,0,,,NF-UNSW-NB15-v3-Benign,441
 0,Benign,0,,,NF-UNSW-NB15-v3-Benign,442
@@ -448,9 +448,9 @@ Label,Attack,is_seeded_ddos,burst_id,burst_phase,source_dataset,row_in_window
 0,Benign,0,,,NF-UNSW-NB15-v3-Benign,446
 0,Benign,0,,,NF-UNSW-NB15-v3-Benign,447
 0,Benign,0,,,NF-UNSW-NB15-v3-Benign,448
-0,Benign,0,,,NF-UNSW-NB15-v3-Benign,449
+1,DDoS,1,2.0,peak,NF-CSE-CIC-IDS2018-v3-DDoS,449
 0,Benign,0,,,NF-UNSW-NB15-v3-Benign,450
-0,Benign,0,,,NF-UNSW-NB15-v3-Benign,451
+1,DDoS,1,2.0,taper,NF-CSE-CIC-IDS2018-v3-DDoS,451
 0,Benign,0,,,NF-UNSW-NB15-v3-Benign,452
 0,Benign,0,,,NF-UNSW-NB15-v3-Benign,453
 0,Benign,0,,,NF-UNSW-NB15-v3-Benign,454
@@ -805,7 +805,7 @@ Label,Attack,is_seeded_ddos,burst_id,burst_phase,source_dataset,row_in_window
 0,Benign,0,,,NF-UNSW-NB15-v3-Benign,803
 0,Benign,0,,,NF-UNSW-NB15-v3-Benign,804
 0,Benign,0,,,NF-UNSW-NB15-v3-Benign,805
-0,Benign,0,,,NF-UNSW-NB15-v3-Benign,806
+1,DDoS,1,3.0,peak,NF-CSE-CIC-IDS2018-v3-DDoS,806
 0,Benign,0,,,NF-UNSW-NB15-v3-Benign,807
 0,Benign,0,,,NF-UNSW-NB15-v3-Benign,808
 0,Benign,0,,,NF-UNSW-NB15-v3-Benign,809
@@ -823,7 +823,7 @@ Label,Attack,is_seeded_ddos,burst_id,burst_phase,source_dataset,row_in_window
 0,Benign,0,,,NF-UNSW-NB15-v3-Benign,821
 0,Benign,0,,,NF-UNSW-NB15-v3-Benign,822
 0,Benign,0,,,NF-UNSW-NB15-v3-Benign,823
-0,Benign,0,,,NF-UNSW-NB15-v3-Benign,824
+1,DDoS,1,3.0,peak,NF-CSE-CIC-IDS2018-v3-DDoS,824
 0,Benign,0,,,NF-UNSW-NB15-v3-Benign,825
 0,Benign,0,,,NF-UNSW-NB15-v3-Benign,826
 0,Benign,0,,,NF-UNSW-NB15-v3-Benign,827
@@ -838,7 +838,7 @@ Label,Attack,is_seeded_ddos,burst_id,burst_phase,source_dataset,row_in_window
 0,Benign,0,,,NF-UNSW-NB15-v3-Benign,836
 0,Benign,0,,,NF-UNSW-NB15-v3-Benign,837
 0,Benign,0,,,NF-UNSW-NB15-v3-Benign,838
-0,Benign,0,,,NF-UNSW-NB15-v3-Benign,839
+1,DDoS,1,3.0,taper,NF-CSE-CIC-IDS2018-v3-DDoS,839
 0,Benign,0,,,NF-UNSW-NB15-v3-Benign,840
 0,Benign,0,,,NF-UNSW-NB15-v3-Benign,841
 0,Benign,0,,,NF-UNSW-NB15-v3-Benign,842
@@ -848,7 +848,7 @@ Label,Attack,is_seeded_ddos,burst_id,burst_phase,source_dataset,row_in_window
 0,Benign,0,,,NF-UNSW-NB15-v3-Benign,846
 0,Benign,0,,,NF-UNSW-NB15-v3-Benign,847
 0,Benign,0,,,NF-UNSW-NB15-v3-Benign,848
-0,Benign,0,,,NF-UNSW-NB15-v3-Benign,849
+1,DDoS,1,3.0,peak,NF-CSE-CIC-IDS2018-v3-DDoS,849
 0,Benign,0,,,NF-UNSW-NB15-v3-Benign,850
 0,Benign,0,,,NF-UNSW-NB15-v3-Benign,851
 0,Benign,0,,,NF-UNSW-NB15-v3-Benign,852
