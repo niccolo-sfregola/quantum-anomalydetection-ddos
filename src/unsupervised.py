@@ -586,14 +586,22 @@ def run_unsupervised(
 
 
 if __name__ == "__main__":
-    SIZE = 50_000
+    SIZE = 100_000
     OPTION = "option_2"
     AGG_FEATURE_SET = "full"
 
-    ENRICHED_ROOT = f"outputs_{SIZE}/{OPTION}/{AGG_FEATURE_SET}/enriched"
-    OUTPUT_DIR    = f"outputs_{SIZE}/{OPTION}/{AGG_FEATURE_SET}/unsupervised_results"
-    AUDIT_ROOT    = f"cleaned_dataset_{SIZE}/{OPTION}"
-    FEATURE_SET   = "combined"
+    USE_STEALTH_ATTACKS = True
+    MIMICRY_STRENGTH_PCT = 90
+
+    STEALTH_TAG = f"stealth_mimic{MIMICRY_STRENGTH_PCT}_vol100x"
+
+    RUN_TAG = f"_{STEALTH_TAG}" if USE_STEALTH_ATTACKS else ""
+
+    ENRICHED_ROOT = f"outputs_{SIZE}{RUN_TAG}/{OPTION}/{AGG_FEATURE_SET}/enriched"
+    OUTPUT_DIR    = f"outputs_{SIZE}{RUN_TAG}/{OPTION}/{AGG_FEATURE_SET}/unsupervised_results"
+    AUDIT_ROOT    = f"cleaned_dataset_{SIZE}{RUN_TAG}/{OPTION}"
+
+    FEATURE_SET = "combined"   # "combined" / "classical_only" / "quantum_only"
 
     run_unsupervised(
         enriched_root     = ENRICHED_ROOT,

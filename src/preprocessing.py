@@ -37,7 +37,7 @@ DROP_REDUNDANT = [
     "inter_packet_arrival_mean",
 ]
 
-DATASET_SCALING = 1_000
+DATASET_SCALING = 100_000
 ROWS_PER_DATASET = DATASET_SCALING
 N_WINDOWS        = 15
 ROWS_PER_WINDOW  = ROWS_PER_DATASET // N_WINDOWS    
@@ -91,22 +91,39 @@ def encode_protocol(df: pd.DataFrame) -> pd.DataFrame:
     return df.drop(columns=["protocol"])
 
 
-def assign_window_id(features_df: pd.DataFrame, audit_df: pd.DataFrame) -> pd.DataFrame:
+def assign_window_id(
+    features_df: pd.DataFrame,
+    audit_df: pd.DataFrame,
+    rows_per_dataset: int = ROWS_PER_DATASET,
+) -> pd.DataFrame:
     """
     Reduced schema has no millisecond timestamp.
-    We use audit['row_in_window'] (0..99999) to bin into 15 windows.
+    We use audit['row_in_window'] to bin rows into 15 windows.
+
+    rows_per_dataset must match the dataset size used throughout the pipeline.
+    For the full challenge setting this is 100_000.
     """
     features_df = features_df.copy()
+
     if "row_in_window" not in audit_df.columns:
         raise ValueError("Reduced schema requires audit['row_in_window'] for windowing")
-    wid = (audit_df["row_in_window"] // ROWS_PER_WINDOW).clip(0, N_WINDOWS - 1).astype(int)
+
+    rows_per_window = max(int(rows_per_dataset) // N_WINDOWS, 1)
+
+    wid = (
+        audit_df["row_in_window"] // rows_per_window
+    ).clip(0, N_WINDOWS - 1).astype(int)
+
     features_df["window_id"] = wid.values
     return features_df
 
 
 # ── Pipeline ──────────────────────────────────────────────────────────────────
 
-def preprocess_dataframe(df: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
+def preprocess_dataframe(
+    df: pd.DataFrame,
+    rows_per_dataset: int = ROWS_PER_DATASET,
+) -> tuple[pd.DataFrame, pd.DataFrame]:
     """Run the full preprocessing pipeline on a single DataFrame."""
     features_df, audit_df = split_audit(df)
     features_df = drop_constant(features_df)
@@ -114,7 +131,11 @@ def preprocess_dataframe(df: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
     features_df = log_transform(features_df)
     features_df = drop_redundant(features_df)
     features_df = encode_protocol(features_df)
-    features_df = assign_window_id(features_df, audit_df)
+    features_df = assign_window_id(
+        features_df,
+        audit_df,
+        rows_per_dataset=rows_per_dataset,
+    )
     return features_df, audit_df
 
 
@@ -141,7 +162,11 @@ def preprocess_file(input_path: str | Path,
     if verbose:
         print(f"[phase0]   {len(df):,} rows x {df.shape[1]} cols")
 
-    features_df, audit_df = preprocess_dataframe(df)
+    rows_for_windowing = dataset_scaling if dataset_scaling is not None else len(df)
+    features_df, audit_df = preprocess_dataframe(
+        df,
+        rows_per_dataset=rows_for_windowing,
+    )
 
     clean_path = output_dir / f"{input_path.stem}_clean.csv"
     audit_path = output_dir / f"{input_path.stem}_audit.csv"
@@ -182,8 +207,24 @@ def preprocess_tree(input_root: str | Path,
 
 
 if __name__ == "__main__":
-    # Edit these paths to match your local layout.
-    INPUT_ROOT  = "Datasets/Datasets/Option_2/option2_nf_unsw_base_cse_native_ddos_reduced_schema"
-    OUTPUT_ROOT = "cleaned_dataset_1000/option_2"
+    SIZE = 100_000
+    OPTION = "option_2"
 
-    preprocess_tree(INPUT_ROOT, OUTPUT_ROOT, dataset_scaling = DATASET_SCALING)
+    USE_STEALTH_ATTACKS = True
+    MIMICRY_STRENGTH_PCT = 90
+
+    STEALTH_TAG = f"stealth_mimic{MIMICRY_STRENGTH_PCT}_vol100x"
+
+    ORIGINAL_INPUT_ROOT = (
+        "Datasets/Datasets/Option_2/"
+        "option2_nf_unsw_base_cse_native_ddos_reduced_schema"
+    )
+
+    STEALTH_INPUT_ROOT = f"stealth_datasets_{SIZE}/{OPTION}/{STEALTH_TAG}"
+
+    INPUT_ROOT = STEALTH_INPUT_ROOT if USE_STEALTH_ATTACKS else ORIGINAL_INPUT_ROOT
+
+    RUN_TAG = f"_{STEALTH_TAG}" if USE_STEALTH_ATTACKS else ""
+    OUTPUT_ROOT = f"cleaned_dataset_{SIZE}{RUN_TAG}/{OPTION}"
+
+    preprocess_tree(INPUT_ROOT, OUTPUT_ROOT, dataset_scaling = SIZE)

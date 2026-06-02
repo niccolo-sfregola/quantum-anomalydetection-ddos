@@ -211,15 +211,22 @@ def aggregate_tree(cleaned_root: str | Path,
 
 
 if __name__ == "__main__":
-    SIZE = 50_000
+    SIZE = 100_000
     OPTION = "option_2"
     AGG_FEATURE_SET = "full"   # "full" => 10 qubits; "minimal" => 4 qubits
 
-    CLEANED_ROOT = f"cleaned_dataset_{SIZE}/{OPTION}"
-    OUTPUT_ROOT  = f"outputs_{SIZE}/{OPTION}/{AGG_FEATURE_SET}"
+    USE_STEALTH_ATTACKS = True
+    MIMICRY_STRENGTH_PCT = 90
+
+    STEALTH_TAG = f"stealth_mimic{MIMICRY_STRENGTH_PCT}_vol100x"
+
+    RUN_TAG = f"_{STEALTH_TAG}" if USE_STEALTH_ATTACKS else ""
+
+    CLEANED_ROOT = f"cleaned_dataset_{SIZE}{RUN_TAG}/{OPTION}"
+    OUTPUT_ROOT  = f"outputs_{SIZE}{RUN_TAG}/{OPTION}/{AGG_FEATURE_SET}"
 
     aggregate_tree(
-        cleaned_root = CLEANED_ROOT,
-        output_root  = OUTPUT_ROOT,
-        feature_set  = AGG_FEATURE_SET,
+        cleaned_root= CLEANED_ROOT,
+        output_root = OUTPUT_ROOT,
+        feature_set = AGG_FEATURE_SET,
     )

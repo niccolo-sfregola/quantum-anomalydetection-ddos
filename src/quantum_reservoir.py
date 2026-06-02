@@ -391,10 +391,17 @@ def load_baseline(path: str | Path) -> DensityMatrix:
 
 
 if __name__ == "__main__":
-    SIZE = 50_000
+    SIZE = 100_000
     OPTION = "option_2"
     AGG_FEATURE_SET = "full"
     N_QUBITS = 10              # full=10, minimal=4
+
+    USE_STEALTH_ATTACKS = True
+    MIMICRY_STRENGTH_PCT = 90
+
+    STEALTH_TAG = f"stealth_mimic{MIMICRY_STRENGTH_PCT}_vol100x"
+
+    RUN_TAG = f"_{STEALTH_TAG}" if USE_STEALTH_ATTACKS else ""
 
     reservoir = QuantumReservoir(
         n_qubits=N_QUBITS,
@@ -405,11 +412,13 @@ if __name__ == "__main__":
         plot_circuit=False,
     )
 
-    baseline = load_baseline(f"outputs_{SIZE}/{OPTION}/baseline/baseline_rho.npy")
+    baseline = load_baseline(
+        f"outputs_{SIZE}{RUN_TAG}/{OPTION}/baseline/baseline_rho.npy"
+    )
 
     enrich_tree(
-        phase1_root  = f"outputs_{SIZE}/{OPTION}/{AGG_FEATURE_SET}",
-        output_root  = f"outputs_{SIZE}/{OPTION}/{AGG_FEATURE_SET}/enriched",
+        phase1_root  = f"outputs_{SIZE}{RUN_TAG}/{OPTION}/{AGG_FEATURE_SET}",
+        output_root  = f"outputs_{SIZE}{RUN_TAG}/{OPTION}/{AGG_FEATURE_SET}/enriched",
         reservoir    = reservoir,
         baseline_rho = baseline,
     )

@@ -74,11 +74,22 @@ def build_baseline(
 
 
 if __name__ == "__main__":
-    SIZE = 50_000
+    SIZE = 100_000
     OPTION = "option_2"
     AGG_FEATURE_SET = "full"
 
-    PHASE1_NORMAL_TRAIN = f"outputs_{SIZE}/{OPTION}/{AGG_FEATURE_SET}/normal/train"
-    OUTPUT_PATH         = f"outputs_{SIZE}/{OPTION}/baseline/baseline_rho.npy"
+    USE_STEALTH_ATTACKS = True
+    MIMICRY_STRENGTH_PCT = 90
+
+    STEALTH_TAG = f"stealth_mimic{MIMICRY_STRENGTH_PCT}_vol100x"
+
+    RUN_TAG = f"_{STEALTH_TAG}" if USE_STEALTH_ATTACKS else ""
+
+    PHASE1_NORMAL_TRAIN = (
+        f"outputs_{SIZE}{RUN_TAG}/{OPTION}/{AGG_FEATURE_SET}/normal/train"
+    )
+    OUTPUT_PATH = (
+        f"outputs_{SIZE}{RUN_TAG}/{OPTION}/baseline/baseline_rho.npy"
+    )
 
     build_baseline(PHASE1_NORMAL_TRAIN, OUTPUT_PATH)

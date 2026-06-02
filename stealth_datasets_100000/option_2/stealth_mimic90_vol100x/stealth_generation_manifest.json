@@ -1,0 +1,412 @@
+{
+  "option": "option_2",
+  "source_root": "Datasets/Datasets/Option_2/option2_nf_unsw_base_cse_native_ddos_reduced_schema",
+  "output_root": "stealth_datasets_100000/option_2/stealth_mimic90_vol100x",
+  "rows_per_dataset": 100000,
+  "dataset_row_limit": 100000,
+  "stealth_tag": "stealth_mimic90_vol100x",
+  "mimicry_strength_pct": 90.0,
+  "volume_reduction_factor": 100.0,
+  "mimic_volume_features": false,
+  "copy_normal_datasets": true,
+  "benign_reference_stats": {
+    "duration": {
+      "mean": 0.5561436933333334,
+      "std": 3.5002292316397736
+    },
+    "inter_packet_arrival_mean": {
+      "mean": 14.158985920720001,
+      "std": 47.65197095721407
+    },
+    "inter_packet_arrival_std": {
+      "mean": 38.26168214202,
+      "std": 118.03663064967854
+    },
+    "packet_size_avg": {
+      "mean": 218.37679519436,
+      "std": 192.87971912080667
+    },
+    "packet_size_std": {
+      "mean": 223.67630971225336,
+      "std": 230.6975954665812
+    },
+    "outbound_byte_ratio": {
+      "mean": 0.6404028701466667,
+      "std": 0.24672585409220307
+    }
+  },
+  "files": [
+    {
+      "source": "Datasets/Datasets/Option_2/option2_nf_unsw_base_cse_native_ddos_reduced_schema/attack/test/attack_test_01.csv",
+      "output": "stealth_datasets_100000/option_2/stealth_mimic90_vol100x/attack/test/attack_test_01_stealth_mimic90_vol100x.csv",
+      "kind": "attack",
+      "rows": 100000,
+      "attack_rows": 1804,
+      "mimicry_strength_pct": 90.0,
+      "volume_reduction_factor": 100.0,
+      "transformed_columns": [
+        "packets_per_second",
+        "bytes_per_second",
+        "total_packets",
+        "total_bytes",
+        "duration",
+        "inter_packet_arrival_mean",
+        "inter_packet_arrival_std",
+        "packet_size_avg",
+        "packet_size_std",
+        "outbound_byte_ratio"
+      ]
+    },
+    {
+      "source": "Datasets/Datasets/Option_2/option2_nf_unsw_base_cse_native_ddos_reduced_schema/attack/test/attack_test_02.csv",
+      "output": "stealth_datasets_100000/option_2/stealth_mimic90_vol100x/attack/test/attack_test_02_stealth_mimic90_vol100x.csv",
+      "kind": "attack",
+      "rows": 100000,
+      "attack_rows": 1599,
+      "mimicry_strength_pct": 90.0,
+      "volume_reduction_factor": 100.0,
+      "transformed_columns": [
+        "packets_per_second",
+        "bytes_per_second",
+        "total_packets",
+        "total_bytes",
+        "duration",
+        "inter_packet_arrival_mean",
+        "inter_packet_arrival_std",
+        "packet_size_avg",
+        "packet_size_std",
+        "outbound_byte_ratio"
+      ]
+    },
+    {
+      "source": "Datasets/Datasets/Option_2/option2_nf_unsw_base_cse_native_ddos_reduced_schema/attack/train/attack_train_01.csv",
+      "output": "stealth_datasets_100000/option_2/stealth_mimic90_vol100x/attack/train/attack_train_01_stealth_mimic90_vol100x.csv",
+      "kind": "attack",
+      "rows": 100000,
+      "attack_rows": 1809,
+      "mimicry_strength_pct": 90.0,
+      "volume_reduction_factor": 100.0,
+      "transformed_columns": [
+        "packets_per_second",
+        "bytes_per_second",
+        "total_packets",
+        "total_bytes",
+        "duration",
+        "inter_packet_arrival_mean",
+        "inter_packet_arrival_std",
+        "packet_size_avg",
+        "packet_size_std",
+        "outbound_byte_ratio"
+      ]
+    },
+    {
+      "source": "Datasets/Datasets/Option_2/option2_nf_unsw_base_cse_native_ddos_reduced_schema/attack/train/attack_train_02.csv",
+      "output": "stealth_datasets_100000/option_2/stealth_mimic90_vol100x/attack/train/attack_train_02_stealth_mimic90_vol100x.csv",
+      "kind": "attack",
+      "rows": 100000,
+      "attack_rows": 1582,
+      "mimicry_strength_pct": 90.0,
+      "volume_reduction_factor": 100.0,
+      "transformed_columns": [
+        "packets_per_second",
+        "bytes_per_second",
+        "total_packets",
+        "total_bytes",
+        "duration",
+        "inter_packet_arrival_mean",
+        "inter_packet_arrival_std",
+        "packet_size_avg",
+        "packet_size_std",
+        "outbound_byte_ratio"
+      ]
+    },
+    {
+      "source": "Datasets/Datasets/Option_2/option2_nf_unsw_base_cse_native_ddos_reduced_schema/attack/train/attack_train_03.csv",
+      "output": "stealth_datasets_100000/option_2/stealth_mimic90_vol100x/attack/train/attack_train_03_stealth_mimic90_vol100x.csv",
+      "kind": "attack",
+      "rows": 100000,
+      "attack_rows": 2416,
+      "mimicry_strength_pct": 90.0,
+      "volume_reduction_factor": 100.0,
+      "transformed_columns": [
+        "packets_per_second",
+        "bytes_per_second",
+        "total_packets",
+        "total_bytes",
+        "duration",
+        "inter_packet_arrival_mean",
+        "inter_packet_arrival_std",
+        "packet_size_avg",
+        "packet_size_std",
+        "outbound_byte_ratio"
+      ]
+    },
+    {
+      "source": "Datasets/Datasets/Option_2/option2_nf_unsw_base_cse_native_ddos_reduced_schema/attack/train/attack_train_04.csv",
+      "output": "stealth_datasets_100000/option_2/stealth_mimic90_vol100x/attack/train/attack_train_04_stealth_mimic90_vol100x.csv",
+      "kind": "attack",
+      "rows": 100000,
+      "attack_rows": 1908,
+      "mimicry_strength_pct": 90.0,
+      "volume_reduction_factor": 100.0,
+      "transformed_columns": [
+        "packets_per_second",
+        "bytes_per_second",
+        "total_packets",
+        "total_bytes",
+        "duration",
+        "inter_packet_arrival_mean",
+        "inter_packet_arrival_std",
+        "packet_size_avg",
+        "packet_size_std",
+        "outbound_byte_ratio"
+      ]
+    },
+    {
+      "source": "Datasets/Datasets/Option_2/option2_nf_unsw_base_cse_native_ddos_reduced_schema/attack/train/attack_train_05.csv",
+      "output": "stealth_datasets_100000/option_2/stealth_mimic90_vol100x/attack/train/attack_train_05_stealth_mimic90_vol100x.csv",
+      "kind": "attack",
+      "rows": 100000,
+      "attack_rows": 1706,
+      "mimicry_strength_pct": 90.0,
+      "volume_reduction_factor": 100.0,
+      "transformed_columns": [
+        "packets_per_second",
+        "bytes_per_second",
+        "total_packets",
+        "total_bytes",
+        "duration",
+        "inter_packet_arrival_mean",
+        "inter_packet_arrival_std",
+        "packet_size_avg",
+        "packet_size_std",
+        "outbound_byte_ratio"
+      ]
+    },
+    {
+      "source": "Datasets/Datasets/Option_2/option2_nf_unsw_base_cse_native_ddos_reduced_schema/attack/train/attack_train_06.csv",
+      "output": "stealth_datasets_100000/option_2/stealth_mimic90_vol100x/attack/train/attack_train_06_stealth_mimic90_vol100x.csv",
+      "kind": "attack",
+      "rows": 100000,
+      "attack_rows": 2145,
+      "mimicry_strength_pct": 90.0,
+      "volume_reduction_factor": 100.0,
+      "transformed_columns": [
+        "packets_per_second",
+        "bytes_per_second",
+        "total_packets",
+        "total_bytes",
+        "duration",
+        "inter_packet_arrival_mean",
+        "inter_packet_arrival_std",
+        "packet_size_avg",
+        "packet_size_std",
+        "outbound_byte_ratio"
+      ]
+    },
+    {
+      "source": "Datasets/Datasets/Option_2/option2_nf_unsw_base_cse_native_ddos_reduced_schema/attack/train/attack_train_07.csv",
+      "output": "stealth_datasets_100000/option_2/stealth_mimic90_vol100x/attack/train/attack_train_07_stealth_mimic90_vol100x.csv",
+      "kind": "attack",
+      "rows": 100000,
+      "attack_rows": 1583,
+      "mimicry_strength_pct": 90.0,
+      "volume_reduction_factor": 100.0,
+      "transformed_columns": [
+        "packets_per_second",
+        "bytes_per_second",
+        "total_packets",
+        "total_bytes",
+        "duration",
+        "inter_packet_arrival_mean",
+        "inter_packet_arrival_std",
+        "packet_size_avg",
+        "packet_size_std",
+        "outbound_byte_ratio"
+      ]
+    },
+    {
+      "source": "Datasets/Datasets/Option_2/option2_nf_unsw_base_cse_native_ddos_reduced_schema/attack/train/attack_train_08.csv",
+      "output": "stealth_datasets_100000/option_2/stealth_mimic90_vol100x/attack/train/attack_train_08_stealth_mimic90_vol100x.csv",
+      "kind": "attack",
+      "rows": 100000,
+      "attack_rows": 1996,
+      "mimicry_strength_pct": 90.0,
+      "volume_reduction_factor": 100.0,
+      "transformed_columns": [
+        "packets_per_second",
+        "bytes_per_second",
+        "total_packets",
+        "total_bytes",
+        "duration",
+        "inter_packet_arrival_mean",
+        "inter_packet_arrival_std",
+        "packet_size_avg",
+        "packet_size_std",
+        "outbound_byte_ratio"
+      ]
+    },
+    {
+      "source": "Datasets/Datasets/Option_2/option2_nf_unsw_base_cse_native_ddos_reduced_schema/attack/validation/attack_validation_01.csv",
+      "output": "stealth_datasets_100000/option_2/stealth_mimic90_vol100x/attack/validation/attack_validation_01_stealth_mimic90_vol100x.csv",
+      "kind": "attack",
+      "rows": 100000,
+      "attack_rows": 1555,
+      "mimicry_strength_pct": 90.0,
+      "volume_reduction_factor": 100.0,
+      "transformed_columns": [
+        "packets_per_second",
+        "bytes_per_second",
+        "total_packets",
+        "total_bytes",
+        "duration",
+        "inter_packet_arrival_mean",
+        "inter_packet_arrival_std",
+        "packet_size_avg",
+        "packet_size_std",
+        "outbound_byte_ratio"
+      ]
+    },
+    {
+      "source": "Datasets/Datasets/Option_2/option2_nf_unsw_base_cse_native_ddos_reduced_schema/attack/validation/attack_validation_02.csv",
+      "output": "stealth_datasets_100000/option_2/stealth_mimic90_vol100x/attack/validation/attack_validation_02_stealth_mimic90_vol100x.csv",
+      "kind": "attack",
+      "rows": 100000,
+      "attack_rows": 2019,
+      "mimicry_strength_pct": 90.0,
+      "volume_reduction_factor": 100.0,
+      "transformed_columns": [
+        "packets_per_second",
+        "bytes_per_second",
+        "total_packets",
+        "total_bytes",
+        "duration",
+        "inter_packet_arrival_mean",
+        "inter_packet_arrival_std",
+        "packet_size_avg",
+        "packet_size_std",
+        "outbound_byte_ratio"
+      ]
+    },
+    {
+      "source": "Datasets/Datasets/Option_2/option2_nf_unsw_base_cse_native_ddos_reduced_schema/normal/test/normal_test_01.csv",
+      "output": "stealth_datasets_100000/option_2/stealth_mimic90_vol100x/normal/test/normal_test_01.csv",
+      "kind": "normal",
+      "rows": 100000,
+      "attack_rows": 0,
+      "mimicry_strength_pct": 0.0,
+      "volume_reduction_factor": 1.0,
+      "transformed_columns": []
+    },
+    {
+      "source": "Datasets/Datasets/Option_2/option2_nf_unsw_base_cse_native_ddos_reduced_schema/normal/test/normal_test_02.csv",
+      "output": "stealth_datasets_100000/option_2/stealth_mimic90_vol100x/normal/test/normal_test_02.csv",
+      "kind": "normal",
+      "rows": 100000,
+      "attack_rows": 0,
+      "mimicry_strength_pct": 0.0,
+      "volume_reduction_factor": 1.0,
+      "transformed_columns": []
+    },
+    {
+      "source": "Datasets/Datasets/Option_2/option2_nf_unsw_base_cse_native_ddos_reduced_schema/normal/train/normal_train_01.csv",
+      "output": "stealth_datasets_100000/option_2/stealth_mimic90_vol100x/normal/train/normal_train_01.csv",
+      "kind": "normal",
+      "rows": 100000,
+      "attack_rows": 0,
+      "mimicry_strength_pct": 0.0,
+      "volume_reduction_factor": 1.0,
+      "transformed_columns": []
+    },
+    {
+      "source": "Datasets/Datasets/Option_2/option2_nf_unsw_base_cse_native_ddos_reduced_schema/normal/train/normal_train_02.csv",
+      "output": "stealth_datasets_100000/option_2/stealth_mimic90_vol100x/normal/train/normal_train_02.csv",
+      "kind": "normal",
+      "rows": 100000,
+      "attack_rows": 0,
+      "mimicry_strength_pct": 0.0,
+      "volume_reduction_factor": 1.0,
+      "transformed_columns": []
+    },
+    {
+      "source": "Datasets/Datasets/Option_2/option2_nf_unsw_base_cse_native_ddos_reduced_schema/normal/train/normal_train_03.csv",
+      "output": "stealth_datasets_100000/option_2/stealth_mimic90_vol100x/normal/train/normal_train_03.csv",
+      "kind": "normal",
+      "rows": 100000,
+      "attack_rows": 0,
+      "mimicry_strength_pct": 0.0,
+      "volume_reduction_factor": 1.0,
+      "transformed_columns": []
+    },
+    {
+      "source": "Datasets/Datasets/Option_2/option2_nf_unsw_base_cse_native_ddos_reduced_schema/normal/train/normal_train_04.csv",
+      "output": "stealth_datasets_100000/option_2/stealth_mimic90_vol100x/normal/train/normal_train_04.csv",
+      "kind": "normal",
+      "rows": 100000,
+      "attack_rows": 0,
+      "mimicry_strength_pct": 0.0,
+      "volume_reduction_factor": 1.0,
+      "transformed_columns": []
+    },
+    {
+      "source": "Datasets/Datasets/Option_2/option2_nf_unsw_base_cse_native_ddos_reduced_schema/normal/train/normal_train_05.csv",
+      "output": "stealth_datasets_100000/option_2/stealth_mimic90_vol100x/normal/train/normal_train_05.csv",
+      "kind": "normal",
+      "rows": 100000,
+      "attack_rows": 0,
+      "mimicry_strength_pct": 0.0,
+      "volume_reduction_factor": 1.0,
+      "transformed_columns": []
+    },
+    {
+      "source": "Datasets/Datasets/Option_2/option2_nf_unsw_base_cse_native_ddos_reduced_schema/normal/train/normal_train_06.csv",
+      "output": "stealth_datasets_100000/option_2/stealth_mimic90_vol100x/normal/train/normal_train_06.csv",
+      "kind": "normal",
+      "rows": 100000,
+      "attack_rows": 0,
+      "mimicry_strength_pct": 0.0,
+      "volume_reduction_factor": 1.0,
+      "transformed_columns": []
+    },
+    {
+      "source": "Datasets/Datasets/Option_2/option2_nf_unsw_base_cse_native_ddos_reduced_schema/normal/train/normal_train_07.csv",
+      "output": "stealth_datasets_100000/option_2/stealth_mimic90_vol100x/normal/train/normal_train_07.csv",
+      "kind": "normal",
+      "rows": 100000,
+      "attack_rows": 0,
+      "mimicry_strength_pct": 0.0,
+      "volume_reduction_factor": 1.0,
+      "transformed_columns": []
+    },
+    {
+      "source": "Datasets/Datasets/Option_2/option2_nf_unsw_base_cse_native_ddos_reduced_schema/normal/train/normal_train_08.csv",
+      "output": "stealth_datasets_100000/option_2/stealth_mimic90_vol100x/normal/train/normal_train_08.csv",
+      "kind": "normal",
+      "rows": 100000,
+      "attack_rows": 0,
+      "mimicry_strength_pct": 0.0,
+      "volume_reduction_factor": 1.0,
+      "transformed_columns": []
+    },
+    {
+      "source": "Datasets/Datasets/Option_2/option2_nf_unsw_base_cse_native_ddos_reduced_schema/normal/validation/normal_validation_01.csv",
+      "output": "stealth_datasets_100000/option_2/stealth_mimic90_vol100x/normal/validation/normal_validation_01.csv",
+      "kind": "normal",
+      "rows": 100000,
+      "attack_rows": 0,
+      "mimicry_strength_pct": 0.0,
+      "volume_reduction_factor": 1.0,
+      "transformed_columns": []
+    },
+    {
+      "source": "Datasets/Datasets/Option_2/option2_nf_unsw_base_cse_native_ddos_reduced_schema/normal/validation/normal_validation_02.csv",
+      "output": "stealth_datasets_100000/option_2/stealth_mimic90_vol100x/normal/validation/normal_validation_02.csv",
+      "kind": "normal",
+      "rows": 100000,
+      "attack_rows": 0,
+      "mimicry_strength_pct": 0.0,
+      "volume_reduction_factor": 1.0,
+      "transformed_columns": []
+    }
+  ]
+}
