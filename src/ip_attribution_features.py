@@ -5,6 +5,13 @@ existing repository. It does not read raw datasets and it does not recreate raw
 features that cleaning removed. Every candidate feature is derived from columns
 that are present in the cleaned input files.
 
+This corrected version also supports the repository's paired cleaned/audit data
+layout, e.g. ``attack_train_01_clean.csv`` next to
+``attack_train_01_audit.csv``. The clean file remains the source for candidate
+model features. The audit sidecar is joined by row order only to recover audit
+metadata such as ``is_seeded_ddos`` for label construction and metric
+computation. Audit columns are still excluded from model inputs downstream.
+
 The output is one row per candidate (window_id, src_ip), with metadata keys,
 optional audit-derived labels for supervised training/evaluation, and numeric
 candidate features safe for model input. Audit columns are never emitted as
@@ -75,6 +82,20 @@ CANONICAL_NUMERIC_COLUMNS: dict[str, list[str]] = {
 # targets/metrics, never model-input features.
 LABEL_AUDIT_COLUMN = "is_seeded_ddos"
 
+# Audit sidecars in this repository are stored separately from clean feature
+# files. These are safe to attach because ip_attribution_common.NON_FEATURE_COLUMNS
+# excludes audit/label columns from model inputs.
+AUDIT_SIDECAR_COLUMNS = [
+    "scenario",
+    "split",
+    "dataset_id",
+    "row_in_window",
+    "is_seeded_ddos",
+    "burst_id",
+    "burst_phase",
+    "source_dataset",
+]
+
 
 @dataclass
 class FeatureConfig:
@@ -140,8 +161,161 @@ def _safe_feature_name(value: Any, max_len: int = 60) -> str:
     return text or "unknown"
 
 
+def _effective_cleaned_root(config: FeatureConfig) -> Path:
+    """Return the directory to scan for cleaned files.
+
+    The runner often receives ``--cleaned-data-dir data/cleaned`` plus
+    ``--option-name option_2``. The repository stores files under
+    ``data/cleaned/<option_name>/...``, so scan that option subdirectory when it
+    exists. If the caller already points at ``data/cleaned/option_2``, this is a
+    no-op.
+    """
+    root = Path(config.cleaned_data_dir)
+    if config.option_name:
+        option_dir = root / str(config.option_name)
+        if option_dir.exists() and option_dir.is_dir():
+            return option_dir
+    return root
+
+
+def _is_audit_file(path: Path) -> bool:
+    stem = path.stem.lower()
+    name = path.name.lower()
+    return (
+        stem.endswith("_audit")
+        or "_audit_" in stem
+        or name.endswith("_audit.csv")
+        or name.endswith("_audit.parquet")
+        or name.endswith("_audit.feather")
+        or name.endswith("_audit.pkl")
+        or name.endswith("_audit.pickle")
+    )
+
+
+def _is_clean_file(path: Path) -> bool:
+    stem = path.stem.lower()
+    name = path.name.lower()
+    return (
+        stem.endswith("_clean")
+        or "_clean_" in stem
+        or name.endswith("_clean.csv")
+        or name.endswith("_clean.parquet")
+        or name.endswith("_clean.feather")
+        or name.endswith("_clean.pkl")
+        or name.endswith("_clean.pickle")
+    )
+
+
+def _candidate_audit_sidecar_paths(clean_path: Path) -> list[Path]:
+    """Return likely audit sidecar paths for a cleaned feature file."""
+    candidates: list[Path] = []
+    name = clean_path.name
+    stem = clean_path.stem
+    suffix = clean_path.suffix
+
+    # Most repository files follow attack_train_01_clean.csv -> attack_train_01_audit.csv.
+    if "_clean" in stem:
+        candidates.append(clean_path.with_name(name.replace("_clean", "_audit")))
+        candidates.append(clean_path.with_name(stem.replace("_clean", "_audit") + suffix))
+    if "clean" in stem:
+        candidates.append(clean_path.with_name(name.replace("clean", "audit")))
+        candidates.append(clean_path.with_name(stem.replace("clean", "audit") + suffix))
+
+    # Some ad-hoc layouts use a sibling audit directory.
+    parts = list(clean_path.parts)
+    for idx, part in enumerate(parts):
+        if part.lower() == "clean":
+            alt_parts = parts.copy()
+            alt_parts[idx] = "audit"
+            candidates.append(Path(*alt_parts))
+        if part.lower() == "cleaned":
+            alt_parts = parts.copy()
+            alt_parts[idx] = "audit"
+            candidates.append(Path(*alt_parts))
+
+    deduped: list[Path] = []
+    seen: set[str] = set()
+    for candidate in candidates:
+        key = str(candidate)
+        if key not in seen and candidate != clean_path:
+            deduped.append(candidate)
+            seen.add(key)
+    return deduped
+
+
+def find_audit_sidecar(clean_path: Path) -> Path | None:
+    for candidate in _candidate_audit_sidecar_paths(clean_path):
+        if candidate.exists() and candidate.is_file() and candidate.suffix.lower() in SUPPORTED_SUFFIXES:
+            return candidate
+    return None
+
+
+def attach_audit_sidecar_if_available(df: pd.DataFrame, path: Path, file_info: dict[str, Any]) -> pd.DataFrame:
+    """Attach audit sidecar columns to a cleaned dataframe, if available.
+
+    The sidecar is used only for labels and metadata. It is never used to create
+    candidate model-input features. For the repository data, clean and audit
+    files are row-aligned, so the safe default is a row-order join after checking
+    row counts.
+    """
+    file_info["audit_sidecar_path"] = None
+    file_info["audit_sidecar_attached"] = False
+    file_info["audit_columns_attached"] = []
+
+    if LABEL_AUDIT_COLUMN in df.columns:
+        file_info["audit_sidecar_note"] = "label column already present in cleaned file"
+        return df
+
+    audit_path = find_audit_sidecar(path)
+    if audit_path is None:
+        file_info["audit_sidecar_note"] = "no matching audit sidecar found"
+        return df
+
+    try:
+        audit_df = read_table(audit_path)
+    except Exception as exc:
+        LOGGER.warning("Could not read audit sidecar %s for %s: %s", audit_path, path, exc)
+        file_info["audit_sidecar_path"] = str(audit_path)
+        file_info["audit_sidecar_note"] = f"failed to read audit sidecar: {exc!r}"
+        return df
+
+    file_info["audit_sidecar_path"] = str(audit_path)
+    file_info["audit_sidecar_rows"] = int(len(audit_df))
+
+    if len(audit_df) != len(df):
+        LOGGER.warning(
+            "Audit sidecar row-count mismatch for %s: clean rows=%d, audit rows=%d. Labels will not be attached.",
+            path,
+            len(df),
+            len(audit_df),
+        )
+        file_info["audit_sidecar_note"] = "row_count_mismatch"
+        return df
+
+    attach_cols = [col for col in AUDIT_SIDECAR_COLUMNS if col in audit_df.columns]
+    if not attach_cols:
+        file_info["audit_sidecar_note"] = "audit sidecar found but contains no recognized audit columns"
+        return df
+
+    out = df.reset_index(drop=True).copy()
+    audit_subset = audit_df[attach_cols].reset_index(drop=True)
+    for col in attach_cols:
+        if col in out.columns:
+            # Preserve cleaned feature columns. Audit columns are allowed to
+            # overwrite only if the existing column is completely empty.
+            if out[col].isna().all():
+                out[col] = audit_subset[col]
+        else:
+            out[col] = audit_subset[col]
+
+    file_info["audit_sidecar_attached"] = True
+    file_info["audit_columns_attached"] = attach_cols
+    file_info["audit_sidecar_note"] = "attached_by_row_order"
+    return out
+
+
 def discover_cleaned_files(config: FeatureConfig) -> list[Path]:
-    root = config.cleaned_data_dir
+    root = _effective_cleaned_root(config)
     if not root.exists():
         raise FileNotFoundError(f"Cleaned data directory does not exist: {root}")
 
@@ -155,8 +329,20 @@ def discover_cleaned_files(config: FeatureConfig) -> list[Path]:
     for pattern in patterns:
         iterator = root.rglob(pattern) if config.recursive else root.glob(pattern)
         for path in iterator:
-            if path.is_file() and path.suffix.lower() in SUPPORTED_SUFFIXES:
-                files.append(path)
+            if not path.is_file() or path.suffix.lower() not in SUPPORTED_SUFFIXES:
+                continue
+            if _is_audit_file(path):
+                continue
+            # When the repository uses explicit *_clean files, prefer them and
+            # ignore unrelated CSV summaries under the same tree.
+            if "cleaned" in [p.lower() for p in path.parts] and not _is_clean_file(path):
+                # Keep non-audit files only if they are not in the repository's
+                # cleaned dataset tree naming convention. This preserves
+                # compatibility with custom cleaned/preprocessed directories.
+                parent_text = "/".join(p.lower() for p in path.parts)
+                if any(token in parent_text for token in ["/option_", "\\option_"]):
+                    continue
+            files.append(path)
 
     # Avoid accidentally re-consuming attribution artifacts if output_dir is under
     # cleaned_data_dir.
@@ -213,7 +399,7 @@ def infer_kind(path: Path, df: pd.DataFrame) -> str:
 
 
 def infer_dataset(path: Path, df: pd.DataFrame) -> tuple[str, str]:
-    dataset = path.stem
+    dataset = path.stem.replace("_clean", "")
     dataset_id = dataset
     for col in ["dataset", "dataset_name"]:
         if col in df.columns and df[col].notna().any():
@@ -297,6 +483,8 @@ def build_candidate_features_for_file(path: Path, config: FeatureConfig) -> tupl
         LOGGER.warning("Skipping empty cleaned data file: %s", path)
         return pd.DataFrame(), file_info
 
+    df = attach_audit_sidecar_if_available(df, path, file_info)
+
     src_col = resolve_column(df, SRC_IP_CANDIDATES, preferred=config.src_ip_col)
     if src_col is None:
         LOGGER.warning("Skipping %s because no source-IP column was found in cleaned data.", path)
@@ -368,6 +556,8 @@ def build_candidate_features_for_file(path: Path, config: FeatureConfig) -> tupl
         cand["window_has_malicious"] = cand["window_has_malicious"].fillna(0).astype(int)
         cand["label_available"] = 1
         file_info["labels_available"] = True
+        file_info["n_seeded_flow_rows"] = int(work["__seeded"].sum())
+        file_info["n_true_malicious_candidates"] = int(cand["true_malicious"].sum())
     else:
         cand["label_available"] = 0
         file_info["labels_available"] = False
@@ -505,9 +695,9 @@ def generate_candidate_features(config: FeatureConfig) -> tuple[pd.DataFrame, di
     ensure_dir(config.output_dir)
     files = discover_cleaned_files(config)
     if not files:
-        raise FileNotFoundError(f"No cleaned data files found under {config.cleaned_data_dir}")
+        raise FileNotFoundError(f"No cleaned data files found under {_effective_cleaned_root(config)}")
 
-    LOGGER.info("Discovered %d cleaned/preprocessed files under %s", len(files), config.cleaned_data_dir)
+    LOGGER.info("Discovered %d cleaned/preprocessed feature files under %s", len(files), _effective_cleaned_root(config))
     frames: list[pd.DataFrame] = []
     file_infos: list[dict[str, Any]] = []
     for path in files:
@@ -545,19 +735,35 @@ def generate_candidate_features(config: FeatureConfig) -> tuple[pd.DataFrame, di
             write_table(split_df.reset_index(drop=True), split_path)
             split_paths[str(safe_split)] = str(split_path)
 
+    labels_available_any = bool(
+        "label_available" in all_candidates.columns
+        and pd.to_numeric(all_candidates["label_available"], errors="coerce").fillna(0).astype(int).sum() > 0
+    )
+    n_true_malicious_candidates = int(
+        pd.to_numeric(all_candidates.get("true_malicious", pd.Series(dtype=int)), errors="coerce").fillna(0).astype(int).sum()
+    )
+
     summary = {
         "config": asdict(config),
+        "effective_cleaned_root": str(_effective_cleaned_root(config)),
         "n_files_discovered": len(files),
         "n_files_with_candidates": len(frames),
         "n_candidates": int(len(all_candidates)),
         "n_windows": int(all_candidates["window_id"].nunique()) if "window_id" in all_candidates.columns else 0,
-        "labels_available_any": bool("true_malicious" in all_candidates.columns and all_candidates["true_malicious"].notna().any()),
+        "labels_available_any": labels_available_any,
+        "n_true_malicious_candidates": n_true_malicious_candidates,
         "all_candidates_path": str(all_path),
         "split_paths": split_paths,
         "file_infos": file_infos,
     }
     save_json(summary, config.output_dir / "candidate_feature_summary.json")
     LOGGER.info("Saved candidate features to %s", all_path)
+    if not labels_available_any:
+        LOGGER.warning(
+            "No labels were available after candidate generation. Check *_audit sidecars and is_seeded_ddos."
+        )
+    else:
+        LOGGER.info("Audit-derived labels available; true malicious candidates: %d", n_true_malicious_candidates)
     return all_candidates, summary
 
 

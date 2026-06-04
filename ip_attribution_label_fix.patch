@@ -1,0 +1,194 @@
+diff --git a/src/ip_attribution_features.py b/src/ip_attribution_features.py
+--- a/src/ip_attribution_features.py
++++ b/src/ip_attribution_features.py
+@@
+ LABEL_AUDIT_COLUMN = "is_seeded_ddos"
++
++# Cleaned challenge outputs in this repository are stored as paired files such as
++#   attack_train_01_clean.csv
++#   attack_train_01_audit.csv
++# The model-input features must come only from the cleaned file, but the audit
++# sidecar is allowed for label construction, validation, split metadata, and
++# metric computation. These columns are attached before aggregation and are later
++# excluded from model features by ip_attribution_common.NON_FEATURE_COLUMNS.
++AUDIT_SIDECAR_COLUMNS = set(AUDIT_COLUMNS) | {"window_id", "window", "window_idx", "window_index", "time_window", "flow_window_id"}
++
++
++def is_audit_sidecar_path(path: Path) -> bool:
++    """Return True for cleaned-output audit sidecar files.
++
++    Audit files should not be treated as flow-feature tables. They are consumed
++    only as sidecars for the corresponding *_clean file.
++    """
++    name = path.name.lower()
++    stem = path.stem.lower()
++    return (
++        name.endswith(":zone.identifier")
++        or stem.endswith("_audit")
++        or "_audit." in name
++        or name.endswith("audit.csv")
++        or name.endswith("audit.parquet")
++        or name.endswith("audit.feather")
++        or name.endswith("audit.pkl")
++        or name.endswith("audit.pickle")
++    )
++
++
++def _binary_audit_series(series: pd.Series) -> pd.Series:
++    """Parse numeric/bool/string audit labels into a 0/1 Series."""
++    if pd.api.types.is_bool_dtype(series):
++        return series.fillna(False).astype(int)
++    numeric = pd.to_numeric(series, errors="coerce")
++    text = series.astype(str).str.strip().str.lower()
++    truthy = text.isin({"1", "1.0", "true", "t", "yes", "y", "attack", "ddos", "malicious"})
++    falsey = text.isin({"0", "0.0", "false", "f", "no", "n", "benign", "normal", "nan", "none", ""})
++    out = pd.Series(0, index=series.index, dtype=int)
++    out.loc[numeric.notna()] = (numeric.loc[numeric.notna()] > 0).astype(int)
++    out.loc[numeric.isna() & truthy] = 1
++    out.loc[numeric.isna() & falsey] = 0
++    return out
++
++
++def _candidate_audit_sidecar_paths(path: Path) -> list[Path]:
++    """Return likely audit sidecar paths for a cleaned flow table."""
++    suffixes = [path.suffix]
++    for suffix in [".csv", ".parquet", ".pq", ".feather", ".ft", ".pkl", ".pickle"]:
++        if suffix not in suffixes:
++            suffixes.append(suffix)
++
++    stems: list[str] = []
++    stem = path.stem
++    replacements = [
++        ("_clean", "_audit"),
++        ("_cleaned", "_audit"),
++        ("-clean", "-audit"),
++        ("-cleaned", "-audit"),
++    ]
++    for old, new in replacements:
++        if old in stem:
++            stems.append(stem.replace(old, new))
++    if "clean" in stem:
++        stems.append(stem.replace("clean", "audit"))
++    stems.append(f"{stem}_audit")
++
++    candidates: list[Path] = []
++    seen: set[Path] = set()
++    for candidate_stem in stems:
++        for suffix in suffixes:
++            candidate = path.with_name(f"{candidate_stem}{suffix}")
++            if candidate != path and candidate not in seen:
++                seen.add(candidate)
++                candidates.append(candidate)
++    return candidates
++
++
++def find_audit_sidecar(path: Path) -> Path | None:
++    for candidate in _candidate_audit_sidecar_paths(path):
++        if candidate.exists() and candidate.is_file():
++            return candidate
++    return None
++
++
++def attach_audit_sidecar(df: pd.DataFrame, path: Path) -> tuple[pd.DataFrame, dict[str, Any]]:
++    """Attach audit-only columns from a cleaned sidecar, preserving row order.
++
++    This does not introduce model inputs: audit columns are used only later for
++    labels, metadata, validation, and metrics.
++    """
++    info: dict[str, Any] = {
++        "audit_sidecar_path": None,
++        "audit_sidecar_attached": False,
++        "audit_columns_attached": [],
++    }
++    sidecar = find_audit_sidecar(path)
++    if sidecar is None:
++        info["reason"] = "no_matching_audit_sidecar_found"
++        return df, info
++
++    try:
++        audit_df = read_table(sidecar)
++    except Exception as exc:
++        info.update({"audit_sidecar_path": str(sidecar), "reason": f"failed_to_read_audit_sidecar:{exc!r}"})
++        LOGGER.warning("Could not read audit sidecar %s for %s: %s", sidecar, path, exc)
++        return df, info
++
++    info["audit_sidecar_path"] = str(sidecar)
++    if len(audit_df) != len(df):
++        info["reason"] = f"row_count_mismatch:clean={len(df)} audit={len(audit_df)}"
++        LOGGER.warning(
++            "Skipping audit sidecar %s for %s because row counts differ: clean=%d audit=%d",
++            sidecar,
++            path,
++            len(df),
++            len(audit_df),
++        )
++        return df, info
++
++    out = df.copy()
++    attached: list[str] = []
++    for col in audit_df.columns:
++        if col in out.columns:
++            continue
++        if col in AUDIT_SIDECAR_COLUMNS:
++            out[col] = audit_df[col].to_numpy()
++            attached.append(col)
++
++    info["audit_sidecar_attached"] = bool(attached)
++    info["audit_columns_attached"] = attached
++    if attached:
++        LOGGER.info("Attached audit sidecar %s to %s with columns: %s", sidecar, path, ", ".join(attached))
++    else:
++        info["reason"] = "sidecar_found_but_no_expected_audit_columns"
++    return out, info
+@@
+ def discover_cleaned_files(config: FeatureConfig) -> list[Path]:
+     root = config.cleaned_data_dir
+     if not root.exists():
+         raise FileNotFoundError(f"Cleaned data directory does not exist: {root}")
++
++    # If the caller uses --cleaned-data-dir data/cleaned together with
++    # --option-name option_2, automatically scope discovery to data/cleaned/option_2.
++    # This keeps the existing command convenient and avoids mixing option_1 and
++    # option_2 cleaned datasets in one attribution run.
++    if config.option_name:
++        option_root = root / config.option_name
++        if option_root.exists() and option_root.is_dir():
++            root = option_root
+@@
+         iterator = root.rglob(pattern) if config.recursive else root.glob(pattern)
+         for path in iterator:
+-            if path.is_file() and path.suffix.lower() in SUPPORTED_SUFFIXES:
++            if path.is_file() and path.suffix.lower() in SUPPORTED_SUFFIXES and not is_audit_sidecar_path(path):
+                 files.append(path)
+@@
+ def build_candidate_features_for_file(path: Path, config: FeatureConfig) -> tuple[pd.DataFrame, dict[str, Any]]:
+     df = read_table(path)
++    df, audit_sidecar_info = attach_audit_sidecar(df, path)
+     file_info: dict[str, Any] = {
+         "path": str(path),
+         "n_input_rows": int(len(df)),
+         "missing_optional_columns": [],
+         "used_columns": {},
+         "window_source": None,
+         "labels_available": False,
++        "audit_sidecar": audit_sidecar_info,
+     }
+@@
+-    if LABEL_AUDIT_COLUMN in df.columns:
+-        seeded = pd.to_numeric(df[LABEL_AUDIT_COLUMN], errors="coerce").fillna(0).astype(int)
++    label_col = resolve_column(df, [LABEL_AUDIT_COLUMN])
++    if label_col is not None:
++        seeded = _binary_audit_series(df[label_col])
+         work["__seeded"] = (seeded > 0).astype(int)
+         label = work.groupby(candidate_keys, dropna=False)["__seeded"].max().rename("true_malicious")
+@@
+         cand["true_malicious"] = cand["true_malicious"].fillna(0).astype(int)
+         cand["window_has_malicious"] = cand["window_has_malicious"].fillna(0).astype(int)
+         cand["label_available"] = 1
+         file_info["labels_available"] = True
++        file_info["label_source_column"] = label_col
++        file_info["positive_flow_labels"] = int(work["__seeded"].sum())
++        file_info["positive_candidate_labels"] = int(cand["true_malicious"].sum())
+     else:
+         cand["label_available"] = 0
+*** End Patch

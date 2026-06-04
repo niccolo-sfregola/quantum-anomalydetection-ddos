@@ -29,987 +29,31 @@
     "window_col": null,
     "window_seconds": null
   },
+  "effective_cleaned_root": "data/cleaned/option_2",
   "file_infos": [
     {
-      "labels_available": false,
-      "missing_optional_columns": [],
-      "n_input_rows": 100000,
-      "path": "data/cleaned/option_1/attack/test/attack_test_01_audit.csv",
-      "skipped_reason": "missing_source_ip_column",
-      "used_columns": {},
-      "window_source": null
-    },
-    {
-      "labels_available": false,
-      "missing_optional_columns": [
-        "protocol",
-        "bytes_per_second",
-        "inter_packet_arrival_mean",
-        "inter_packet_arrival_std",
-        "is_seeded_ddos"
+      "audit_columns_attached": [
+        "row_in_window",
+        "is_seeded_ddos",
+        "burst_id",
+        "burst_phase",
+        "source_dataset"
       ],
-      "n_candidates": 703,
-      "n_input_rows": 100000,
-      "n_windows": 15,
-      "path": "data/cleaned/option_1/attack/test/attack_test_01_clean.csv",
-      "used_columns": {
-        "dst_ip": "dst_ip",
-        "dst_port": "dst_port",
-        "numeric": {
-          "duration": "duration",
-          "outbound_byte_ratio": "outbound_byte_ratio",
-          "packet_size_avg": "packet_size_avg",
-          "packet_size_std": "packet_size_std",
-          "packets_per_second": "packets_per_second",
-          "total_bytes": "total_bytes",
-          "total_packets": "total_packets"
-        },
-        "protocol": null,
-        "src_ip": "src_ip",
-        "src_port": "src_port"
-      },
-      "window_source": "existing_column:window_id"
-    },
-    {
-      "labels_available": false,
-      "missing_optional_columns": [],
-      "n_input_rows": 100000,
-      "path": "data/cleaned/option_1/attack/test/attack_test_02_audit.csv",
-      "skipped_reason": "missing_source_ip_column",
-      "used_columns": {},
-      "window_source": null
-    },
-    {
-      "labels_available": false,
+      "audit_sidecar_attached": true,
+      "audit_sidecar_note": "attached_by_row_order",
+      "audit_sidecar_path": "data/cleaned/option_2/attack/test/attack_test_01_audit.csv",
+      "audit_sidecar_rows": 100000,
+      "labels_available": true,
       "missing_optional_columns": [
         "protocol",
         "bytes_per_second",
         "inter_packet_arrival_mean",
-        "inter_packet_arrival_std",
-        "is_seeded_ddos"
-      ],
-      "n_candidates": 731,
-      "n_input_rows": 100000,
-      "n_windows": 15,
-      "path": "data/cleaned/option_1/attack/test/attack_test_02_clean.csv",
-      "used_columns": {
-        "dst_ip": "dst_ip",
-        "dst_port": "dst_port",
-        "numeric": {
-          "duration": "duration",
-          "outbound_byte_ratio": "outbound_byte_ratio",
-          "packet_size_avg": "packet_size_avg",
-          "packet_size_std": "packet_size_std",
-          "packets_per_second": "packets_per_second",
-          "total_bytes": "total_bytes",
-          "total_packets": "total_packets"
-        },
-        "protocol": null,
-        "src_ip": "src_ip",
-        "src_port": "src_port"
-      },
-      "window_source": "existing_column:window_id"
-    },
-    {
-      "labels_available": false,
-      "missing_optional_columns": [],
-      "n_input_rows": 100000,
-      "path": "data/cleaned/option_1/attack/train/attack_train_01_audit.csv",
-      "skipped_reason": "missing_source_ip_column",
-      "used_columns": {},
-      "window_source": null
-    },
-    {
-      "labels_available": false,
-      "missing_optional_columns": [
-        "protocol",
-        "bytes_per_second",
-        "inter_packet_arrival_mean",
-        "inter_packet_arrival_std",
-        "is_seeded_ddos"
-      ],
-      "n_candidates": 491,
-      "n_input_rows": 100000,
-      "n_windows": 15,
-      "path": "data/cleaned/option_1/attack/train/attack_train_01_clean.csv",
-      "used_columns": {
-        "dst_ip": "dst_ip",
-        "dst_port": "dst_port",
-        "numeric": {
-          "duration": "duration",
-          "outbound_byte_ratio": "outbound_byte_ratio",
-          "packet_size_avg": "packet_size_avg",
-          "packet_size_std": "packet_size_std",
-          "packets_per_second": "packets_per_second",
-          "total_bytes": "total_bytes",
-          "total_packets": "total_packets"
-        },
-        "protocol": null,
-        "src_ip": "src_ip",
-        "src_port": "src_port"
-      },
-      "window_source": "existing_column:window_id"
-    },
-    {
-      "labels_available": false,
-      "missing_optional_columns": [],
-      "n_input_rows": 100000,
-      "path": "data/cleaned/option_1/attack/train/attack_train_02_audit.csv",
-      "skipped_reason": "missing_source_ip_column",
-      "used_columns": {},
-      "window_source": null
-    },
-    {
-      "labels_available": false,
-      "missing_optional_columns": [
-        "protocol",
-        "bytes_per_second",
-        "inter_packet_arrival_mean",
-        "inter_packet_arrival_std",
-        "is_seeded_ddos"
-      ],
-      "n_candidates": 683,
-      "n_input_rows": 100000,
-      "n_windows": 15,
-      "path": "data/cleaned/option_1/attack/train/attack_train_02_clean.csv",
-      "used_columns": {
-        "dst_ip": "dst_ip",
-        "dst_port": "dst_port",
-        "numeric": {
-          "duration": "duration",
-          "outbound_byte_ratio": "outbound_byte_ratio",
-          "packet_size_avg": "packet_size_avg",
-          "packet_size_std": "packet_size_std",
-          "packets_per_second": "packets_per_second",
-          "total_bytes": "total_bytes",
-          "total_packets": "total_packets"
-        },
-        "protocol": null,
-        "src_ip": "src_ip",
-        "src_port": "src_port"
-      },
-      "window_source": "existing_column:window_id"
-    },
-    {
-      "labels_available": false,
-      "missing_optional_columns": [],
-      "n_input_rows": 100000,
-      "path": "data/cleaned/option_1/attack/train/attack_train_03_audit.csv",
-      "skipped_reason": "missing_source_ip_column",
-      "used_columns": {},
-      "window_source": null
-    },
-    {
-      "labels_available": false,
-      "missing_optional_columns": [
-        "protocol",
-        "bytes_per_second",
-        "inter_packet_arrival_mean",
-        "inter_packet_arrival_std",
-        "is_seeded_ddos"
-      ],
-      "n_candidates": 586,
-      "n_input_rows": 100000,
-      "n_windows": 15,
-      "path": "data/cleaned/option_1/attack/train/attack_train_03_clean.csv",
-      "used_columns": {
-        "dst_ip": "dst_ip",
-        "dst_port": "dst_port",
-        "numeric": {
-          "duration": "duration",
-          "outbound_byte_ratio": "outbound_byte_ratio",
-          "packet_size_avg": "packet_size_avg",
-          "packet_size_std": "packet_size_std",
-          "packets_per_second": "packets_per_second",
-          "total_bytes": "total_bytes",
-          "total_packets": "total_packets"
-        },
-        "protocol": null,
-        "src_ip": "src_ip",
-        "src_port": "src_port"
-      },
-      "window_source": "existing_column:window_id"
-    },
-    {
-      "labels_available": false,
-      "missing_optional_columns": [],
-      "n_input_rows": 100000,
-      "path": "data/cleaned/option_1/attack/train/attack_train_04_audit.csv",
-      "skipped_reason": "missing_source_ip_column",
-      "used_columns": {},
-      "window_source": null
-    },
-    {
-      "labels_available": false,
-      "missing_optional_columns": [
-        "protocol",
-        "bytes_per_second",
-        "inter_packet_arrival_mean",
-        "inter_packet_arrival_std",
-        "is_seeded_ddos"
-      ],
-      "n_candidates": 593,
-      "n_input_rows": 100000,
-      "n_windows": 15,
-      "path": "data/cleaned/option_1/attack/train/attack_train_04_clean.csv",
-      "used_columns": {
-        "dst_ip": "dst_ip",
-        "dst_port": "dst_port",
-        "numeric": {
-          "duration": "duration",
-          "outbound_byte_ratio": "outbound_byte_ratio",
-          "packet_size_avg": "packet_size_avg",
-          "packet_size_std": "packet_size_std",
-          "packets_per_second": "packets_per_second",
-          "total_bytes": "total_bytes",
-          "total_packets": "total_packets"
-        },
-        "protocol": null,
-        "src_ip": "src_ip",
-        "src_port": "src_port"
-      },
-      "window_source": "existing_column:window_id"
-    },
-    {
-      "labels_available": false,
-      "missing_optional_columns": [],
-      "n_input_rows": 100000,
-      "path": "data/cleaned/option_1/attack/train/attack_train_05_audit.csv",
-      "skipped_reason": "missing_source_ip_column",
-      "used_columns": {},
-      "window_source": null
-    },
-    {
-      "labels_available": false,
-      "missing_optional_columns": [
-        "protocol",
-        "bytes_per_second",
-        "inter_packet_arrival_mean",
-        "inter_packet_arrival_std",
-        "is_seeded_ddos"
-      ],
-      "n_candidates": 522,
-      "n_input_rows": 100000,
-      "n_windows": 15,
-      "path": "data/cleaned/option_1/attack/train/attack_train_05_clean.csv",
-      "used_columns": {
-        "dst_ip": "dst_ip",
-        "dst_port": "dst_port",
-        "numeric": {
-          "duration": "duration",
-          "outbound_byte_ratio": "outbound_byte_ratio",
-          "packet_size_avg": "packet_size_avg",
-          "packet_size_std": "packet_size_std",
-          "packets_per_second": "packets_per_second",
-          "total_bytes": "total_bytes",
-          "total_packets": "total_packets"
-        },
-        "protocol": null,
-        "src_ip": "src_ip",
-        "src_port": "src_port"
-      },
-      "window_source": "existing_column:window_id"
-    },
-    {
-      "labels_available": false,
-      "missing_optional_columns": [],
-      "n_input_rows": 100000,
-      "path": "data/cleaned/option_1/attack/train/attack_train_06_audit.csv",
-      "skipped_reason": "missing_source_ip_column",
-      "used_columns": {},
-      "window_source": null
-    },
-    {
-      "labels_available": false,
-      "missing_optional_columns": [
-        "protocol",
-        "bytes_per_second",
-        "inter_packet_arrival_mean",
-        "inter_packet_arrival_std",
-        "is_seeded_ddos"
-      ],
-      "n_candidates": 608,
-      "n_input_rows": 100000,
-      "n_windows": 15,
-      "path": "data/cleaned/option_1/attack/train/attack_train_06_clean.csv",
-      "used_columns": {
-        "dst_ip": "dst_ip",
-        "dst_port": "dst_port",
-        "numeric": {
-          "duration": "duration",
-          "outbound_byte_ratio": "outbound_byte_ratio",
-          "packet_size_avg": "packet_size_avg",
-          "packet_size_std": "packet_size_std",
-          "packets_per_second": "packets_per_second",
-          "total_bytes": "total_bytes",
-          "total_packets": "total_packets"
-        },
-        "protocol": null,
-        "src_ip": "src_ip",
-        "src_port": "src_port"
-      },
-      "window_source": "existing_column:window_id"
-    },
-    {
-      "labels_available": false,
-      "missing_optional_columns": [],
-      "n_input_rows": 100000,
-      "path": "data/cleaned/option_1/attack/train/attack_train_07_audit.csv",
-      "skipped_reason": "missing_source_ip_column",
-      "used_columns": {},
-      "window_source": null
-    },
-    {
-      "labels_available": false,
-      "missing_optional_columns": [
-        "protocol",
-        "bytes_per_second",
-        "inter_packet_arrival_mean",
-        "inter_packet_arrival_std",
-        "is_seeded_ddos"
-      ],
-      "n_candidates": 676,
-      "n_input_rows": 100000,
-      "n_windows": 15,
-      "path": "data/cleaned/option_1/attack/train/attack_train_07_clean.csv",
-      "used_columns": {
-        "dst_ip": "dst_ip",
-        "dst_port": "dst_port",
-        "numeric": {
-          "duration": "duration",
-          "outbound_byte_ratio": "outbound_byte_ratio",
-          "packet_size_avg": "packet_size_avg",
-          "packet_size_std": "packet_size_std",
-          "packets_per_second": "packets_per_second",
-          "total_bytes": "total_bytes",
-          "total_packets": "total_packets"
-        },
-        "protocol": null,
-        "src_ip": "src_ip",
-        "src_port": "src_port"
-      },
-      "window_source": "existing_column:window_id"
-    },
-    {
-      "labels_available": false,
-      "missing_optional_columns": [],
-      "n_input_rows": 100000,
-      "path": "data/cleaned/option_1/attack/train/attack_train_08_audit.csv",
-      "skipped_reason": "missing_source_ip_column",
-      "used_columns": {},
-      "window_source": null
-    },
-    {
-      "labels_available": false,
-      "missing_optional_columns": [
-        "protocol",
-        "bytes_per_second",
-        "inter_packet_arrival_mean",
-        "inter_packet_arrival_std",
-        "is_seeded_ddos"
-      ],
-      "n_candidates": 504,
-      "n_input_rows": 100000,
-      "n_windows": 15,
-      "path": "data/cleaned/option_1/attack/train/attack_train_08_clean.csv",
-      "used_columns": {
-        "dst_ip": "dst_ip",
-        "dst_port": "dst_port",
-        "numeric": {
-          "duration": "duration",
-          "outbound_byte_ratio": "outbound_byte_ratio",
-          "packet_size_avg": "packet_size_avg",
-          "packet_size_std": "packet_size_std",
-          "packets_per_second": "packets_per_second",
-          "total_bytes": "total_bytes",
-          "total_packets": "total_packets"
-        },
-        "protocol": null,
-        "src_ip": "src_ip",
-        "src_port": "src_port"
-      },
-      "window_source": "existing_column:window_id"
-    },
-    {
-      "labels_available": false,
-      "missing_optional_columns": [],
-      "n_input_rows": 100000,
-      "path": "data/cleaned/option_1/attack/validation/attack_validation_01_audit.csv",
-      "skipped_reason": "missing_source_ip_column",
-      "used_columns": {},
-      "window_source": null
-    },
-    {
-      "labels_available": false,
-      "missing_optional_columns": [
-        "protocol",
-        "bytes_per_second",
-        "inter_packet_arrival_mean",
-        "inter_packet_arrival_std",
-        "is_seeded_ddos"
-      ],
-      "n_candidates": 583,
-      "n_input_rows": 100000,
-      "n_windows": 15,
-      "path": "data/cleaned/option_1/attack/validation/attack_validation_01_clean.csv",
-      "used_columns": {
-        "dst_ip": "dst_ip",
-        "dst_port": "dst_port",
-        "numeric": {
-          "duration": "duration",
-          "outbound_byte_ratio": "outbound_byte_ratio",
-          "packet_size_avg": "packet_size_avg",
-          "packet_size_std": "packet_size_std",
-          "packets_per_second": "packets_per_second",
-          "total_bytes": "total_bytes",
-          "total_packets": "total_packets"
-        },
-        "protocol": null,
-        "src_ip": "src_ip",
-        "src_port": "src_port"
-      },
-      "window_source": "existing_column:window_id"
-    },
-    {
-      "labels_available": false,
-      "missing_optional_columns": [],
-      "n_input_rows": 100000,
-      "path": "data/cleaned/option_1/attack/validation/attack_validation_02_audit.csv",
-      "skipped_reason": "missing_source_ip_column",
-      "used_columns": {},
-      "window_source": null
-    },
-    {
-      "labels_available": false,
-      "missing_optional_columns": [
-        "protocol",
-        "bytes_per_second",
-        "inter_packet_arrival_mean",
-        "inter_packet_arrival_std",
-        "is_seeded_ddos"
-      ],
-      "n_candidates": 557,
-      "n_input_rows": 100000,
-      "n_windows": 15,
-      "path": "data/cleaned/option_1/attack/validation/attack_validation_02_clean.csv",
-      "used_columns": {
-        "dst_ip": "dst_ip",
-        "dst_port": "dst_port",
-        "numeric": {
-          "duration": "duration",
-          "outbound_byte_ratio": "outbound_byte_ratio",
-          "packet_size_avg": "packet_size_avg",
-          "packet_size_std": "packet_size_std",
-          "packets_per_second": "packets_per_second",
-          "total_bytes": "total_bytes",
-          "total_packets": "total_packets"
-        },
-        "protocol": null,
-        "src_ip": "src_ip",
-        "src_port": "src_port"
-      },
-      "window_source": "existing_column:window_id"
-    },
-    {
-      "labels_available": false,
-      "missing_optional_columns": [],
-      "n_input_rows": 100000,
-      "path": "data/cleaned/option_1/normal/test/normal_test_01_audit.csv",
-      "skipped_reason": "missing_source_ip_column",
-      "used_columns": {},
-      "window_source": null
-    },
-    {
-      "labels_available": false,
-      "missing_optional_columns": [
-        "protocol",
-        "bytes_per_second",
-        "inter_packet_arrival_mean",
-        "inter_packet_arrival_std",
-        "is_seeded_ddos"
-      ],
-      "n_candidates": 392,
-      "n_input_rows": 100000,
-      "n_windows": 15,
-      "path": "data/cleaned/option_1/normal/test/normal_test_01_clean.csv",
-      "used_columns": {
-        "dst_ip": "dst_ip",
-        "dst_port": "dst_port",
-        "numeric": {
-          "duration": "duration",
-          "outbound_byte_ratio": "outbound_byte_ratio",
-          "packet_size_avg": "packet_size_avg",
-          "packet_size_std": "packet_size_std",
-          "packets_per_second": "packets_per_second",
-          "total_bytes": "total_bytes",
-          "total_packets": "total_packets"
-        },
-        "protocol": null,
-        "src_ip": "src_ip",
-        "src_port": "src_port"
-      },
-      "window_source": "existing_column:window_id"
-    },
-    {
-      "labels_available": false,
-      "missing_optional_columns": [],
-      "n_input_rows": 100000,
-      "path": "data/cleaned/option_1/normal/test/normal_test_02_audit.csv",
-      "skipped_reason": "missing_source_ip_column",
-      "used_columns": {},
-      "window_source": null
-    },
-    {
-      "labels_available": false,
-      "missing_optional_columns": [
-        "protocol",
-        "bytes_per_second",
-        "inter_packet_arrival_mean",
-        "inter_packet_arrival_std",
-        "is_seeded_ddos"
-      ],
-      "n_candidates": 381,
-      "n_input_rows": 100000,
-      "n_windows": 15,
-      "path": "data/cleaned/option_1/normal/test/normal_test_02_clean.csv",
-      "used_columns": {
-        "dst_ip": "dst_ip",
-        "dst_port": "dst_port",
-        "numeric": {
-          "duration": "duration",
-          "outbound_byte_ratio": "outbound_byte_ratio",
-          "packet_size_avg": "packet_size_avg",
-          "packet_size_std": "packet_size_std",
-          "packets_per_second": "packets_per_second",
-          "total_bytes": "total_bytes",
-          "total_packets": "total_packets"
-        },
-        "protocol": null,
-        "src_ip": "src_ip",
-        "src_port": "src_port"
-      },
-      "window_source": "existing_column:window_id"
-    },
-    {
-      "labels_available": false,
-      "missing_optional_columns": [],
-      "n_input_rows": 100000,
-      "path": "data/cleaned/option_1/normal/train/normal_train_01_audit.csv",
-      "skipped_reason": "missing_source_ip_column",
-      "used_columns": {},
-      "window_source": null
-    },
-    {
-      "labels_available": false,
-      "missing_optional_columns": [
-        "protocol",
-        "bytes_per_second",
-        "inter_packet_arrival_mean",
-        "inter_packet_arrival_std",
-        "is_seeded_ddos"
-      ],
-      "n_candidates": 376,
-      "n_input_rows": 100000,
-      "n_windows": 15,
-      "path": "data/cleaned/option_1/normal/train/normal_train_01_clean.csv",
-      "used_columns": {
-        "dst_ip": "dst_ip",
-        "dst_port": "dst_port",
-        "numeric": {
-          "duration": "duration",
-          "outbound_byte_ratio": "outbound_byte_ratio",
-          "packet_size_avg": "packet_size_avg",
-          "packet_size_std": "packet_size_std",
-          "packets_per_second": "packets_per_second",
-          "total_bytes": "total_bytes",
-          "total_packets": "total_packets"
-        },
-        "protocol": null,
-        "src_ip": "src_ip",
-        "src_port": "src_port"
-      },
-      "window_source": "existing_column:window_id"
-    },
-    {
-      "labels_available": false,
-      "missing_optional_columns": [],
-      "n_input_rows": 100000,
-      "path": "data/cleaned/option_1/normal/train/normal_train_02_audit.csv",
-      "skipped_reason": "missing_source_ip_column",
-      "used_columns": {},
-      "window_source": null
-    },
-    {
-      "labels_available": false,
-      "missing_optional_columns": [
-        "protocol",
-        "bytes_per_second",
-        "inter_packet_arrival_mean",
-        "inter_packet_arrival_std",
-        "is_seeded_ddos"
-      ],
-      "n_candidates": 379,
-      "n_input_rows": 100000,
-      "n_windows": 15,
-      "path": "data/cleaned/option_1/normal/train/normal_train_02_clean.csv",
-      "used_columns": {
-        "dst_ip": "dst_ip",
-        "dst_port": "dst_port",
-        "numeric": {
-          "duration": "duration",
-          "outbound_byte_ratio": "outbound_byte_ratio",
-          "packet_size_avg": "packet_size_avg",
-          "packet_size_std": "packet_size_std",
-          "packets_per_second": "packets_per_second",
-          "total_bytes": "total_bytes",
-          "total_packets": "total_packets"
-        },
-        "protocol": null,
-        "src_ip": "src_ip",
-        "src_port": "src_port"
-      },
-      "window_source": "existing_column:window_id"
-    },
-    {
-      "labels_available": false,
-      "missing_optional_columns": [],
-      "n_input_rows": 100000,
-      "path": "data/cleaned/option_1/normal/train/normal_train_03_audit.csv",
-      "skipped_reason": "missing_source_ip_column",
-      "used_columns": {},
-      "window_source": null
-    },
-    {
-      "labels_available": false,
-      "missing_optional_columns": [
-        "protocol",
-        "bytes_per_second",
-        "inter_packet_arrival_mean",
-        "inter_packet_arrival_std",
-        "is_seeded_ddos"
-      ],
-      "n_candidates": 388,
-      "n_input_rows": 100000,
-      "n_windows": 15,
-      "path": "data/cleaned/option_1/normal/train/normal_train_03_clean.csv",
-      "used_columns": {
-        "dst_ip": "dst_ip",
-        "dst_port": "dst_port",
-        "numeric": {
-          "duration": "duration",
-          "outbound_byte_ratio": "outbound_byte_ratio",
-          "packet_size_avg": "packet_size_avg",
-          "packet_size_std": "packet_size_std",
-          "packets_per_second": "packets_per_second",
-          "total_bytes": "total_bytes",
-          "total_packets": "total_packets"
-        },
-        "protocol": null,
-        "src_ip": "src_ip",
-        "src_port": "src_port"
-      },
-      "window_source": "existing_column:window_id"
-    },
-    {
-      "labels_available": false,
-      "missing_optional_columns": [],
-      "n_input_rows": 100000,
-      "path": "data/cleaned/option_1/normal/train/normal_train_04_audit.csv",
-      "skipped_reason": "missing_source_ip_column",
-      "used_columns": {},
-      "window_source": null
-    },
-    {
-      "labels_available": false,
-      "missing_optional_columns": [
-        "protocol",
-        "bytes_per_second",
-        "inter_packet_arrival_mean",
-        "inter_packet_arrival_std",
-        "is_seeded_ddos"
-      ],
-      "n_candidates": 378,
-      "n_input_rows": 100000,
-      "n_windows": 15,
-      "path": "data/cleaned/option_1/normal/train/normal_train_04_clean.csv",
-      "used_columns": {
-        "dst_ip": "dst_ip",
-        "dst_port": "dst_port",
-        "numeric": {
-          "duration": "duration",
-          "outbound_byte_ratio": "outbound_byte_ratio",
-          "packet_size_avg": "packet_size_avg",
-          "packet_size_std": "packet_size_std",
-          "packets_per_second": "packets_per_second",
-          "total_bytes": "total_bytes",
-          "total_packets": "total_packets"
-        },
-        "protocol": null,
-        "src_ip": "src_ip",
-        "src_port": "src_port"
-      },
-      "window_source": "existing_column:window_id"
-    },
-    {
-      "labels_available": false,
-      "missing_optional_columns": [],
-      "n_input_rows": 100000,
-      "path": "data/cleaned/option_1/normal/train/normal_train_05_audit.csv",
-      "skipped_reason": "missing_source_ip_column",
-      "used_columns": {},
-      "window_source": null
-    },
-    {
-      "labels_available": false,
-      "missing_optional_columns": [
-        "protocol",
-        "bytes_per_second",
-        "inter_packet_arrival_mean",
-        "inter_packet_arrival_std",
-        "is_seeded_ddos"
-      ],
-      "n_candidates": 375,
-      "n_input_rows": 100000,
-      "n_windows": 15,
-      "path": "data/cleaned/option_1/normal/train/normal_train_05_clean.csv",
-      "used_columns": {
-        "dst_ip": "dst_ip",
-        "dst_port": "dst_port",
-        "numeric": {
-          "duration": "duration",
-          "outbound_byte_ratio": "outbound_byte_ratio",
-          "packet_size_avg": "packet_size_avg",
-          "packet_size_std": "packet_size_std",
-          "packets_per_second": "packets_per_second",
-          "total_bytes": "total_bytes",
-          "total_packets": "total_packets"
-        },
-        "protocol": null,
-        "src_ip": "src_ip",
-        "src_port": "src_port"
-      },
-      "window_source": "existing_column:window_id"
-    },
-    {
-      "labels_available": false,
-      "missing_optional_columns": [],
-      "n_input_rows": 100000,
-      "path": "data/cleaned/option_1/normal/train/normal_train_06_audit.csv",
-      "skipped_reason": "missing_source_ip_column",
-      "used_columns": {},
-      "window_source": null
-    },
-    {
-      "labels_available": false,
-      "missing_optional_columns": [
-        "protocol",
-        "bytes_per_second",
-        "inter_packet_arrival_mean",
-        "inter_packet_arrival_std",
-        "is_seeded_ddos"
-      ],
-      "n_candidates": 373,
-      "n_input_rows": 100000,
-      "n_windows": 15,
-      "path": "data/cleaned/option_1/normal/train/normal_train_06_clean.csv",
-      "used_columns": {
-        "dst_ip": "dst_ip",
-        "dst_port": "dst_port",
-        "numeric": {
-          "duration": "duration",
-          "outbound_byte_ratio": "outbound_byte_ratio",
-          "packet_size_avg": "packet_size_avg",
-          "packet_size_std": "packet_size_std",
-          "packets_per_second": "packets_per_second",
-          "total_bytes": "total_bytes",
-          "total_packets": "total_packets"
-        },
-        "protocol": null,
-        "src_ip": "src_ip",
-        "src_port": "src_port"
-      },
-      "window_source": "existing_column:window_id"
-    },
-    {
-      "labels_available": false,
-      "missing_optional_columns": [],
-      "n_input_rows": 100000,
-      "path": "data/cleaned/option_1/normal/train/normal_train_07_audit.csv",
-      "skipped_reason": "missing_source_ip_column",
-      "used_columns": {},
-      "window_source": null
-    },
-    {
-      "labels_available": false,
-      "missing_optional_columns": [
-        "protocol",
-        "bytes_per_second",
-        "inter_packet_arrival_mean",
-        "inter_packet_arrival_std",
-        "is_seeded_ddos"
-      ],
-      "n_candidates": 381,
-      "n_input_rows": 100000,
-      "n_windows": 15,
-      "path": "data/cleaned/option_1/normal/train/normal_train_07_clean.csv",
-      "used_columns": {
-        "dst_ip": "dst_ip",
-        "dst_port": "dst_port",
-        "numeric": {
-          "duration": "duration",
-          "outbound_byte_ratio": "outbound_byte_ratio",
-          "packet_size_avg": "packet_size_avg",
-          "packet_size_std": "packet_size_std",
-          "packets_per_second": "packets_per_second",
-          "total_bytes": "total_bytes",
-          "total_packets": "total_packets"
-        },
-        "protocol": null,
-        "src_ip": "src_ip",
-        "src_port": "src_port"
-      },
-      "window_source": "existing_column:window_id"
-    },
-    {
-      "labels_available": false,
-      "missing_optional_columns": [],
-      "n_input_rows": 100000,
-      "path": "data/cleaned/option_1/normal/train/normal_train_08_audit.csv",
-      "skipped_reason": "missing_source_ip_column",
-      "used_columns": {},
-      "window_source": null
-    },
-    {
-      "labels_available": false,
-      "missing_optional_columns": [
-        "protocol",
-        "bytes_per_second",
-        "inter_packet_arrival_mean",
-        "inter_packet_arrival_std",
-        "is_seeded_ddos"
-      ],
-      "n_candidates": 376,
-      "n_input_rows": 100000,
-      "n_windows": 15,
-      "path": "data/cleaned/option_1/normal/train/normal_train_08_clean.csv",
-      "used_columns": {
-        "dst_ip": "dst_ip",
-        "dst_port": "dst_port",
-        "numeric": {
-          "duration": "duration",
-          "outbound_byte_ratio": "outbound_byte_ratio",
-          "packet_size_avg": "packet_size_avg",
-          "packet_size_std": "packet_size_std",
-          "packets_per_second": "packets_per_second",
-          "total_bytes": "total_bytes",
-          "total_packets": "total_packets"
-        },
-        "protocol": null,
-        "src_ip": "src_ip",
-        "src_port": "src_port"
-      },
-      "window_source": "existing_column:window_id"
-    },
-    {
-      "labels_available": false,
-      "missing_optional_columns": [],
-      "n_input_rows": 100000,
-      "path": "data/cleaned/option_1/normal/validation/normal_validation_01_audit.csv",
-      "skipped_reason": "missing_source_ip_column",
-      "used_columns": {},
-      "window_source": null
-    },
-    {
-      "labels_available": false,
-      "missing_optional_columns": [
-        "protocol",
-        "bytes_per_second",
-        "inter_packet_arrival_mean",
-        "inter_packet_arrival_std",
-        "is_seeded_ddos"
-      ],
-      "n_candidates": 371,
-      "n_input_rows": 100000,
-      "n_windows": 15,
-      "path": "data/cleaned/option_1/normal/validation/normal_validation_01_clean.csv",
-      "used_columns": {
-        "dst_ip": "dst_ip",
-        "dst_port": "dst_port",
-        "numeric": {
-          "duration": "duration",
-          "outbound_byte_ratio": "outbound_byte_ratio",
-          "packet_size_avg": "packet_size_avg",
-          "packet_size_std": "packet_size_std",
-          "packets_per_second": "packets_per_second",
-          "total_bytes": "total_bytes",
-          "total_packets": "total_packets"
-        },
-        "protocol": null,
-        "src_ip": "src_ip",
-        "src_port": "src_port"
-      },
-      "window_source": "existing_column:window_id"
-    },
-    {
-      "labels_available": false,
-      "missing_optional_columns": [],
-      "n_input_rows": 100000,
-      "path": "data/cleaned/option_1/normal/validation/normal_validation_02_audit.csv",
-      "skipped_reason": "missing_source_ip_column",
-      "used_columns": {},
-      "window_source": null
-    },
-    {
-      "labels_available": false,
-      "missing_optional_columns": [
-        "protocol",
-        "bytes_per_second",
-        "inter_packet_arrival_mean",
-        "inter_packet_arrival_std",
-        "is_seeded_ddos"
-      ],
-      "n_candidates": 374,
-      "n_input_rows": 100000,
-      "n_windows": 15,
-      "path": "data/cleaned/option_1/normal/validation/normal_validation_02_clean.csv",
-      "used_columns": {
-        "dst_ip": "dst_ip",
-        "dst_port": "dst_port",
-        "numeric": {
-          "duration": "duration",
-          "outbound_byte_ratio": "outbound_byte_ratio",
-          "packet_size_avg": "packet_size_avg",
-          "packet_size_std": "packet_size_std",
-          "packets_per_second": "packets_per_second",
-          "total_bytes": "total_bytes",
-          "total_packets": "total_packets"
-        },
-        "protocol": null,
-        "src_ip": "src_ip",
-        "src_port": "src_port"
-      },
-      "window_source": "existing_column:window_id"
-    },
-    {
-      "labels_available": false,
-      "missing_optional_columns": [],
-      "n_input_rows": 100000,
-      "path": "data/cleaned/option_2/attack/test/attack_test_01_audit.csv",
-      "skipped_reason": "missing_source_ip_column",
-      "used_columns": {},
-      "window_source": null
-    },
-    {
-      "labels_available": false,
-      "missing_optional_columns": [
-        "protocol",
-        "bytes_per_second",
-        "inter_packet_arrival_mean",
-        "inter_packet_arrival_std",
-        "is_seeded_ddos"
+        "inter_packet_arrival_std"
       ],
       "n_candidates": 411,
       "n_input_rows": 100000,
+      "n_seeded_flow_rows": 1804,
+      "n_true_malicious_candidates": 30,
       "n_windows": 15,
       "path": "data/cleaned/option_2/attack/test/attack_test_01_clean.csv",
       "used_columns": {
@@ -1031,25 +75,28 @@
       "window_source": "existing_column:window_id"
     },
     {
-      "labels_available": false,
-      "missing_optional_columns": [],
-      "n_input_rows": 100000,
-      "path": "data/cleaned/option_2/attack/test/attack_test_02_audit.csv",
-      "skipped_reason": "missing_source_ip_column",
-      "used_columns": {},
-      "window_source": null
-    },
-    {
-      "labels_available": false,
+      "audit_columns_attached": [
+        "row_in_window",
+        "is_seeded_ddos",
+        "burst_id",
+        "burst_phase",
+        "source_dataset"
+      ],
+      "audit_sidecar_attached": true,
+      "audit_sidecar_note": "attached_by_row_order",
+      "audit_sidecar_path": "data/cleaned/option_2/attack/test/attack_test_02_audit.csv",
+      "audit_sidecar_rows": 100000,
+      "labels_available": true,
       "missing_optional_columns": [
         "protocol",
         "bytes_per_second",
         "inter_packet_arrival_mean",
-        "inter_packet_arrival_std",
-        "is_seeded_ddos"
+        "inter_packet_arrival_std"
       ],
       "n_candidates": 425,
       "n_input_rows": 100000,
+      "n_seeded_flow_rows": 1599,
+      "n_true_malicious_candidates": 50,
       "n_windows": 15,
       "path": "data/cleaned/option_2/attack/test/attack_test_02_clean.csv",
       "used_columns": {
@@ -1071,25 +118,28 @@
       "window_source": "existing_column:window_id"
     },
     {
-      "labels_available": false,
-      "missing_optional_columns": [],
-      "n_input_rows": 100000,
-      "path": "data/cleaned/option_2/attack/train/attack_train_01_audit.csv",
-      "skipped_reason": "missing_source_ip_column",
-      "used_columns": {},
-      "window_source": null
-    },
-    {
-      "labels_available": false,
+      "audit_columns_attached": [
+        "row_in_window",
+        "is_seeded_ddos",
+        "burst_id",
+        "burst_phase",
+        "source_dataset"
+      ],
+      "audit_sidecar_attached": true,
+      "audit_sidecar_note": "attached_by_row_order",
+      "audit_sidecar_path": "data/cleaned/option_2/attack/train/attack_train_01_audit.csv",
+      "audit_sidecar_rows": 100000,
+      "labels_available": true,
       "missing_optional_columns": [
         "protocol",
         "bytes_per_second",
         "inter_packet_arrival_mean",
-        "inter_packet_arrival_std",
-        "is_seeded_ddos"
+        "inter_packet_arrival_std"
       ],
       "n_candidates": 401,
       "n_input_rows": 100000,
+      "n_seeded_flow_rows": 1809,
+      "n_true_malicious_candidates": 30,
       "n_windows": 15,
       "path": "data/cleaned/option_2/attack/train/attack_train_01_clean.csv",
       "used_columns": {
@@ -1111,25 +161,28 @@
       "window_source": "existing_column:window_id"
     },
     {
-      "labels_available": false,
-      "missing_optional_columns": [],
-      "n_input_rows": 100000,
-      "path": "data/cleaned/option_2/attack/train/attack_train_02_audit.csv",
-      "skipped_reason": "missing_source_ip_column",
-      "used_columns": {},
-      "window_source": null
-    },
-    {
-      "labels_available": false,
+      "audit_columns_attached": [
+        "row_in_window",
+        "is_seeded_ddos",
+        "burst_id",
+        "burst_phase",
+        "source_dataset"
+      ],
+      "audit_sidecar_attached": true,
+      "audit_sidecar_note": "attached_by_row_order",
+      "audit_sidecar_path": "data/cleaned/option_2/attack/train/attack_train_02_audit.csv",
+      "audit_sidecar_rows": 100000,
+      "labels_available": true,
       "missing_optional_columns": [
         "protocol",
         "bytes_per_second",
         "inter_packet_arrival_mean",
-        "inter_packet_arrival_std",
-        "is_seeded_ddos"
+        "inter_packet_arrival_std"
       ],
       "n_candidates": 415,
       "n_input_rows": 100000,
+      "n_seeded_flow_rows": 1582,
+      "n_true_malicious_candidates": 34,
       "n_windows": 15,
       "path": "data/cleaned/option_2/attack/train/attack_train_02_clean.csv",
       "used_columns": {
@@ -1151,25 +204,28 @@
       "window_source": "existing_column:window_id"
     },
     {
-      "labels_available": false,
-      "missing_optional_columns": [],
-      "n_input_rows": 100000,
-      "path": "data/cleaned/option_2/attack/train/attack_train_03_audit.csv",
-      "skipped_reason": "missing_source_ip_column",
-      "used_columns": {},
-      "window_source": null
-    },
-    {
-      "labels_available": false,
+      "audit_columns_attached": [
+        "row_in_window",
+        "is_seeded_ddos",
+        "burst_id",
+        "burst_phase",
+        "source_dataset"
+      ],
+      "audit_sidecar_attached": true,
+      "audit_sidecar_note": "attached_by_row_order",
+      "audit_sidecar_path": "data/cleaned/option_2/attack/train/attack_train_03_audit.csv",
+      "audit_sidecar_rows": 100000,
+      "labels_available": true,
       "missing_optional_columns": [
         "protocol",
         "bytes_per_second",
         "inter_packet_arrival_mean",
-        "inter_packet_arrival_std",
-        "is_seeded_ddos"
+        "inter_packet_arrival_std"
       ],
       "n_candidates": 413,
       "n_input_rows": 100000,
+      "n_seeded_flow_rows": 2416,
+      "n_true_malicious_candidates": 40,
       "n_windows": 15,
       "path": "data/cleaned/option_2/attack/train/attack_train_03_clean.csv",
       "used_columns": {
@@ -1191,25 +247,28 @@
       "window_source": "existing_column:window_id"
     },
     {
-      "labels_available": false,
-      "missing_optional_columns": [],
-      "n_input_rows": 100000,
-      "path": "data/cleaned/option_2/attack/train/attack_train_04_audit.csv",
-      "skipped_reason": "missing_source_ip_column",
-      "used_columns": {},
-      "window_source": null
-    },
-    {
-      "labels_available": false,
+      "audit_columns_attached": [
+        "row_in_window",
+        "is_seeded_ddos",
+        "burst_id",
+        "burst_phase",
+        "source_dataset"
+      ],
+      "audit_sidecar_attached": true,
+      "audit_sidecar_note": "attached_by_row_order",
+      "audit_sidecar_path": "data/cleaned/option_2/attack/train/attack_train_04_audit.csv",
+      "audit_sidecar_rows": 100000,
+      "labels_available": true,
       "missing_optional_columns": [
         "protocol",
         "bytes_per_second",
         "inter_packet_arrival_mean",
-        "inter_packet_arrival_std",
-        "is_seeded_ddos"
+        "inter_packet_arrival_std"
       ],
       "n_candidates": 445,
       "n_input_rows": 100000,
+      "n_seeded_flow_rows": 1908,
+      "n_true_malicious_candidates": 56,
       "n_windows": 15,
       "path": "data/cleaned/option_2/attack/train/attack_train_04_clean.csv",
       "used_columns": {
@@ -1231,25 +290,28 @@
       "window_source": "existing_column:window_id"
     },
     {
-      "labels_available": false,
-      "missing_optional_columns": [],
-      "n_input_rows": 100000,
-      "path": "data/cleaned/option_2/attack/train/attack_train_05_audit.csv",
-      "skipped_reason": "missing_source_ip_column",
-      "used_columns": {},
-      "window_source": null
-    },
-    {
-      "labels_available": false,
+      "audit_columns_attached": [
+        "row_in_window",
+        "is_seeded_ddos",
+        "burst_id",
+        "burst_phase",
+        "source_dataset"
+      ],
+      "audit_sidecar_attached": true,
+      "audit_sidecar_note": "attached_by_row_order",
+      "audit_sidecar_path": "data/cleaned/option_2/attack/train/attack_train_05_audit.csv",
+      "audit_sidecar_rows": 100000,
+      "labels_available": true,
       "missing_optional_columns": [
         "protocol",
         "bytes_per_second",
         "inter_packet_arrival_mean",
-        "inter_packet_arrival_std",
-        "is_seeded_ddos"
+        "inter_packet_arrival_std"
       ],
       "n_candidates": 401,
       "n_input_rows": 100000,
+      "n_seeded_flow_rows": 1706,
+      "n_true_malicious_candidates": 20,
       "n_windows": 15,
       "path": "data/cleaned/option_2/attack/train/attack_train_05_clean.csv",
       "used_columns": {
@@ -1271,25 +333,28 @@
       "window_source": "existing_column:window_id"
     },
     {
-      "labels_available": false,
-      "missing_optional_columns": [],
-      "n_input_rows": 100000,
-      "path": "data/cleaned/option_2/attack/train/attack_train_06_audit.csv",
-      "skipped_reason": "missing_source_ip_column",
-      "used_columns": {},
-      "window_source": null
-    },
-    {
-      "labels_available": false,
+      "audit_columns_attached": [
+        "row_in_window",
+        "is_seeded_ddos",
+        "burst_id",
+        "burst_phase",
+        "source_dataset"
+      ],
+      "audit_sidecar_attached": true,
+      "audit_sidecar_note": "attached_by_row_order",
+      "audit_sidecar_path": "data/cleaned/option_2/attack/train/attack_train_06_audit.csv",
+      "audit_sidecar_rows": 100000,
+      "labels_available": true,
       "missing_optional_columns": [
         "protocol",
         "bytes_per_second",
         "inter_packet_arrival_mean",
-        "inter_packet_arrival_std",
-        "is_seeded_ddos"
+        "inter_packet_arrival_std"
       ],
       "n_candidates": 420,
       "n_input_rows": 100000,
+      "n_seeded_flow_rows": 2145,
+      "n_true_malicious_candidates": 30,
       "n_windows": 15,
       "path": "data/cleaned/option_2/attack/train/attack_train_06_clean.csv",
       "used_columns": {
@@ -1311,25 +376,28 @@
       "window_source": "existing_column:window_id"
     },
     {
-      "labels_available": false,
-      "missing_optional_columns": [],
-      "n_input_rows": 100000,
-      "path": "data/cleaned/option_2/attack/train/attack_train_07_audit.csv",
-      "skipped_reason": "missing_source_ip_column",
-      "used_columns": {},
-      "window_source": null
-    },
-    {
-      "labels_available": false,
+      "audit_columns_attached": [
+        "row_in_window",
+        "is_seeded_ddos",
+        "burst_id",
+        "burst_phase",
+        "source_dataset"
+      ],
+      "audit_sidecar_attached": true,
+      "audit_sidecar_note": "attached_by_row_order",
+      "audit_sidecar_path": "data/cleaned/option_2/attack/train/attack_train_07_audit.csv",
+      "audit_sidecar_rows": 100000,
+      "labels_available": true,
       "missing_optional_columns": [
         "protocol",
         "bytes_per_second",
         "inter_packet_arrival_mean",
-        "inter_packet_arrival_std",
-        "is_seeded_ddos"
+        "inter_packet_arrival_std"
       ],
       "n_candidates": 427,
       "n_input_rows": 100000,
+      "n_seeded_flow_rows": 1583,
+      "n_true_malicious_candidates": 42,
       "n_windows": 15,
       "path": "data/cleaned/option_2/attack/train/attack_train_07_clean.csv",
       "used_columns": {
@@ -1351,25 +419,28 @@
       "window_source": "existing_column:window_id"
     },
     {
-      "labels_available": false,
-      "missing_optional_columns": [],
-      "n_input_rows": 100000,
-      "path": "data/cleaned/option_2/attack/train/attack_train_08_audit.csv",
-      "skipped_reason": "missing_source_ip_column",
-      "used_columns": {},
-      "window_source": null
-    },
-    {
-      "labels_available": false,
+      "audit_columns_attached": [
+        "row_in_window",
+        "is_seeded_ddos",
+        "burst_id",
+        "burst_phase",
+        "source_dataset"
+      ],
+      "audit_sidecar_attached": true,
+      "audit_sidecar_note": "attached_by_row_order",
+      "audit_sidecar_path": "data/cleaned/option_2/attack/train/attack_train_08_audit.csv",
+      "audit_sidecar_rows": 100000,
+      "labels_available": true,
       "missing_optional_columns": [
         "protocol",
         "bytes_per_second",
         "inter_packet_arrival_mean",
-        "inter_packet_arrival_std",
-        "is_seeded_ddos"
+        "inter_packet_arrival_std"
       ],
       "n_candidates": 392,
       "n_input_rows": 100000,
+      "n_seeded_flow_rows": 1996,
+      "n_true_malicious_candidates": 20,
       "n_windows": 15,
       "path": "data/cleaned/option_2/attack/train/attack_train_08_clean.csv",
       "used_columns": {
@@ -1391,25 +462,28 @@
       "window_source": "existing_column:window_id"
     },
     {
-      "labels_available": false,
-      "missing_optional_columns": [],
-      "n_input_rows": 100000,
-      "path": "data/cleaned/option_2/attack/validation/attack_validation_01_audit.csv",
-      "skipped_reason": "missing_source_ip_column",
-      "used_columns": {},
-      "window_source": null
-    },
-    {
-      "labels_available": false,
+      "audit_columns_attached": [
+        "row_in_window",
+        "is_seeded_ddos",
+        "burst_id",
+        "burst_phase",
+        "source_dataset"
+      ],
+      "audit_sidecar_attached": true,
+      "audit_sidecar_note": "attached_by_row_order",
+      "audit_sidecar_path": "data/cleaned/option_2/attack/validation/attack_validation_01_audit.csv",
+      "audit_sidecar_rows": 100000,
+      "labels_available": true,
       "missing_optional_columns": [
         "protocol",
         "bytes_per_second",
         "inter_packet_arrival_mean",
-        "inter_packet_arrival_std",
-        "is_seeded_ddos"
+        "inter_packet_arrival_std"
       ],
       "n_candidates": 409,
       "n_input_rows": 100000,
+      "n_seeded_flow_rows": 1555,
+      "n_true_malicious_candidates": 20,
       "n_windows": 15,
       "path": "data/cleaned/option_2/attack/validation/attack_validation_01_clean.csv",
       "used_columns": {
@@ -1431,25 +505,28 @@
       "window_source": "existing_column:window_id"
     },
     {
-      "labels_available": false,
-      "missing_optional_columns": [],
-      "n_input_rows": 100000,
-      "path": "data/cleaned/option_2/attack/validation/attack_validation_02_audit.csv",
-      "skipped_reason": "missing_source_ip_column",
-      "used_columns": {},
-      "window_source": null
-    },
-    {
-      "labels_available": false,
+      "audit_columns_attached": [
+        "row_in_window",
+        "is_seeded_ddos",
+        "burst_id",
+        "burst_phase",
+        "source_dataset"
+      ],
+      "audit_sidecar_attached": true,
+      "audit_sidecar_note": "attached_by_row_order",
+      "audit_sidecar_path": "data/cleaned/option_2/attack/validation/attack_validation_02_audit.csv",
+      "audit_sidecar_rows": 100000,
+      "labels_available": true,
       "missing_optional_columns": [
         "protocol",
         "bytes_per_second",
         "inter_packet_arrival_mean",
-        "inter_packet_arrival_std",
-        "is_seeded_ddos"
+        "inter_packet_arrival_std"
       ],
       "n_candidates": 416,
       "n_input_rows": 100000,
+      "n_seeded_flow_rows": 2019,
+      "n_true_malicious_candidates": 30,
       "n_windows": 15,
       "path": "data/cleaned/option_2/attack/validation/attack_validation_02_clean.csv",
       "used_columns": {
@@ -1471,25 +548,28 @@
       "window_source": "existing_column:window_id"
     },
     {
-      "labels_available": false,
-      "missing_optional_columns": [],
-      "n_input_rows": 100000,
-      "path": "data/cleaned/option_2/normal/test/normal_test_01_audit.csv",
-      "skipped_reason": "missing_source_ip_column",
-      "used_columns": {},
-      "window_source": null
-    },
-    {
-      "labels_available": false,
+      "audit_columns_attached": [
+        "row_in_window",
+        "is_seeded_ddos",
+        "burst_id",
+        "burst_phase",
+        "source_dataset"
+      ],
+      "audit_sidecar_attached": true,
+      "audit_sidecar_note": "attached_by_row_order",
+      "audit_sidecar_path": "data/cleaned/option_2/normal/test/normal_test_01_audit.csv",
+      "audit_sidecar_rows": 100000,
+      "labels_available": true,
       "missing_optional_columns": [
         "protocol",
         "bytes_per_second",
         "inter_packet_arrival_mean",
-        "inter_packet_arrival_std",
-        "is_seeded_ddos"
+        "inter_packet_arrival_std"
       ],
       "n_candidates": 377,
       "n_input_rows": 100000,
+      "n_seeded_flow_rows": 0,
+      "n_true_malicious_candidates": 0,
       "n_windows": 15,
       "path": "data/cleaned/option_2/normal/test/normal_test_01_clean.csv",
       "used_columns": {
@@ -1511,25 +591,28 @@
       "window_source": "existing_column:window_id"
     },
     {
-      "labels_available": false,
-      "missing_optional_columns": [],
-      "n_input_rows": 100000,
-      "path": "data/cleaned/option_2/normal/test/normal_test_02_audit.csv",
-      "skipped_reason": "missing_source_ip_column",
-      "used_columns": {},
-      "window_source": null
-    },
-    {
-      "labels_available": false,
+      "audit_columns_attached": [
+        "row_in_window",
+        "is_seeded_ddos",
+        "burst_id",
+        "burst_phase",
+        "source_dataset"
+      ],
+      "audit_sidecar_attached": true,
+      "audit_sidecar_note": "attached_by_row_order",
+      "audit_sidecar_path": "data/cleaned/option_2/normal/test/normal_test_02_audit.csv",
+      "audit_sidecar_rows": 100000,
+      "labels_available": true,
       "missing_optional_columns": [
         "protocol",
         "bytes_per_second",
         "inter_packet_arrival_mean",
-        "inter_packet_arrival_std",
-        "is_seeded_ddos"
+        "inter_packet_arrival_std"
       ],
       "n_candidates": 367,
       "n_input_rows": 100000,
+      "n_seeded_flow_rows": 0,
+      "n_true_malicious_candidates": 0,
       "n_windows": 15,
       "path": "data/cleaned/option_2/normal/test/normal_test_02_clean.csv",
       "used_columns": {
@@ -1551,25 +634,28 @@
       "window_source": "existing_column:window_id"
     },
     {
-      "labels_available": false,
-      "missing_optional_columns": [],
-      "n_input_rows": 100000,
-      "path": "data/cleaned/option_2/normal/train/normal_train_01_audit.csv",
-      "skipped_reason": "missing_source_ip_column",
-      "used_columns": {},
-      "window_source": null
-    },
-    {
-      "labels_available": false,
+      "audit_columns_attached": [
+        "row_in_window",
+        "is_seeded_ddos",
+        "burst_id",
+        "burst_phase",
+        "source_dataset"
+      ],
+      "audit_sidecar_attached": true,
+      "audit_sidecar_note": "attached_by_row_order",
+      "audit_sidecar_path": "data/cleaned/option_2/normal/train/normal_train_01_audit.csv",
+      "audit_sidecar_rows": 100000,
+      "labels_available": true,
       "missing_optional_columns": [
         "protocol",
         "bytes_per_second",
         "inter_packet_arrival_mean",
-        "inter_packet_arrival_std",
-        "is_seeded_ddos"
+        "inter_packet_arrival_std"
       ],
       "n_candidates": 382,
       "n_input_rows": 100000,
+      "n_seeded_flow_rows": 0,
+      "n_true_malicious_candidates": 0,
       "n_windows": 15,
       "path": "data/cleaned/option_2/normal/train/normal_train_01_clean.csv",
       "used_columns": {
@@ -1591,25 +677,28 @@
       "window_source": "existing_column:window_id"
     },
     {
-      "labels_available": false,
-      "missing_optional_columns": [],
-      "n_input_rows": 100000,
-      "path": "data/cleaned/option_2/normal/train/normal_train_02_audit.csv",
-      "skipped_reason": "missing_source_ip_column",
-      "used_columns": {},
-      "window_source": null
-    },
-    {
-      "labels_available": false,
+      "audit_columns_attached": [
+        "row_in_window",
+        "is_seeded_ddos",
+        "burst_id",
+        "burst_phase",
+        "source_dataset"
+      ],
+      "audit_sidecar_attached": true,
+      "audit_sidecar_note": "attached_by_row_order",
+      "audit_sidecar_path": "data/cleaned/option_2/normal/train/normal_train_02_audit.csv",
+      "audit_sidecar_rows": 100000,
+      "labels_available": true,
       "missing_optional_columns": [
         "protocol",
         "bytes_per_second",
         "inter_packet_arrival_mean",
-        "inter_packet_arrival_std",
-        "is_seeded_ddos"
+        "inter_packet_arrival_std"
       ],
       "n_candidates": 381,
       "n_input_rows": 100000,
+      "n_seeded_flow_rows": 0,
+      "n_true_malicious_candidates": 0,
       "n_windows": 15,
       "path": "data/cleaned/option_2/normal/train/normal_train_02_clean.csv",
       "used_columns": {
@@ -1631,25 +720,28 @@
       "window_source": "existing_column:window_id"
     },
     {
-      "labels_available": false,
-      "missing_optional_columns": [],
-      "n_input_rows": 100000,
-      "path": "data/cleaned/option_2/normal/train/normal_train_03_audit.csv",
-      "skipped_reason": "missing_source_ip_column",
-      "used_columns": {},
-      "window_source": null
-    },
-    {
-      "labels_available": false,
+      "audit_columns_attached": [
+        "row_in_window",
+        "is_seeded_ddos",
+        "burst_id",
+        "burst_phase",
+        "source_dataset"
+      ],
+      "audit_sidecar_attached": true,
+      "audit_sidecar_note": "attached_by_row_order",
+      "audit_sidecar_path": "data/cleaned/option_2/normal/train/normal_train_03_audit.csv",
+      "audit_sidecar_rows": 100000,
+      "labels_available": true,
       "missing_optional_columns": [
         "protocol",
         "bytes_per_second",
         "inter_packet_arrival_mean",
-        "inter_packet_arrival_std",
-        "is_seeded_ddos"
+        "inter_packet_arrival_std"
       ],
       "n_candidates": 370,
       "n_input_rows": 100000,
+      "n_seeded_flow_rows": 0,
+      "n_true_malicious_candidates": 0,
       "n_windows": 15,
       "path": "data/cleaned/option_2/normal/train/normal_train_03_clean.csv",
       "used_columns": {
@@ -1671,25 +763,28 @@
       "window_source": "existing_column:window_id"
     },
     {
-      "labels_available": false,
-      "missing_optional_columns": [],
-      "n_input_rows": 100000,
-      "path": "data/cleaned/option_2/normal/train/normal_train_04_audit.csv",
-      "skipped_reason": "missing_source_ip_column",
-      "used_columns": {},
-      "window_source": null
-    },
-    {
-      "labels_available": false,
+      "audit_columns_attached": [
+        "row_in_window",
+        "is_seeded_ddos",
+        "burst_id",
+        "burst_phase",
+        "source_dataset"
+      ],
+      "audit_sidecar_attached": true,
+      "audit_sidecar_note": "attached_by_row_order",
+      "audit_sidecar_path": "data/cleaned/option_2/normal/train/normal_train_04_audit.csv",
+      "audit_sidecar_rows": 100000,
+      "labels_available": true,
       "missing_optional_columns": [
         "protocol",
         "bytes_per_second",
         "inter_packet_arrival_mean",
-        "inter_packet_arrival_std",
-        "is_seeded_ddos"
+        "inter_packet_arrival_std"
       ],
       "n_candidates": 376,
       "n_input_rows": 100000,
+      "n_seeded_flow_rows": 0,
+      "n_true_malicious_candidates": 0,
       "n_windows": 15,
       "path": "data/cleaned/option_2/normal/train/normal_train_04_clean.csv",
       "used_columns": {
@@ -1711,25 +806,28 @@
       "window_source": "existing_column:window_id"
     },
     {
-      "labels_available": false,
-      "missing_optional_columns": [],
-      "n_input_rows": 100000,
-      "path": "data/cleaned/option_2/normal/train/normal_train_05_audit.csv",
-      "skipped_reason": "missing_source_ip_column",
-      "used_columns": {},
-      "window_source": null
-    },
-    {
-      "labels_available": false,
+      "audit_columns_attached": [
+        "row_in_window",
+        "is_seeded_ddos",
+        "burst_id",
+        "burst_phase",
+        "source_dataset"
+      ],
+      "audit_sidecar_attached": true,
+      "audit_sidecar_note": "attached_by_row_order",
+      "audit_sidecar_path": "data/cleaned/option_2/normal/train/normal_train_05_audit.csv",
+      "audit_sidecar_rows": 100000,
+      "labels_available": true,
       "missing_optional_columns": [
         "protocol",
         "bytes_per_second",
         "inter_packet_arrival_mean",
-        "inter_packet_arrival_std",
-        "is_seeded_ddos"
+        "inter_packet_arrival_std"
       ],
       "n_candidates": 377,
       "n_input_rows": 100000,
+      "n_seeded_flow_rows": 0,
+      "n_true_malicious_candidates": 0,
       "n_windows": 15,
       "path": "data/cleaned/option_2/normal/train/normal_train_05_clean.csv",
       "used_columns": {
@@ -1751,25 +849,28 @@
       "window_source": "existing_column:window_id"
     },
     {
-      "labels_available": false,
-      "missing_optional_columns": [],
-      "n_input_rows": 100000,
-      "path": "data/cleaned/option_2/normal/train/normal_train_06_audit.csv",
-      "skipped_reason": "missing_source_ip_column",
-      "used_columns": {},
-      "window_source": null
-    },
-    {
-      "labels_available": false,
+      "audit_columns_attached": [
+        "row_in_window",
+        "is_seeded_ddos",
+        "burst_id",
+        "burst_phase",
+        "source_dataset"
+      ],
+      "audit_sidecar_attached": true,
+      "audit_sidecar_note": "attached_by_row_order",
+      "audit_sidecar_path": "data/cleaned/option_2/normal/train/normal_train_06_audit.csv",
+      "audit_sidecar_rows": 100000,
+      "labels_available": true,
       "missing_optional_columns": [
         "protocol",
         "bytes_per_second",
         "inter_packet_arrival_mean",
-        "inter_packet_arrival_std",
-        "is_seeded_ddos"
+        "inter_packet_arrival_std"
       ],
       "n_candidates": 371,
       "n_input_rows": 100000,
+      "n_seeded_flow_rows": 0,
+      "n_true_malicious_candidates": 0,
       "n_windows": 15,
       "path": "data/cleaned/option_2/normal/train/normal_train_06_clean.csv",
       "used_columns": {
@@ -1791,25 +892,28 @@
       "window_source": "existing_column:window_id"
     },
     {
-      "labels_available": false,
-      "missing_optional_columns": [],
-      "n_input_rows": 100000,
-      "path": "data/cleaned/option_2/normal/train/normal_train_07_audit.csv",
-      "skipped_reason": "missing_source_ip_column",
-      "used_columns": {},
-      "window_source": null
-    },
-    {
-      "labels_available": false,
+      "audit_columns_attached": [
+        "row_in_window",
+        "is_seeded_ddos",
+        "burst_id",
+        "burst_phase",
+        "source_dataset"
+      ],
+      "audit_sidecar_attached": true,
+      "audit_sidecar_note": "attached_by_row_order",
+      "audit_sidecar_path": "data/cleaned/option_2/normal/train/normal_train_07_audit.csv",
+      "audit_sidecar_rows": 100000,
+      "labels_available": true,
       "missing_optional_columns": [
         "protocol",
         "bytes_per_second",
         "inter_packet_arrival_mean",
-        "inter_packet_arrival_std",
-        "is_seeded_ddos"
+        "inter_packet_arrival_std"
       ],
       "n_candidates": 376,
       "n_input_rows": 100000,
+      "n_seeded_flow_rows": 0,
+      "n_true_malicious_candidates": 0,
       "n_windows": 15,
       "path": "data/cleaned/option_2/normal/train/normal_train_07_clean.csv",
       "used_columns": {
@@ -1831,25 +935,28 @@
       "window_source": "existing_column:window_id"
     },
     {
-      "labels_available": false,
-      "missing_optional_columns": [],
-      "n_input_rows": 100000,
-      "path": "data/cleaned/option_2/normal/train/normal_train_08_audit.csv",
-      "skipped_reason": "missing_source_ip_column",
-      "used_columns": {},
-      "window_source": null
-    },
-    {
-      "labels_available": false,
+      "audit_columns_attached": [
+        "row_in_window",
+        "is_seeded_ddos",
+        "burst_id",
+        "burst_phase",
+        "source_dataset"
+      ],
+      "audit_sidecar_attached": true,
+      "audit_sidecar_note": "attached_by_row_order",
+      "audit_sidecar_path": "data/cleaned/option_2/normal/train/normal_train_08_audit.csv",
+      "audit_sidecar_rows": 100000,
+      "labels_available": true,
       "missing_optional_columns": [
         "protocol",
         "bytes_per_second",
         "inter_packet_arrival_mean",
-        "inter_packet_arrival_std",
-        "is_seeded_ddos"
+        "inter_packet_arrival_std"
       ],
       "n_candidates": 392,
       "n_input_rows": 100000,
+      "n_seeded_flow_rows": 0,
+      "n_true_malicious_candidates": 0,
       "n_windows": 15,
       "path": "data/cleaned/option_2/normal/train/normal_train_08_clean.csv",
       "used_columns": {
@@ -1871,25 +978,28 @@
       "window_source": "existing_column:window_id"
     },
     {
-      "labels_available": false,
-      "missing_optional_columns": [],
-      "n_input_rows": 100000,
-      "path": "data/cleaned/option_2/normal/validation/normal_validation_01_audit.csv",
-      "skipped_reason": "missing_source_ip_column",
-      "used_columns": {},
-      "window_source": null
-    },
-    {
-      "labels_available": false,
+      "audit_columns_attached": [
+        "row_in_window",
+        "is_seeded_ddos",
+        "burst_id",
+        "burst_phase",
+        "source_dataset"
+      ],
+      "audit_sidecar_attached": true,
+      "audit_sidecar_note": "attached_by_row_order",
+      "audit_sidecar_path": "data/cleaned/option_2/normal/validation/normal_validation_01_audit.csv",
+      "audit_sidecar_rows": 100000,
+      "labels_available": true,
       "missing_optional_columns": [
         "protocol",
         "bytes_per_second",
         "inter_packet_arrival_mean",
-        "inter_packet_arrival_std",
-        "is_seeded_ddos"
+        "inter_packet_arrival_std"
       ],
       "n_candidates": 380,
       "n_input_rows": 100000,
+      "n_seeded_flow_rows": 0,
+      "n_true_malicious_candidates": 0,
       "n_windows": 15,
       "path": "data/cleaned/option_2/normal/validation/normal_validation_01_clean.csv",
       "used_columns": {
@@ -1911,25 +1021,28 @@
       "window_source": "existing_column:window_id"
     },
     {
-      "labels_available": false,
-      "missing_optional_columns": [],
-      "n_input_rows": 100000,
-      "path": "data/cleaned/option_2/normal/validation/normal_validation_02_audit.csv",
-      "skipped_reason": "missing_source_ip_column",
-      "used_columns": {},
-      "window_source": null
-    },
-    {
-      "labels_available": false,
+      "audit_columns_attached": [
+        "row_in_window",
+        "is_seeded_ddos",
+        "burst_id",
+        "burst_phase",
+        "source_dataset"
+      ],
+      "audit_sidecar_attached": true,
+      "audit_sidecar_note": "attached_by_row_order",
+      "audit_sidecar_path": "data/cleaned/option_2/normal/validation/normal_validation_02_audit.csv",
+      "audit_sidecar_rows": 100000,
+      "labels_available": true,
       "missing_optional_columns": [
         "protocol",
         "bytes_per_second",
         "inter_packet_arrival_mean",
-        "inter_packet_arrival_std",
-        "is_seeded_ddos"
+        "inter_packet_arrival_std"
       ],
       "n_candidates": 368,
       "n_input_rows": 100000,
+      "n_seeded_flow_rows": 0,
+      "n_true_malicious_candidates": 0,
       "n_windows": 15,
       "path": "data/cleaned/option_2/normal/validation/normal_validation_02_clean.csv",
       "used_columns": {
@@ -1951,10 +1064,11 @@
       "window_source": "existing_column:window_id"
     }
   ],
-  "labels_available_any": false,
-  "n_candidates": 21273,
-  "n_files_discovered": 96,
-  "n_files_with_candidates": 48,
+  "labels_available_any": true,
+  "n_candidates": 9492,
+  "n_files_discovered": 24,
+  "n_files_with_candidates": 24,
+  "n_true_malicious_candidates": 402,
   "n_windows": 15,
   "split_paths": {
     "test": "outputs_FULL/option_2/full/ip_attribution/features/candidate_ip_features_test.csv",

@@ -104,14 +104,14 @@
   "fit_info": {
     "description": "normal/benign training datasets only when available",
     "fit_scope": "normal_train",
-    "n_fit_rows": 6051,
+    "n_fit_rows": 3025,
     "uses_candidate_labels_as_targets": false
   },
   "method": "unsupervised_isolation_forest",
   "metrics_path": "outputs_FULL/option_2/full/ip_attribution/unsupervised/combined/metrics_all.json",
   "model_path": "outputs_FULL/option_2/full/ip_attribution/unsupervised/combined/unsupervised_model.joblib",
   "n_features": 76,
-  "n_rows": 21273,
+  "n_rows": 9492,
   "prediction_paths": {
     "all": "outputs_FULL/option_2/full/ip_attribution/unsupervised/combined/predictions_all.csv",
     "test": "outputs_FULL/option_2/full/ip_attribution/unsupervised/combined/predictions_test.csv",
@@ -119,7 +119,7 @@
     "validation": "outputs_FULL/option_2/full/ip_attribution/unsupervised/combined/predictions_validation.csv"
   },
   "status": "ok",
-  "threshold": 0.0,
+  "threshold": -1.4887451080941583e-17,
   "threshold_info": {
     "contamination": 0.02,
     "quantile": 0.98,
