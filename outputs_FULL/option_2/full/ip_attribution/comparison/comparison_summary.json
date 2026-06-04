@@ -1,0 +1,22 @@
+{
+  "comparison_csv": "outputs_FULL/option_2/full/ip_attribution/comparison/supervised_vs_unsupervised_comparison.csv",
+  "rows": [
+    {
+      "feature_mode": null,
+      "method": null,
+      "reason": "true_malicious labels unavailable; supervised attribution cannot train. Unsupervised scoring remains available.",
+      "split": "all",
+      "status": "skipped"
+    },
+    {
+      "feature_mode": "combined",
+      "method": "unsupervised_isolation_forest",
+      "n_candidates": 21273,
+      "n_features": 76,
+      "predicted_positive": 4569,
+      "split": "all",
+      "status": "ok",
+      "threshold": 0.0
+    }
+  ]
+}

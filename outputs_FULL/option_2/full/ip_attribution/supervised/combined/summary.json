@@ -1,0 +1,28 @@
+{
+  "config": {
+    "contamination": 0.02,
+    "default_threshold": 0.5,
+    "feature_mode": "combined",
+    "features_path": "outputs_FULL/option_2/full/ip_attribution/enriched/candidate_ip_features_enriched_all.csv",
+    "hgb_learning_rate": 0.08,
+    "hgb_max_iter": 250,
+    "logistic_c": 1.0,
+    "max_iter": 1000,
+    "model_type": "logistic",
+    "output_dir": "outputs_FULL/option_2/full/ip_attribution/supervised/combined",
+    "output_format": "csv",
+    "random_seed": 42,
+    "rf_max_depth": null,
+    "rf_n_estimators": 300,
+    "threshold_strategy": "f1",
+    "top_ks": [
+      1,
+      5,
+      10,
+      20
+    ]
+  },
+  "features_path": "outputs_FULL/option_2/full/ip_attribution/enriched/candidate_ip_features_enriched_all.csv",
+  "reason": "true_malicious labels unavailable; supervised attribution cannot train. Unsupervised scoring remains available.",
+  "status": "skipped"
+}

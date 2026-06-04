@@ -1,0 +1,3 @@
+method,feature_mode,split,status,reason,threshold,n_features,n_candidates,predicted_positive
+,,all,skipped,true_malicious labels unavailable; supervised attribution cannot train. Unsupervised scoring remains available.,,,,
+unsupervised_isolation_forest,combined,all,ok,,0.0,76.0,21273.0,4569.0

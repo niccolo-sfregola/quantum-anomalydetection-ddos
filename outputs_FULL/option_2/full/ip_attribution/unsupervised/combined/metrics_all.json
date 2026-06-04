@@ -1,0 +1,12 @@
+{
+  "by_split": {},
+  "candidate_metrics": {
+    "labels_available": false,
+    "mean_score": -0.04168185641752594,
+    "n_candidates": 21273,
+    "predicted_positive": 4569
+  },
+  "ranking_metrics": {
+    "labels_available": false
+  }
+}
