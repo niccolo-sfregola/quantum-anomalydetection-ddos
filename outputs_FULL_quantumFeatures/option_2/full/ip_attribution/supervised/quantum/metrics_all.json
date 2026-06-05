@@ -1,0 +1,567 @@
+{
+  "by_split": {
+    "all": {
+      "candidate_metrics": {
+        "average_precision": 0.05826763947900991,
+        "confusion_matrix": {
+          "fn": 35,
+          "fp": 7679,
+          "tn": 1411,
+          "tp": 367
+        },
+        "f1": 0.0868844696969697,
+        "labels_available": true,
+        "mean_score": 0.4707918094178319,
+        "n_candidates": 9492,
+        "precision": 0.04561272682078051,
+        "predicted_positive": 8046,
+        "recall": 0.9129353233830846,
+        "roc_auc": 0.5907782320520609,
+        "support_negative": 9090,
+        "support_positive": 402
+      },
+      "ranking_metrics": {
+        "attack_windows_with_positive_ips": 42,
+        "labels_available": true,
+        "mean_average_precision_over_windows": 0.41240230977721337,
+        "mean_false_positives_per_attack_window": 22.357142857142858,
+        "mean_predicted_malicious_ips_per_attack_window": 31.095238095238095,
+        "mean_true_malicious_ips_per_attack_window": 9.571428571428571,
+        "mean_true_malicious_ips_recovered_per_attack_window": 8.738095238095237,
+        "median_average_precision_over_windows": 0.35539590106334584,
+        "median_recall_at_1": 0.0,
+        "median_recall_at_10": 0.3,
+        "median_recall_at_20": 0.7,
+        "median_recall_at_5": 0.2,
+        "per_dataset": {
+          "attack_test_01": {
+            "attack_windows_with_positive_ips": 3,
+            "mean_average_precision_over_windows": 0.30385480990578856,
+            "mean_false_positives_per_attack_window": 22.666666666666668,
+            "mean_predicted_malicious_ips_per_attack_window": 29.666666666666668,
+            "recall_at_1": 0.0,
+            "recall_at_10": 0.2333333333333333,
+            "recall_at_20": 0.43333333333333335,
+            "recall_at_5": 0.13333333333333333
+          },
+          "attack_test_02": {
+            "attack_windows_with_positive_ips": 5,
+            "mean_average_precision_over_windows": 0.35513082649141925,
+            "mean_false_positives_per_attack_window": 21.6,
+            "mean_predicted_malicious_ips_per_attack_window": 30.2,
+            "recall_at_1": 0.02,
+            "recall_at_10": 0.28,
+            "recall_at_20": 0.6200000000000001,
+            "recall_at_5": 0.12
+          },
+          "attack_train_01": {
+            "attack_windows_with_positive_ips": 3,
+            "mean_average_precision_over_windows": 0.49751623078697876,
+            "mean_false_positives_per_attack_window": 21.0,
+            "mean_predicted_malicious_ips_per_attack_window": 30.333333333333332,
+            "recall_at_1": 0.06666666666666667,
+            "recall_at_10": 0.5,
+            "recall_at_20": 0.7666666666666666,
+            "recall_at_5": 0.26666666666666666
+          },
+          "attack_train_02": {
+            "attack_windows_with_positive_ips": 4,
+            "mean_average_precision_over_windows": 0.3138691984090515,
+            "mean_false_positives_per_attack_window": 24.0,
+            "mean_predicted_malicious_ips_per_attack_window": 31.5,
+            "recall_at_1": 0.025,
+            "recall_at_10": 0.275,
+            "recall_at_20": 0.6,
+            "recall_at_5": 0.225
+          },
+          "attack_train_03": {
+            "attack_windows_with_positive_ips": 4,
+            "mean_average_precision_over_windows": 0.3376904738850932,
+            "mean_false_positives_per_attack_window": 23.25,
+            "mean_predicted_malicious_ips_per_attack_window": 33.25,
+            "recall_at_1": 0.025,
+            "recall_at_10": 0.25,
+            "recall_at_20": 0.625,
+            "recall_at_5": 0.1
+          },
+          "attack_train_04": {
+            "attack_windows_with_positive_ips": 6,
+            "mean_average_precision_over_windows": 0.5534502719587191,
+            "mean_false_positives_per_attack_window": 22.833333333333332,
+            "mean_predicted_malicious_ips_per_attack_window": 31.5,
+            "recall_at_1": 0.03333333333333333,
+            "recall_at_10": 0.5055555555555556,
+            "recall_at_20": 0.7833333333333333,
+            "recall_at_5": 0.3166666666666667
+          },
+          "attack_train_05": {
+            "attack_windows_with_positive_ips": 2,
+            "mean_average_precision_over_windows": 0.454681029344635,
+            "mean_false_positives_per_attack_window": 22.0,
+            "mean_predicted_malicious_ips_per_attack_window": 30.5,
+            "recall_at_1": 0.05,
+            "recall_at_10": 0.35,
+            "recall_at_20": 0.5,
+            "recall_at_5": 0.25
+          },
+          "attack_train_06": {
+            "attack_windows_with_positive_ips": 3,
+            "mean_average_precision_over_windows": 0.4231995813137823,
+            "mean_false_positives_per_attack_window": 21.666666666666668,
+            "mean_predicted_malicious_ips_per_attack_window": 31.333333333333332,
+            "recall_at_1": 0.03333333333333333,
+            "recall_at_10": 0.4000000000000001,
+            "recall_at_20": 0.5333333333333333,
+            "recall_at_5": 0.16666666666666666
+          },
+          "attack_train_07": {
+            "attack_windows_with_positive_ips": 5,
+            "mean_average_precision_over_windows": 0.4155699919739472,
+            "mean_false_positives_per_attack_window": 21.2,
+            "mean_predicted_malicious_ips_per_attack_window": 29.2,
+            "recall_at_1": 0.04,
+            "recall_at_10": 0.4,
+            "recall_at_20": 0.74,
+            "recall_at_5": 0.24
+          },
+          "attack_train_08": {
+            "attack_windows_with_positive_ips": 2,
+            "mean_average_precision_over_windows": 0.4764962434080081,
+            "mean_false_positives_per_attack_window": 22.5,
+            "mean_predicted_malicious_ips_per_attack_window": 32.5,
+            "recall_at_1": 0.0,
+            "recall_at_10": 0.44999999999999996,
+            "recall_at_20": 0.8,
+            "recall_at_5": 0.2
+          },
+          "attack_validation_01": {
+            "attack_windows_with_positive_ips": 2,
+            "mean_average_precision_over_windows": 0.4530559663917074,
+            "mean_false_positives_per_attack_window": 24.0,
+            "mean_predicted_malicious_ips_per_attack_window": 34.0,
+            "recall_at_1": 0.05,
+            "recall_at_10": 0.3,
+            "recall_at_20": 0.55,
+            "recall_at_5": 0.2
+          },
+          "attack_validation_02": {
+            "attack_windows_with_positive_ips": 3,
+            "mean_average_precision_over_windows": 0.3660914176929621,
+            "mean_false_positives_per_attack_window": 22.0,
+            "mean_predicted_malicious_ips_per_attack_window": 31.0,
+            "recall_at_1": 0.03333333333333333,
+            "recall_at_10": 0.26666666666666666,
+            "recall_at_20": 0.5666666666666667,
+            "recall_at_5": 0.09999999999999999
+          }
+        },
+        "recall_at_1": 0.03095238095238096,
+        "recall_at_10": 0.35555555555555557,
+        "recall_at_20": 0.6428571428571429,
+        "recall_at_5": 0.19761904761904764
+      }
+    },
+    "test": {
+      "candidate_metrics": {
+        "average_precision": 0.04815426639926627,
+        "confusion_matrix": {
+          "fn": 16,
+          "fp": 1257,
+          "tn": 243,
+          "tp": 64
+        },
+        "f1": 0.0913633119200571,
+        "labels_available": true,
+        "mean_score": 0.46686784028378836,
+        "n_candidates": 1580,
+        "precision": 0.04844814534443603,
+        "predicted_positive": 1321,
+        "recall": 0.8,
+        "roc_auc": 0.4815250000000001,
+        "support_negative": 1500,
+        "support_positive": 80
+      },
+      "ranking_metrics": {
+        "attack_windows_with_positive_ips": 8,
+        "labels_available": true,
+        "mean_average_precision_over_windows": 0.3359023202718077,
+        "mean_false_positives_per_attack_window": 22.0,
+        "mean_predicted_malicious_ips_per_attack_window": 30.0,
+        "mean_true_malicious_ips_per_attack_window": 10.0,
+        "mean_true_malicious_ips_recovered_per_attack_window": 8.0,
+        "median_average_precision_over_windows": 0.35697145289145527,
+        "median_recall_at_1": 0.0,
+        "median_recall_at_10": 0.3,
+        "median_recall_at_20": 0.6499999999999999,
+        "median_recall_at_5": 0.15000000000000002,
+        "per_dataset": {
+          "attack_test_01": {
+            "attack_windows_with_positive_ips": 3,
+            "mean_average_precision_over_windows": 0.30385480990578856,
+            "mean_false_positives_per_attack_window": 22.666666666666668,
+            "mean_predicted_malicious_ips_per_attack_window": 29.666666666666668,
+            "recall_at_1": 0.0,
+            "recall_at_10": 0.2333333333333333,
+            "recall_at_20": 0.43333333333333335,
+            "recall_at_5": 0.13333333333333333
+          },
+          "attack_test_02": {
+            "attack_windows_with_positive_ips": 5,
+            "mean_average_precision_over_windows": 0.35513082649141925,
+            "mean_false_positives_per_attack_window": 21.6,
+            "mean_predicted_malicious_ips_per_attack_window": 30.2,
+            "recall_at_1": 0.02,
+            "recall_at_10": 0.28,
+            "recall_at_20": 0.6200000000000001,
+            "recall_at_5": 0.12
+          }
+        },
+        "recall_at_1": 0.0125,
+        "recall_at_10": 0.26249999999999996,
+        "recall_at_20": 0.55,
+        "recall_at_5": 0.125
+      }
+    },
+    "train": {
+      "candidate_metrics": {
+        "average_precision": 0.07206919855170005,
+        "confusion_matrix": {
+          "fn": 16,
+          "fp": 5143,
+          "tn": 924,
+          "tp": 256
+        },
+        "f1": 0.0902839005466408,
+        "labels_available": true,
+        "mean_score": 0.47197350558681667,
+        "n_candidates": 6339,
+        "precision": 0.04741618818299685,
+        "predicted_positive": 5399,
+        "recall": 0.9411764705882353,
+        "roc_auc": 0.6417298500082413,
+        "support_negative": 6067,
+        "support_positive": 272
+      },
+      "ranking_metrics": {
+        "attack_windows_with_positive_ips": 29,
+        "labels_available": true,
+        "mean_average_precision_over_windows": 0.435492836641593,
+        "mean_false_positives_per_attack_window": 22.379310344827587,
+        "mean_predicted_malicious_ips_per_attack_window": 31.20689655172414,
+        "mean_true_malicious_ips_per_attack_window": 9.379310344827585,
+        "mean_true_malicious_ips_recovered_per_attack_window": 8.827586206896552,
+        "median_average_precision_over_windows": 0.3560121895648211,
+        "median_recall_at_1": 0.0,
+        "median_recall_at_10": 0.3,
+        "median_recall_at_20": 0.7,
+        "median_recall_at_5": 0.2,
+        "per_dataset": {
+          "attack_train_01": {
+            "attack_windows_with_positive_ips": 3,
+            "mean_average_precision_over_windows": 0.49751623078697876,
+            "mean_false_positives_per_attack_window": 21.0,
+            "mean_predicted_malicious_ips_per_attack_window": 30.333333333333332,
+            "recall_at_1": 0.06666666666666667,
+            "recall_at_10": 0.5,
+            "recall_at_20": 0.7666666666666666,
+            "recall_at_5": 0.26666666666666666
+          },
+          "attack_train_02": {
+            "attack_windows_with_positive_ips": 4,
+            "mean_average_precision_over_windows": 0.3138691984090515,
+            "mean_false_positives_per_attack_window": 24.0,
+            "mean_predicted_malicious_ips_per_attack_window": 31.5,
+            "recall_at_1": 0.025,
+            "recall_at_10": 0.275,
+            "recall_at_20": 0.6,
+            "recall_at_5": 0.225
+          },
+          "attack_train_03": {
+            "attack_windows_with_positive_ips": 4,
+            "mean_average_precision_over_windows": 0.3376904738850932,
+            "mean_false_positives_per_attack_window": 23.25,
+            "mean_predicted_malicious_ips_per_attack_window": 33.25,
+            "recall_at_1": 0.025,
+            "recall_at_10": 0.25,
+            "recall_at_20": 0.625,
+            "recall_at_5": 0.1
+          },
+          "attack_train_04": {
+            "attack_windows_with_positive_ips": 6,
+            "mean_average_precision_over_windows": 0.5534502719587191,
+            "mean_false_positives_per_attack_window": 22.833333333333332,
+            "mean_predicted_malicious_ips_per_attack_window": 31.5,
+            "recall_at_1": 0.03333333333333333,
+            "recall_at_10": 0.5055555555555556,
+            "recall_at_20": 0.7833333333333333,
+            "recall_at_5": 0.3166666666666667
+          },
+          "attack_train_05": {
+            "attack_windows_with_positive_ips": 2,
+            "mean_average_precision_over_windows": 0.454681029344635,
+            "mean_false_positives_per_attack_window": 22.0,
+            "mean_predicted_malicious_ips_per_attack_window": 30.5,
+            "recall_at_1": 0.05,
+            "recall_at_10": 0.35,
+            "recall_at_20": 0.5,
+            "recall_at_5": 0.25
+          },
+          "attack_train_06": {
+            "attack_windows_with_positive_ips": 3,
+            "mean_average_precision_over_windows": 0.4231995813137823,
+            "mean_false_positives_per_attack_window": 21.666666666666668,
+            "mean_predicted_malicious_ips_per_attack_window": 31.333333333333332,
+            "recall_at_1": 0.03333333333333333,
+            "recall_at_10": 0.4000000000000001,
+            "recall_at_20": 0.5333333333333333,
+            "recall_at_5": 0.16666666666666666
+          },
+          "attack_train_07": {
+            "attack_windows_with_positive_ips": 5,
+            "mean_average_precision_over_windows": 0.4155699919739472,
+            "mean_false_positives_per_attack_window": 21.2,
+            "mean_predicted_malicious_ips_per_attack_window": 29.2,
+            "recall_at_1": 0.04,
+            "recall_at_10": 0.4,
+            "recall_at_20": 0.74,
+            "recall_at_5": 0.24
+          },
+          "attack_train_08": {
+            "attack_windows_with_positive_ips": 2,
+            "mean_average_precision_over_windows": 0.4764962434080081,
+            "mean_false_positives_per_attack_window": 22.5,
+            "mean_predicted_malicious_ips_per_attack_window": 32.5,
+            "recall_at_1": 0.0,
+            "recall_at_10": 0.44999999999999996,
+            "recall_at_20": 0.8,
+            "recall_at_5": 0.2
+          }
+        },
+        "recall_at_1": 0.034482758620689655,
+        "recall_at_10": 0.39425287356321825,
+        "recall_at_20": 0.6827586206896552,
+        "recall_at_5": 0.2275862068965517
+      }
+    },
+    "validation": {
+      "candidate_metrics": {
+        "average_precision": 0.031731527919503025,
+        "confusion_matrix": {
+          "fn": 3,
+          "fp": 1279,
+          "tn": 244,
+          "tp": 47
+        },
+        "f1": 0.06831395348837209,
+        "labels_available": true,
+        "mean_score": 0.46997114776277416,
+        "n_candidates": 1573,
+        "precision": 0.03544494720965309,
+        "predicted_positive": 1326,
+        "recall": 0.94,
+        "roc_auc": 0.49057124097176624,
+        "support_negative": 1523,
+        "support_positive": 50
+      },
+      "ranking_metrics": {
+        "attack_windows_with_positive_ips": 5,
+        "labels_available": true,
+        "mean_average_precision_over_windows": 0.40087723717246027,
+        "mean_false_positives_per_attack_window": 22.8,
+        "mean_predicted_malicious_ips_per_attack_window": 32.2,
+        "mean_true_malicious_ips_per_attack_window": 10.0,
+        "mean_true_malicious_ips_recovered_per_attack_window": 9.4,
+        "median_average_precision_over_windows": 0.2921714104608842,
+        "median_recall_at_1": 0.0,
+        "median_recall_at_10": 0.2,
+        "median_recall_at_20": 0.6,
+        "median_recall_at_5": 0.0,
+        "per_dataset": {
+          "attack_validation_01": {
+            "attack_windows_with_positive_ips": 2,
+            "mean_average_precision_over_windows": 0.4530559663917074,
+            "mean_false_positives_per_attack_window": 24.0,
+            "mean_predicted_malicious_ips_per_attack_window": 34.0,
+            "recall_at_1": 0.05,
+            "recall_at_10": 0.3,
+            "recall_at_20": 0.55,
+            "recall_at_5": 0.2
+          },
+          "attack_validation_02": {
+            "attack_windows_with_positive_ips": 3,
+            "mean_average_precision_over_windows": 0.3660914176929621,
+            "mean_false_positives_per_attack_window": 22.0,
+            "mean_predicted_malicious_ips_per_attack_window": 31.0,
+            "recall_at_1": 0.03333333333333333,
+            "recall_at_10": 0.26666666666666666,
+            "recall_at_20": 0.5666666666666667,
+            "recall_at_5": 0.09999999999999999
+          }
+        },
+        "recall_at_1": 0.04,
+        "recall_at_10": 0.28,
+        "recall_at_20": 0.5599999999999999,
+        "recall_at_5": 0.13999999999999999
+      }
+    }
+  },
+  "candidate_metrics": {
+    "average_precision": 0.05826763947900991,
+    "confusion_matrix": {
+      "fn": 35,
+      "fp": 7679,
+      "tn": 1411,
+      "tp": 367
+    },
+    "f1": 0.0868844696969697,
+    "labels_available": true,
+    "mean_score": 0.4707918094178319,
+    "n_candidates": 9492,
+    "precision": 0.04561272682078051,
+    "predicted_positive": 8046,
+    "recall": 0.9129353233830846,
+    "roc_auc": 0.5907782320520609,
+    "support_negative": 9090,
+    "support_positive": 402
+  },
+  "ranking_metrics": {
+    "attack_windows_with_positive_ips": 42,
+    "labels_available": true,
+    "mean_average_precision_over_windows": 0.41240230977721337,
+    "mean_false_positives_per_attack_window": 22.357142857142858,
+    "mean_predicted_malicious_ips_per_attack_window": 31.095238095238095,
+    "mean_true_malicious_ips_per_attack_window": 9.571428571428571,
+    "mean_true_malicious_ips_recovered_per_attack_window": 8.738095238095237,
+    "median_average_precision_over_windows": 0.35539590106334584,
+    "median_recall_at_1": 0.0,
+    "median_recall_at_10": 0.3,
+    "median_recall_at_20": 0.7,
+    "median_recall_at_5": 0.2,
+    "per_dataset": {
+      "attack_test_01": {
+        "attack_windows_with_positive_ips": 3,
+        "mean_average_precision_over_windows": 0.30385480990578856,
+        "mean_false_positives_per_attack_window": 22.666666666666668,
+        "mean_predicted_malicious_ips_per_attack_window": 29.666666666666668,
+        "recall_at_1": 0.0,
+        "recall_at_10": 0.2333333333333333,
+        "recall_at_20": 0.43333333333333335,
+        "recall_at_5": 0.13333333333333333
+      },
+      "attack_test_02": {
+        "attack_windows_with_positive_ips": 5,
+        "mean_average_precision_over_windows": 0.35513082649141925,
+        "mean_false_positives_per_attack_window": 21.6,
+        "mean_predicted_malicious_ips_per_attack_window": 30.2,
+        "recall_at_1": 0.02,
+        "recall_at_10": 0.28,
+        "recall_at_20": 0.6200000000000001,
+        "recall_at_5": 0.12
+      },
+      "attack_train_01": {
+        "attack_windows_with_positive_ips": 3,
+        "mean_average_precision_over_windows": 0.49751623078697876,
+        "mean_false_positives_per_attack_window": 21.0,
+        "mean_predicted_malicious_ips_per_attack_window": 30.333333333333332,
+        "recall_at_1": 0.06666666666666667,
+        "recall_at_10": 0.5,
+        "recall_at_20": 0.7666666666666666,
+        "recall_at_5": 0.26666666666666666
+      },
+      "attack_train_02": {
+        "attack_windows_with_positive_ips": 4,
+        "mean_average_precision_over_windows": 0.3138691984090515,
+        "mean_false_positives_per_attack_window": 24.0,
+        "mean_predicted_malicious_ips_per_attack_window": 31.5,
+        "recall_at_1": 0.025,
+        "recall_at_10": 0.275,
+        "recall_at_20": 0.6,
+        "recall_at_5": 0.225
+      },
+      "attack_train_03": {
+        "attack_windows_with_positive_ips": 4,
+        "mean_average_precision_over_windows": 0.3376904738850932,
+        "mean_false_positives_per_attack_window": 23.25,
+        "mean_predicted_malicious_ips_per_attack_window": 33.25,
+        "recall_at_1": 0.025,
+        "recall_at_10": 0.25,
+        "recall_at_20": 0.625,
+        "recall_at_5": 0.1
+      },
+      "attack_train_04": {
+        "attack_windows_with_positive_ips": 6,
+        "mean_average_precision_over_windows": 0.5534502719587191,
+        "mean_false_positives_per_attack_window": 22.833333333333332,
+        "mean_predicted_malicious_ips_per_attack_window": 31.5,
+        "recall_at_1": 0.03333333333333333,
+        "recall_at_10": 0.5055555555555556,
+        "recall_at_20": 0.7833333333333333,
+        "recall_at_5": 0.3166666666666667
+      },
+      "attack_train_05": {
+        "attack_windows_with_positive_ips": 2,
+        "mean_average_precision_over_windows": 0.454681029344635,
+        "mean_false_positives_per_attack_window": 22.0,
+        "mean_predicted_malicious_ips_per_attack_window": 30.5,
+        "recall_at_1": 0.05,
+        "recall_at_10": 0.35,
+        "recall_at_20": 0.5,
+        "recall_at_5": 0.25
+      },
+      "attack_train_06": {
+        "attack_windows_with_positive_ips": 3,
+        "mean_average_precision_over_windows": 0.4231995813137823,
+        "mean_false_positives_per_attack_window": 21.666666666666668,
+        "mean_predicted_malicious_ips_per_attack_window": 31.333333333333332,
+        "recall_at_1": 0.03333333333333333,
+        "recall_at_10": 0.4000000000000001,
+        "recall_at_20": 0.5333333333333333,
+        "recall_at_5": 0.16666666666666666
+      },
+      "attack_train_07": {
+        "attack_windows_with_positive_ips": 5,
+        "mean_average_precision_over_windows": 0.4155699919739472,
+        "mean_false_positives_per_attack_window": 21.2,
+        "mean_predicted_malicious_ips_per_attack_window": 29.2,
+        "recall_at_1": 0.04,
+        "recall_at_10": 0.4,
+        "recall_at_20": 0.74,
+        "recall_at_5": 0.24
+      },
+      "attack_train_08": {
+        "attack_windows_with_positive_ips": 2,
+        "mean_average_precision_over_windows": 0.4764962434080081,
+        "mean_false_positives_per_attack_window": 22.5,
+        "mean_predicted_malicious_ips_per_attack_window": 32.5,
+        "recall_at_1": 0.0,
+        "recall_at_10": 0.44999999999999996,
+        "recall_at_20": 0.8,
+        "recall_at_5": 0.2
+      },
+      "attack_validation_01": {
+        "attack_windows_with_positive_ips": 2,
+        "mean_average_precision_over_windows": 0.4530559663917074,
+        "mean_false_positives_per_attack_window": 24.0,
+        "mean_predicted_malicious_ips_per_attack_window": 34.0,
+        "recall_at_1": 0.05,
+        "recall_at_10": 0.3,
+        "recall_at_20": 0.55,
+        "recall_at_5": 0.2
+      },
+      "attack_validation_02": {
+        "attack_windows_with_positive_ips": 3,
+        "mean_average_precision_over_windows": 0.3660914176929621,
+        "mean_false_positives_per_attack_window": 22.0,
+        "mean_predicted_malicious_ips_per_attack_window": 31.0,
+        "recall_at_1": 0.03333333333333333,
+        "recall_at_10": 0.26666666666666666,
+        "recall_at_20": 0.5666666666666667,
+        "recall_at_5": 0.09999999999999999
+      }
+    },
+    "recall_at_1": 0.03095238095238096,
+    "recall_at_10": 0.35555555555555557,
+    "recall_at_20": 0.6428571428571429,
+    "recall_at_5": 0.19761904761904764
+  }
+}

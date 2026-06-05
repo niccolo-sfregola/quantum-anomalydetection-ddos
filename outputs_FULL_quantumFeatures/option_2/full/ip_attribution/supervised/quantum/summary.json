@@ -1,0 +1,69 @@
+{
+  "config": {
+    "contamination": 0.02,
+    "default_threshold": 0.5,
+    "feature_mode": "quantum",
+    "features_path": "outputs_FULL/option_2/full/ip_attribution/enriched/candidate_ip_features_enriched_all.csv",
+    "hgb_learning_rate": 0.08,
+    "hgb_max_iter": 250,
+    "logistic_c": 1.0,
+    "max_iter": 1000,
+    "model_type": "logistic",
+    "output_dir": "outputs_FULL/option_2/full/ip_attribution/supervised/quantum",
+    "output_format": "csv",
+    "random_seed": 42,
+    "rf_max_depth": null,
+    "rf_n_estimators": 300,
+    "threshold_strategy": "f1",
+    "top_ks": [
+      1,
+      5,
+      10,
+      20
+    ]
+  },
+  "feature_columns": [
+    "q_z_0",
+    "q_z_1",
+    "q_z_2",
+    "q_z_3",
+    "q_z_4",
+    "q_z_5",
+    "q_zz_0_1",
+    "q_zz_1_2",
+    "q_zz_2_3",
+    "q_zz_3_4",
+    "q_zz_4_5",
+    "q_zz_5_0",
+    "q_measurement_entropy",
+    "q_linear_entropy",
+    "q_benign_z_l2",
+    "q_benign_z_mean_abs",
+    "q_benign_z_cosine_distance"
+  ],
+  "feature_mode": "quantum",
+  "features_path": "outputs_FULL/option_2/full/ip_attribution/enriched/candidate_ip_features_enriched_all.csv",
+  "method": "supervised_logistic",
+  "metrics_path": "outputs_FULL/option_2/full/ip_attribution/supervised/quantum/metrics_all.json",
+  "model_path": "outputs_FULL/option_2/full/ip_attribution/supervised/quantum/supervised_model.joblib",
+  "n_features": 17,
+  "n_rows": 9492,
+  "prediction_paths": {
+    "all": "outputs_FULL/option_2/full/ip_attribution/supervised/quantum/predictions_all.csv",
+    "test": "outputs_FULL/option_2/full/ip_attribution/supervised/quantum/predictions_test.csv",
+    "train": "outputs_FULL/option_2/full/ip_attribution/supervised/quantum/predictions_train.csv",
+    "validation": "outputs_FULL/option_2/full/ip_attribution/supervised/quantum/predictions_validation.csv"
+  },
+  "status": "ok",
+  "threshold": 0.33642971182872716,
+  "threshold_info": {
+    "selected": {
+      "f1": 0.06831395348837209,
+      "precision": 0.03544494720965309,
+      "predicted_positive": 1326.0,
+      "recall": 0.94,
+      "threshold": 0.33642971182872716
+    },
+    "strategy": "f1"
+  }
+}

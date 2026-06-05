@@ -1,0 +1,70 @@
+{
+  "config": {
+    "contamination": 0.02,
+    "default_threshold": 0.0,
+    "feature_mode": "quantum",
+    "features_path": "outputs_FULL/option_2/full/ip_attribution/enriched/candidate_ip_features_enriched_all.csv",
+    "fit_scope": "normal_train",
+    "iforest_max_samples": "auto",
+    "iforest_n_estimators": 300,
+    "lof_n_neighbors": 35,
+    "model_type": "isolation_forest",
+    "ocsvm_nu": null,
+    "output_dir": "outputs_FULL/option_2/full/ip_attribution/unsupervised/quantum",
+    "output_format": "csv",
+    "random_seed": 42,
+    "threshold_strategy": "quantile",
+    "top_ks": [
+      1,
+      5,
+      10,
+      20
+    ]
+  },
+  "feature_columns": [
+    "q_z_0",
+    "q_z_1",
+    "q_z_2",
+    "q_z_3",
+    "q_z_4",
+    "q_z_5",
+    "q_zz_0_1",
+    "q_zz_1_2",
+    "q_zz_2_3",
+    "q_zz_3_4",
+    "q_zz_4_5",
+    "q_zz_5_0",
+    "q_measurement_entropy",
+    "q_linear_entropy",
+    "q_benign_z_l2",
+    "q_benign_z_mean_abs",
+    "q_benign_z_cosine_distance"
+  ],
+  "feature_mode": "quantum",
+  "features_path": "outputs_FULL/option_2/full/ip_attribution/enriched/candidate_ip_features_enriched_all.csv",
+  "fit_info": {
+    "description": "normal/benign training datasets only when available",
+    "fit_scope": "normal_train",
+    "n_fit_rows": 3025,
+    "uses_candidate_labels_as_targets": false
+  },
+  "method": "unsupervised_isolation_forest",
+  "metrics_path": "outputs_FULL/option_2/full/ip_attribution/unsupervised/quantum/metrics_all.json",
+  "model_path": "outputs_FULL/option_2/full/ip_attribution/unsupervised/quantum/unsupervised_model.joblib",
+  "n_features": 17,
+  "n_rows": 9492,
+  "prediction_paths": {
+    "all": "outputs_FULL/option_2/full/ip_attribution/unsupervised/quantum/predictions_all.csv",
+    "test": "outputs_FULL/option_2/full/ip_attribution/unsupervised/quantum/predictions_test.csv",
+    "train": "outputs_FULL/option_2/full/ip_attribution/unsupervised/quantum/predictions_train.csv",
+    "validation": "outputs_FULL/option_2/full/ip_attribution/unsupervised/quantum/predictions_validation.csv"
+  },
+  "status": "ok",
+  "threshold": 1.577514160966409e-17,
+  "threshold_info": {
+    "contamination": 0.02,
+    "quantile": 0.98,
+    "source": "fit_scores",
+    "strategy": "quantile"
+  }
+}

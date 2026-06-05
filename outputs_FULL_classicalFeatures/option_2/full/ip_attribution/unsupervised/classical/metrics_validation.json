@@ -1,0 +1,61 @@
+{
+  "candidate_metrics": {
+    "average_precision": 0.7889014233276761,
+    "confusion_matrix": {
+      "fn": 6,
+      "fp": 129,
+      "tn": 1394,
+      "tp": 44
+    },
+    "f1": 0.39461883408071746,
+    "labels_available": true,
+    "mean_score": -0.06316278293600196,
+    "n_candidates": 1573,
+    "precision": 0.2543352601156069,
+    "predicted_positive": 173,
+    "recall": 0.88,
+    "roc_auc": 0.972199606040709,
+    "support_negative": 1523,
+    "support_positive": 50
+  },
+  "ranking_metrics": {
+    "attack_windows_with_positive_ips": 5,
+    "labels_available": true,
+    "mean_average_precision_over_windows": 0.897242100005258,
+    "mean_false_positives_per_attack_window": 19.0,
+    "mean_predicted_malicious_ips_per_attack_window": 27.8,
+    "mean_true_malicious_ips_per_attack_window": 10.0,
+    "mean_true_malicious_ips_recovered_per_attack_window": 8.8,
+    "median_average_precision_over_windows": 0.9572979797979798,
+    "median_recall_at_1": 0.1,
+    "median_recall_at_10": 0.9,
+    "median_recall_at_20": 1.0,
+    "median_recall_at_5": 0.5,
+    "per_dataset": {
+      "attack_validation_01": {
+        "attack_windows_with_positive_ips": 2,
+        "mean_average_precision_over_windows": 0.8879222166722167,
+        "mean_false_positives_per_attack_window": 22.5,
+        "mean_predicted_malicious_ips_per_attack_window": 32.5,
+        "recall_at_1": 0.05,
+        "recall_at_10": 0.9,
+        "recall_at_20": 1.0,
+        "recall_at_5": 0.45
+      },
+      "attack_validation_02": {
+        "attack_windows_with_positive_ips": 3,
+        "mean_average_precision_over_windows": 0.9034553555606187,
+        "mean_false_positives_per_attack_window": 16.666666666666668,
+        "mean_predicted_malicious_ips_per_attack_window": 24.666666666666668,
+        "recall_at_1": 0.10000000000000002,
+        "recall_at_10": 0.8666666666666667,
+        "recall_at_20": 1.0,
+        "recall_at_5": 0.4666666666666666
+      }
+    },
+    "recall_at_1": 0.08,
+    "recall_at_10": 0.8800000000000001,
+    "recall_at_20": 1.0,
+    "recall_at_5": 0.45999999999999996
+  }
+}
